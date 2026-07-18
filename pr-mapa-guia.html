@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇵🇷 Infinity House · Guía de Puerto Rico</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Inter:wght@400;500;600&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #0d1f1a; color: #f0ede6; min-height: 100vh; }
+
+  /* HEADER */
+  .header { background: linear-gradient(135deg, #0d1f1a 0%, #1a3a2e 100%); border-bottom: 1px solid #2a4a3a; padding: 16px 20px 12px; }
+  .header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .header-right { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; }
+  .header-logo { height: 56px; width: 56px; border-radius: 50%; object-fit: cover; border: 2px solid #2a4a3a; }
+  .header-text h1 { font-family: 'Syne', sans-serif; font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em; color: #f0ede6; }
+  .header-text h1 span { color: #3ecfb2; }
+  .header-text p { font-size: 0.75rem; color: #7a9e90; margin-top: 2px; }
+  .lang-toggle { display: flex; gap: 4px; flex-shrink: 0; }
+  .lang-btn { padding: 5px 10px; border-radius: 20px; border: 1.5px solid #2a4a3a; background: transparent; color: #7a9e90; font-size: 0.72rem; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+  .lang-btn.active { background: #3ecfb2; border-color: #3ecfb2; color: #0d1f1a; }
+
+  /* SEARCH BAR */
+  .search-bar { background: #111f1a; border-bottom: 1px solid #1e3028; padding: 10px 20px; }
+  .search-inner { max-width: 900px; margin: 0 auto; position: relative; }
+  .search-input { width: 100%; background: #162820; border: 1.5px solid #2a4a3a; border-radius: 10px; padding: 9px 14px 9px 36px; color: #f0ede6; font-family: 'Inter', sans-serif; font-size: 0.85rem; outline: none; transition: border-color 0.15s; }
+  .search-input::placeholder { color: #5a7e70; }
+  .search-input:focus { border-color: #3ecfb2; }
+  .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 0.9rem; color: #5a7e70; pointer-events: none; }
+  .search-clear { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #5a7e70; cursor: pointer; font-size: 1rem; display: none; }
+
+  /* FILTER BAR */
+  .filter-bar { background: #111f1a; border-bottom: 1px solid #1e3028; padding: 10px 20px; position: sticky; top: 0; z-index: 100; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .filter-bar::-webkit-scrollbar { display: none; }
+  .filter-inner { max-width: 900px; margin: 0 auto; display: flex; gap: 7px; align-items: center; white-space: nowrap; }
+  .filter-btn { display: inline-flex; align-items: center; gap: 5px; padding: 6px 13px; border-radius: 100px; border: 1.5px solid #ff7a45; background: transparent; color: #7a9e90; font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 500; cursor: pointer; transition: all 0.15s; white-space: nowrap; flex-shrink: 0; }
+  .filter-btn:hover { border-color: #ff7a45; color: #ff7a45; }
+  .filter-btn.active { background: #ff7a45; border-color: #ff7a45; color: #0d1f1a; font-weight: 700; }
+  .home-btn { background: rgba(62,207,178,0.12); border-color: #ff7a45; color: #3ecfb2; font-weight: 700; }
+  .home-btn:hover { background: #3ecfb2; color: #0d1f1a; }
+
+  /* MAIN */
+  .main { max-width: 900px; margin: 0 auto; padding: 16px; }
+  .stats-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .stats-bar .count { font-size: 0.75rem; color: #7a9e90; }
+  .stats-bar .count span { color: #3ecfb2; font-weight: 600; }
+
+  /* SECTIONS */
+  .section-group { margin-bottom: 26px; }
+  .section-group.hidden { display: none; }
+  .section-title { display: flex; align-items: center; gap: 8px; font-family: 'Syne', sans-serif; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: #3ecfb2; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #1e3028; }
+  .section-title .badge { background: #1e3028; border-radius: 20px; padding: 2px 8px; font-size: 0.68rem; color: #7a9e90; font-weight: 500; letter-spacing: 0; text-transform: none; }
+
+  /* CARDS */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 9px; }
+  .place-card { background: #162820; border: 1px solid #1e3028; border-radius: 12px; padding: 13px 14px; transition: all 0.15s; position: relative; overflow: hidden; }
+  .place-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent, #3ecfb2); opacity: 0; transition: opacity 0.15s; }
+  .place-card:hover { border-color: #2a4a3a; background: #1a3028; transform: translateY(-1px); }
+  .place-card:hover::before { opacity: 1; }
+  .place-card.infinity-pick { border-color: #f59e0b44; padding-bottom: 30px; }
+  .place-card.infinity-pick::after { content: '⭐ INFINITY HOUSE Pick'; position: absolute; bottom: 8px; right: 8px; font-size: 0.6rem; font-weight: 700; color: #f59e0b; background: rgba(245,158,11,0.12); border-radius: 10px; padding: 2px 6px; }
+  .place-card.hidden-card { display: none; }
+
+  .card-top { display: flex; align-items: flex-start; gap: 9px; margin-bottom: 7px; }
+  .card-icon { font-size: 1.25rem; flex-shrink: 0; line-height: 1; margin-top: 1px; }
+  .card-name { font-size: 0.86rem; font-weight: 600; color: #f0ede6; line-height: 1.3; }
+  .card-name a { color: inherit; text-decoration: none; border-bottom: 1px dashed rgba(62,207,178,0.35); transition: color 0.15s; }
+  .card-name a:hover { color: #3ecfb2; border-bottom-color: #3ecfb2; }
+
+  .card-meta { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; align-items: center; }
+  .card-tag { font-size: 0.67rem; font-weight: 500; padding: 2px 7px; border-radius: 20px; background: #1e3028; color: #7a9e90; }
+  .card-time { font-size: 0.67rem; font-weight: 600; color: #3ecfb2; background: rgba(62,207,178,0.1); border-radius: 20px; padding: 2px 7px; }
+  .card-price { font-size: 0.67rem; font-weight: 600; border-radius: 20px; padding: 2px 7px; }
+  .price-1 { color: #66bb6a; background: rgba(102,187,106,0.1); }
+  .price-2 { color: #ffca28; background: rgba(255,202,40,0.1); }
+  .price-3 { color: #ff7c5c; background: rgba(255,124,92,0.1); }
+  .card-note { font-size: 0.73rem; color: #5a7e70; line-height: 1.45; margin-top: 6px; }
+  .card-note .en { display: none; }
+  .card-note .es { display: inline; }
+
+  /* CARD ACTIONS */
+  .card-actions { display: flex; gap: 6px; margin-top: 9px; }
+  .action-btn { display: inline-flex; align-items: center; gap: 4px; padding: 5px 10px; border-radius: 8px; border: 1px solid #2a4a3a; background: transparent; color: #7a9e90; font-size: 0.7rem; font-family: 'Inter', sans-serif; font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.15s; }
+  .action-btn:hover { border-color: #3ecfb2; color: #3ecfb2; }
+  .action-btn.call { border-color: rgba(102,187,106,0.4); color: #66bb6a; }
+  .action-btn.call:hover { background: rgba(102,187,106,0.1); }
+  .action-btn.go-btn { border-color: #3ecfb2; color: #0d1f1a; background: #3ecfb2; font-weight: 700; }
+  .action-btn.go-btn:hover { background: #34bfa4; border-color: #34bfa4; color: #0d1f1a; }
+  .action-btn.share { border-color: rgba(41,182,246,0.4); color: #29b6f6; }
+  .action-btn.share:hover { background: rgba(41,182,246,0.1); }
+
+  /* ACCENT COLORS */
+  .cat-restaurant { --accent: #ff7c5c; }
+  .cat-supermercado { --accent: #4db6ac; }
+  .cat-playa { --accent: #29b6f6; }
+  .cat-entretenimiento { --accent: #ab47bc; }
+  .cat-compras { --accent: #ffca28; }
+  .cat-aventura { --accent: #66bb6a; }
+  .cat-hiking { --accent: #8d6e63; }
+  .tag-hiking { background: rgba(141,110,99,0.12); color: #8d6e63; }
+  .cat-nocturno { --accent: #7986cb; }
+  .cat-emergencia { --accent: #ef5350; }
+  .cat-gasolinera { --accent: #ffa726; }
+
+  .tag-restaurant { background: rgba(255,124,92,0.12); color: #ff7c5c; }
+  .tag-supermercado { background: rgba(77,182,172,0.12); color: #4db6ac; }
+  .tag-playa { background: rgba(41,182,246,0.12); color: #29b6f6; }
+  .tag-entretenimiento { background: rgba(171,71,188,0.12); color: #ab47bc; }
+  .tag-compras { background: rgba(255,202,40,0.12); color: #ffca28; }
+  .tag-aventura { background: rgba(102,187,106,0.12); color: #66bb6a; }
+  .tag-nocturno { background: rgba(121,134,203,0.12); color: #7986cb; }
+  .tag-emergencia { background: rgba(239,83,80,0.12); color: #ef5350; }
+  .tag-gasolinera { background: rgba(255,167,38,0.12); color: #ffa726; }
+  .tag-farmacia { background: rgba(236,64,122,0.12); color: #ec407a; }
+  .cat-farmacia { --accent: #ec407a; }
+  .tag-hangout { background: rgba(38,166,154,0.12); color: #26a69a; }
+  .cat-hangout { --accent: #26a69a; }
+  .tag-evento { background: rgba(236,64,122,0.12); color: #ec407a; }
+  .cat-evento { --accent: #ec407a; }
+
+  /* BEACH BADGE */
+  .beach-info { display: flex; gap: 5px; margin-top: 6px; flex-wrap: wrap; }
+  .beach-badge { font-size: 0.65rem; font-weight: 600; padding: 2px 7px; border-radius: 20px; }
+  .lifeguard-yes { background: rgba(102,187,106,0.15); color: #66bb6a; }
+  .lifeguard-no { background: rgba(239,83,80,0.12); color: #ef5350; }
+  .flag-blue { background: rgba(41,182,246,0.12); color: #29b6f6; }
+  .flag-varies { background: rgba(255,202,40,0.12); color: #ffca28; }
+
+  /* BADGE LATE */
+  .badge-late { display: inline-flex; align-items: center; gap: 3px; font-size: 0.65rem; color: #7986cb; background: rgba(121,134,203,0.12); border-radius: 20px; padding: 2px 6px; margin-left: 5px; }
+
+  /* EMPTY */
+  .empty-state { text-align: center; padding: 50px 20px; color: #5a7e70; display: none; }
+  .empty-state.visible { display: block; }
+  .empty-state .emoji { font-size: 2.2rem; margin-bottom: 10px; }
+
+  @media (max-width: 480px) {
+    .cards-grid { grid-template-columns: 1fr; }
+    .header-text h1 { font-size: 1.1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-text">
+      <h1>🇵🇷 <span>Infinity House</span> · Puerto Rico</h1>
+      <p id="subtitle-es">Guía de lugares favoritos · 🏠 Tiempos desde Infinity House</p>
+      <p id="subtitle-en" style="display:none">Favorite places guide · 🏠 Drive times from Infinity House</p>
+    </div>
+    <div class="header-right">
+      <div class="lang-toggle" style="flex-wrap: wrap; justify-content: center; max-width: 90px;">
+        <button class="lang-btn active" id="btn-es" onclick="setLang('es')">ES</button>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" id="btn-pt" onclick="setLang('pt')">PT</button>
+        <button class="lang-btn" id="btn-fr" onclick="setLang('fr')">FR</button>
+      </div>
+      <img src="data:image/png;base64,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" alt="Infinity House" class="header-logo">
+    </div>
+  </div>
+</div>
+
+
+<!-- WELCOME MESSAGE BANNER -->
+<div id="welcome-banner" style="background: linear-gradient(135deg, #1a3a2e 0%, #0d1f1a 100%); padding: 10px 20px; text-align: center; border-bottom: 1px solid #2a4a3a;">
+  <p id="welcome-text-es" style="color: #3ecfb2; font-size: 0.85rem; font-weight: 600;">🌴 ¡Bienvenidos a Infinity House! Esperamos que disfruten su estadía.</p>
+  <p id="welcome-text-en" style="display:none; color: #3ecfb2; font-size: 0.85rem; font-weight: 600;">🌴 Welcome to Infinity House! We hope you enjoy your stay.</p>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <button class="filter-btn home-btn" onclick="window.open('https://www.google.com/maps?q=18.3155200,-65.8706680','_blank')">🏠 INFINITY HOUSE</button>
+    <button class="filter-btn" onclick="useMyLocation()" id="location-btn" style="border-color:#ff7a45;">📍 <span class="lbl" data-es="Usar mi ubicación" data-en="Use my location">Usar mi ubicación</span></button>
+
+    <button class="filter-btn active" data-filter="all" onclick="filterPlaces('all',this)"><span>🗺️</span> <span class="lbl" data-es="Todos" data-en="All">Todos</span></button>
+    <button class="filter-btn" data-filter="restaurant" onclick="filterPlaces('restaurant',this)"><span>🍽️</span> <span class="lbl" data-es="Restaurantes" data-en="Restaurants">Restaurantes</span></button>
+    <button class="filter-btn" data-filter="supermercado" onclick="filterPlaces('supermercado',this)"><span>🛒</span> <span class="lbl" data-es="Supermercados" data-en="Groceries">Supermercados</span></button>
+    <button class="filter-btn" data-filter="playa" onclick="filterPlaces('playa',this)"><span>🏖️</span> <span class="lbl" data-es="Playas" data-en="Beaches">Playas</span></button>
+    <button class="filter-btn" data-filter="aventura" onclick="filterPlaces('aventura',this)"><span>🌿</span> <span class="lbl" data-es="Aventuras" data-en="Adventures">Aventuras</span></button>
+    <button class="filter-btn" data-filter="hiking" onclick="filterPlaces('hiking',this)"><span>🥾</span> <span class="lbl" data-es="Hiking" data-en="Hiking">Hiking</span></button>
+    <button class="filter-btn" data-filter="entretenimiento" onclick="filterPlaces('entretenimiento',this)"><span>🎮</span> <span class="lbl" data-es="Entretenimiento" data-en="Entertainment">Entretenimiento</span></button>
+    <button class="filter-btn" data-filter="compras" onclick="filterPlaces('compras',this)"><span>🛍️</span> <span class="lbl" data-es="Compras" data-en="Shopping">Compras</span></button>
+    <button class="filter-btn" data-filter="hangout" onclick="filterPlaces('hangout',this)"><span>🌆</span> <span class="lbl" data-es="Pasar el rato" data-en="Hang out">Pasar el rato</span></button>
+    <button class="filter-btn" data-filter="evento" onclick="filterPlaces('evento',this)"><span>🎉</span> <span class="lbl" data-es="Eventos" data-en="Events">Eventos</span></button>
+    <button class="filter-btn" data-filter="nocturno" onclick="filterPlaces('nocturno',this)"><span>🌙</span> <span class="lbl" data-es="Llegar tarde" data-en="Late arrival">Llegar tarde</span></button>
+    <button class="filter-btn" data-filter="emergencia" onclick="filterPlaces('emergencia',this)"><span>🏥</span> <span class="lbl" data-es="Emergencias" data-en="Emergencies">Emergencias</span></button>
+    <button class="filter-btn" data-filter="farmacia" onclick="filterPlaces('farmacia',this)"><span>💊</span> <span class="lbl" data-es="Farmacias" data-en="Pharmacies">Farmacias</span></button>
+    <button class="filter-btn" data-filter="gasolinera" onclick="filterPlaces('gasolinera',this)"><span>⛽</span> <span class="lbl" data-es="Gasolineras" data-en="Gas stations">Gasolineras</span></button>
+  </div>
+</div>
+
+<div class="main">
+  <div class="stats-bar">
+    <div class="count"><span class="lbl" data-es="Mostrando" data-en="Showing">Mostrando</span> <span id="visible-count">101</span> <span class="lbl" data-es="lugares" data-en="places">lugares</span></div>
+  </div>
+
+  <!-- EMERGENCIAS -->
+  <div class="section-group" data-cats="emergencia">
+    <div class="section-title">🏥 <span class="lbl" data-es="Emergencias y farmacias" data-en="Emergencies & Pharmacies">Emergencias y farmacias</span> <span class="badge">5</span></div>
+    <div class="cards-grid">
+
+      <div class="place-card cat-emergencia" data-cat="emergencia">
+        <div class="card-top"><div class="card-icon">🚨</div><div>
+          <div class="card-name"><a href="tel:911">911 · Emergencias</a></div>
+          <div class="card-meta"><span class="card-tag tag-emergencia"><span class="lbl" data-es="Puerto Rico" data-en="Puerto Rico">Puerto Rico</span></span><span class="card-time">📞 Gratis</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Policía, bomberos y ambulancia. Marca 911.</span><span class="en">Police, fire & ambulance. Dial 911.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="tel:911" target="_blank">🚀 GO</a><a class="action-btn call" href="tel:911">📞 911</a></div>
+      </div>
+
+      <div class="place-card cat-emergencia" data-cat="emergencia">
+        <div class="card-top"><div class="card-icon">🏥</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/hospital+canóvanas+puerto+rico" target="_blank">Hospital HIMA San Pablo · Caguas</a></div>
+          <div class="card-meta"><span class="card-tag tag-emergencia">Caguas · 24/7</span><span class="card-time">🚗 ~25 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Hospital más cercano con sala de emergencias 24/7.</span><span class="en">Nearest hospital with 24/7 emergency room.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/hospital+canóvanas+puerto+rico" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17872530505">📞 Llamar</a>
+        </div>
+      </div>
+
+      <div class="place-card cat-emergencia" data-cat="emergencia">
+        <div class="card-top"><div class="card-icon">🏥</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Hospital+Auxilio+Mutuo+San+Juan+Puerto+Rico" target="_blank">Hospital Auxilio Mutuo · San Juan</a></div>
+          <div class="card-meta"><span class="card-tag tag-emergencia">Hato Rey · 24/7</span><span class="card-time">🚗 ~45 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Hospital de referencia en San Juan. Sala de emergencias 24/7.</span><span class="en">Reference hospital in San Juan. 24/7 emergency room.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Hospital+Auxilio+Mutuo+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17877580000">📞 Llamar</a>
+        </div>
+      </div>
+
+      <div class="place-card cat-emergencia infinity-pick" data-cat="emergencia">
+        <div class="card-top"><div class="card-icon">🏥</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Hospital+Presbyterian+San+Juan+Puerto+Rico" target="_blank">Hospital Presbyterian · San Juan</a></div>
+          <div class="card-meta"><span class="card-tag tag-emergencia">Santurce · 24/7</span><span class="card-time">🚗 ~50 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Hospital universitario con sala de emergencias 24/7. Santurce.</span><span class="en">University hospital with 24/7 emergency room. Santurce.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Hospital+Presbyterian+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17877217300">📞 Llamar</a>
+        </div>
+      </div>
+
+      <div class="place-card cat-emergencia" data-cat="emergencia">
+        <div class="card-top"><div class="card-icon">🦷</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/dentista+emergencia+canovanas+puerto+rico" target="_blank">Dentista de emergencia · área</a></div>
+          <div class="card-meta"><span class="card-tag tag-emergencia">Canóvanas / Carolina</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Busca "dentista emergencia Canóvanas" en Google para opciones del día.</span><span class="en">Search "emergency dentist Canóvanas" on Google for same-day options.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/dentista+emergencia+canovanas+puerto+rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GASOLINERAS -->
+  <div class="section-group" data-cats="gasolinera">
+    <div class="section-title">⛽ <span class="lbl" data-es="Gasolineras cercanas" data-en="Nearby Gas Stations">Gasolineras cercanas</span> <span class="badge">4</span></div>
+    <div class="cards-grid">
+
+      <div class="place-card cat-gasolinera" data-cat="gasolinera">
+        <div class="card-top"><div class="card-icon">⛽</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/gasolinera+PR-957+canovanas" target="_blank">Gasolinera · PR-957 (más cercana)</a></div>
+          <div class="card-meta"><span class="card-tag tag-gasolinera"><span class="lbl" data-es="Canóvanas" data-en="Canóvanas">Canóvanas</span></span><span class="card-time">🚗 2 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">La gasolinera más cercana a Infinity House en la PR-957.</span><span class="en">Closest gas station to Infinity House on PR-957.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/gasolinera+PR-957+canovanas" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-gasolinera" data-cat="gasolinera">
+        <div class="card-top"><div class="card-icon">⛽</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/gulf+gasolinera+canovanas+PR-3" target="_blank">Gulf / Puma · PR-3 Canóvanas</a></div>
+          <div class="card-meta"><span class="card-tag tag-gasolinera">PR-3 Canóvanas</span><span class="card-time">🚗 10 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Gasolineras en la carretera principal PR-3. Varias opciones.</span><span class="en">Gas stations on main highway PR-3. Multiple options.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/gulf+gasolinera+canovanas+PR-3" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-gasolinera" data-cat="gasolinera">
+        <div class="card-top"><div class="card-icon">⛽</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/gasolinera+luquillo+puerto+rico" target="_blank">Gasolineras · Luquillo / Fajardo</a></div>
+          <div class="card-meta"><span class="card-tag tag-gasolinera">Luquillo / Fajardo</span><span class="card-time">🚗 25–40 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Llena el tanque antes de ir a las playas del este. Pocas opciones allá.</span><span class="en">Fill up before heading to east coast beaches. Limited options there.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/gasolinera+luquillo+puerto+rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-gasolinera" data-cat="gasolinera">
+        <div class="card-top"><div class="card-icon">⛽</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/gasolinera+24+horas+carolina+puerto+rico" target="_blank">Gasolinera 24h · Carolina</a></div>
+          <div class="card-meta"><span class="card-tag tag-gasolinera">Carolina · 24/7</span><span class="card-time">🚗 22 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Estaciones 24 horas en Carolina para llegadas nocturnas.</span><span class="en">24-hour stations in Carolina for late-night arrivals.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/gasolinera+24+horas+carolina+puerto+rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- FARMACIAS -->
+  <div class="section-group" data-cats="farmacia">
+    <div class="section-title">💊 <span class="lbl" data-es="Farmacias" data-en="Pharmacies">Farmacias</span> <span class="badge">3</span></div>
+    <div class="cards-grid">
+
+      <div class="place-card cat-farmacia" data-cat="farmacia">
+        <div class="card-top"><div class="card-icon">💊</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">Walgreens · The Outlet Canóvanas</a></div>
+          <div class="card-meta"><span class="card-tag tag-farmacia">Canóvanas · 7am–10pm</span><span class="card-time">🚗 14 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Farmacia, artículos de salud y básicos del hogar.</span><span class="en">Pharmacy, health items and household basics.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17879530295">📞 Llamar</a>
+        </div>
+      </div>
+
+      <div class="place-card cat-farmacia" data-cat="farmacia">
+        <div class="card-top"><div class="card-icon">💊</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/cvs+farmacia+carolina+puerto+rico" target="_blank">CVS Pharmacy · Carolina</a></div>
+          <div class="card-meta"><span class="card-tag tag-farmacia">Carolina · 8am–9pm</span><span class="card-time">🚗 24 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Farmacia con servicios de foto y clínica MinuteClinic.</span><span class="en">Pharmacy with photo services and MinuteClinic.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/cvs+farmacia+carolina+puerto+rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-farmacia" data-cat="farmacia">
+        <div class="card-top"><div class="card-icon">💊</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/walgreens+24+horas+isla+verde+carolina" target="_blank">Walgreens 24h · Isla Verde</a></div>
+          <div class="card-meta"><span class="card-tag tag-farmacia">Carolina · 24/7</span><span class="card-time">🚗 35 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Única Walgreens abierta 24 horas. Para emergencias nocturnas.</span><span class="en">Only 24-hour Walgreens. For night emergencies.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/walgreens+24+horas+isla+verde+carolina" target="_blank">🚀 GO</a></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUPERMERCADOS -->
+  <div class="section-group" data-cats="supermercado">
+    <div class="section-title">🛒 <span class="lbl" data-es="Supermercados" data-en="Grocery Stores">Supermercados</span> <span class="badge">4</span></div>
+    <div class="cards-grid">
+
+      <div class="place-card cat-supermercado infinity-pick" data-cat="supermercado">
+        <div class="card-top"><div class="card-icon">🛒</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJgbxIquVfA4wRyhsjKBkCOSk" target="_blank">Supermercado Único</a></div>
+          <div class="card-meta"><span class="card-tag tag-supermercado"><span class="lbl" data-es="Cerca de la casa" data-en="Near the house">Cerca de la casa</span></span><span class="card-time">🚗 1 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">El más cercano. Desayunos, sándwiches, comestibles básicos. 6am–7pm.</span><span class="en">The closest one. Breakfast, sandwiches, basic groceries. 6am–7pm.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJgbxIquVfA4wRyhsjKBkCOSk" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-supermercado" data-cat="supermercado">
+        <div class="card-top"><div class="card-icon">🛒</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=13760940218680465475" target="_blank">Supermercado Selectos</a></div>
+          <div class="card-meta"><span class="card-tag tag-supermercado">Canóvanas</span><span class="card-time">🚗 8 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">PR-185. Lun–Sáb 7am–7pm · Dom 7am–5pm.</span><span class="en">PR-185. Mon–Sat 7am–7pm · Sun 7am–5pm.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=13760940218680465475" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-supermercado" data-cat="supermercado">
+        <div class="card-top"><div class="card-icon">🛒</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=15585172332857890567" target="_blank">Supermercado Econo</a></div>
+          <div class="card-meta"><span class="card-tag tag-supermercado">Canóvanas</span><span class="card-time">🚗 15 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Carr PR-3. Lun–Sáb 6am–10pm · Dom 8am–7pm.</span><span class="en">Carr PR-3. Mon–Sat 6am–10pm · Sun 8am–7pm.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=15585172332857890567" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-supermercado infinity-pick" data-cat="supermercado">
+        <div class="card-top"><div class="card-icon">🛒</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=587837725042293899" target="_blank">Walmart Supercenter</a></div>
+          <div class="card-meta"><span class="card-tag tag-supermercado">Canóvanas</span><span class="card-time">🚗 15 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Todo en un lugar. 6am–11pm todos los días.</span><span class="en">Everything in one place. 6am–11pm daily.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=587837725042293899" target="_blank">🚀 GO</a></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LLEGAR TARDE -->
+  <div class="section-group" data-cats="nocturno">
+    <div class="section-title">🌙 <span class="lbl" data-es="Para llegar tarde" data-en="Late Arrival">Para llegar tarde</span> <span class="badge">3</span></div>
+    <div class="cards-grid">
+
+      <div class="place-card cat-nocturno" data-cat="nocturno">
+        <div class="card-top"><div class="card-icon">🌙</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=9664377433617052782" target="_blank">Supermercado Pueblo</a> <span class="badge-late">24/7</span></div>
+          <div class="card-meta"><span class="card-tag tag-nocturno">Carolina · <span class="lbl" data-es="cerca aeropuerto" data-en="near airport">cerca aeropuerto</span></span><span class="card-time">🚗 24 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Abierto las 24 horas, los 7 días de la semana.</span><span class="en">Open 24 hours, 7 days a week.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=9664377433617052782" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-nocturno" data-cat="nocturno">
+        <div class="card-top"><div class="card-icon">🌙</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=7420956108422811747" target="_blank">Odyssey Rest</a> <span class="badge-late"><span class="lbl" data-es="hasta 2am" data-en="until 2am">hasta 2am</span></span></div>
+          <div class="card-meta"><span class="card-tag tag-nocturno">Carolina · <span class="lbl" data-es="cerca aeropuerto" data-en="near airport">cerca aeropuerto</span></span><span class="card-time">🚗 35 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Abierto desde las 8am hasta las 2:00 a.m. todos los días.</span><span class="en">Open from 8am until 2:00 a.m. every day.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://maps.google.com/?cid=7420956108422811747" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17872539100">📞 <span class="lbl" data-es="Llamar" data-en="Call">Llamar</span></a>
+        </div>
+      </div>
+
+      <div class="place-card cat-nocturno infinity-pick" data-cat="nocturno">
+        <div class="card-top"><div class="card-icon">🌙</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=10453451374380665900" target="_blank">El Platanal</a> <span class="badge-late">24/7</span></div>
+          <div class="card-meta"><span class="card-tag tag-nocturno">Carolina</span><span class="card-time">🚗 30 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Comida caribeña · Abierto las 24 horas.</span><span class="en">Caribbean food · Open 24 hours.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=10453451374380665900" target="_blank">🚀 GO</a></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RESTAURANTES CANOVANAS -->
+  <div class="section-group" data-cats="restaurant">
+    <div class="section-title">🍽️ <span class="lbl" data-es="Restaurantes · Canóvanas" data-en="Restaurants · Canóvanas">Restaurantes · Canóvanas</span> <span class="badge">11</span></div>
+    <div class="cards-grid">
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">☕</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=951084373348984815" target="_blank">Black Coffee House ⭐5.0</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Café · Mar–Sáb 8am–4pm" data-en="Café · Tue–Sat 8am–4pm">Café · Mar–Sáb 8am–4pm</span></span><span class="card-time">🚗 6 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Mejor matcha y café de la zona. Ambiente acogedor.</span><span class="en">Best matcha and coffee in the area. Cozy atmosphere.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=951084373348984815" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍝</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=10060446833214976331" target="_blank">Restaurante Escobar ⭐4.9</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Italiana · Lun/Mié–Dom" data-en="Italian · Mon/Wed–Sun">Italiana · Lun/Mié–Dom</span></span><span class="card-time">🚗 15 min</span><span class="card-price price-3">$$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Pasta hecha a mano, ambiente romántico. Valet parking. El top de Canóvanas.</span><span class="en">Handmade pasta, romantic atmosphere. Valet parking. Best in Canóvanas.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=10060446833214976331" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍌</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=2583091817435590426" target="_blank">Campomofongo</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Criolla · Mié–Dom" data-en="Local · Wed–Sun">Criolla · Mié–Dom</span></span><span class="card-time">🚗 10 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Mofongo y comida local en ambiente al aire libre.</span><span class="en">Mofongo and local food in an outdoor setting.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=2583091817435590426" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🥟</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=1996126788781075559" target="_blank">Los Pastelillos de Pochy ⭐4.8</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Frituras · Mié–Dom" data-en="Fried food · Wed–Sun">Frituras · Mié–Dom</span></span><span class="card-time">🚗 9 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Los mejores pastelillos y ceviche de la zona.</span><span class="en">The best pastelillos and ceviche in the area.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=1996126788781075559" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🥐</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=8562276133288653426" target="_blank">Panadería Jireh</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Panadería · 6am–7pm" data-en="Bakery · 6am–7pm">Panadería · 6am–7pm</span></span><span class="card-time">🚗 11 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Desayunos, sándwiches, pastries y café puertorriqueño.</span><span class="en">Breakfast, sandwiches, pastries and Puerto Rican coffee.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=8562276133288653426" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍺</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=17404361694633080917" target="_blank">El Vaso Rojo</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Bar · Mié–Dom" data-en="Bar · Wed–Sun">Bar · Mié–Dom</span></span><span class="card-time">🚗 11 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Buena vibra, música en vivo los viernes. Ambiente familiar.</span><span class="en">Good vibes, live music on Fridays. Family-friendly.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=17404361694633080917" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🌿</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=14005243891222959756" target="_blank">Hacienda El Flamboyan</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Criolla · Jue–Dom" data-en="Local · Thu–Sun">Criolla · Jue–Dom</span></span><span class="card-time">🚗 8 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Vistas espectaculares y decoración antigua. Una experiencia única.</span><span class="en">Spectacular views and vintage décor. A unique experience.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=14005243891222959756" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍳</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=2402914875345354676" target="_blank">Victoria Bistró Café ⭐4.7</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Brunch · hasta 4pm" data-en="Brunch · until 4pm">Brunch · hasta 4pm</span></span><span class="card-time">🚗 16 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">El mejor brunch de Canóvanas. French toast y eggs benedict.</span><span class="en">Best brunch in Canóvanas. French toast and eggs benedict.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=2402914875345354676" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍕</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=10548713727686665089" target="_blank">Pizzería Trattoria Italiana ⭐4.6</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Italiana · Jue–Dom" data-en="Italian · Thu–Sun">Italiana · Jue–Dom</span></span><span class="card-time">🚗 16 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Pizza y pasta artesanal.</span><span class="en">Artisan pizza and pasta.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=10548713727686665089" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🥩</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=578823869947486147" target="_blank">Restaurante Zimple ⭐4.5</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Steakhouse · Vie–Dom" data-en="Steakhouse · Fri–Sun">Steakhouse · Vie–Dom</span></span><span class="card-time">🚗 16 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Steakhouse & Seafood. El pulpo en salsa de ajo es celestial.</span><span class="en">Steakhouse & Seafood. The garlic octopus is divine.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=578823869947486147" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍕</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Blenny's+Pizza+Canovanas+Puerto+Rico" target="_blank">Blenny's Pizza</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Delivery · Mié–Dom" data-en="Delivery · Wed–Sun">Delivery · Mié–Dom</span></span><span class="card-time">🚗 10 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Entrega a domicilio. Miércoles a domingo.</span><span class="en">Home delivery. Wednesday to Sunday.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Blenny's+Pizza+Canovanas+Puerto+Rico" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17879601066">📞 787-960-1066</a>
+        </div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">☕</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Starbucks+Canovanas+Puerto+Rico" target="_blank">Starbucks</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Varios lugares" data-en="Multiple locations">Varios lugares</span></span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Cadena de café con varias ubicaciones en la zona.</span><span class="en">Coffee chain with multiple locations in the area.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Starbucks+Canovanas+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🌮</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Tijuana%27s+Puerto+Rico" target="_blank">Tijuana's</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Varios lugares" data-en="Multiple locations">Varios lugares</span></span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Comida mexicana rápida y casual. Varias ubicaciones.</span><span class="en">Quick casual Mexican food. Multiple locations.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Tijuana%27s+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍽️</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Metropol+Restaurant+Puerto+Rico" target="_blank">Metropol Restaurant & Bar</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Varios lugares" data-en="Multiple locations">Varios lugares</span></span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Cocina cubana-caribeña, cadena reconocida en la isla.</span><span class="en">Cuban-Caribbean cuisine, well-known chain on the island.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Metropol+Restaurant+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMIDA EN EL PUNTO DE VENTA (THE OUTLET) -->
+  <div class="section-group" data-cats="restaurant">
+    <div class="section-title">🍕 <span class="lbl" data-es="Comida rápida · The Outlet" data-en="Quick Food · The Outlet">Comida rápida · The Outlet</span> <span class="badge">6</span></div>
+    <div class="cards-grid">
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍕</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">PizzaAt@</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">The Outlet · Canóvanas</span><span class="card-time">🚗 14 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Pizza rápida dentro de The Outlet.</span><span class="en">Quick pizza inside The Outlet.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍌</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">Tostón Express</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">The Outlet · Canóvanas</span><span class="card-time">🚗 14 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Tostones y comida criolla rápida en The Outlet.</span><span class="en">Tostones and quick local food in The Outlet.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🌮</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">Tijuana's Express</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">The Outlet · Canóvanas</span><span class="card-time">🚗 14 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Versión rápida de Tijuana's dentro de The Outlet.</span><span class="en">Quick version of Tijuana's inside The Outlet.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍷</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">Karma's Wine Bar & Beer Garden</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">The Outlet · Canóvanas</span><span class="card-time">🚗 14 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Bar de vinos y cervezas dentro de The Outlet. Buen ambiente.</span><span class="en">Wine and beer bar inside The Outlet. Good vibe.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍗</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">Golden Corral</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">The Outlet · Canóvanas</span><span class="card-time">🚗 14 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Buffet familiar dentro de The Outlet.</span><span class="en">Family buffet inside The Outlet.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍔</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">Comida rápida: BK, KFC, Metro, Wendy's</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">The Outlet · Canóvanas</span><span class="card-time">🚗 14 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Cadenas de comida rápida disponibles en The Outlet.</span><span class="en">Fast food chains available in The Outlet.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">🚀 GO</a></div>
+      </div>
+
+
+
+  <!-- RESTAURANTES CAROLINA / SAN JUAN -->
+  <div class="section-group" data-cats="restaurant">
+    <div class="section-title">🍽️ <span class="lbl" data-es="Restaurantes · Carolina & San Juan" data-en="Restaurants · Carolina & San Juan">Restaurantes · Carolina & San Juan</span> <span class="badge">9</span></div>
+    <div class="cards-grid">
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍌</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=16412512489290879728" target="_blank">Mofongo's Carolina ⭐4.4</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Puertorriqueña · Mar–Dom" data-en="PR food · Tue–Sun">Puertorriqueña · Mar–Dom</span></span><span class="card-time">🚗 27 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Mofongo churrasco imperdible. Cerca del aeropuerto.</span><span class="en">Must-try mofongo churrasco. Near the airport.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=16412512489290879728" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🦐</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=15943160738662629996" target="_blank">Mi Casita Sea Food ⭐4.4</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Mariscos · Piñones" data-en="Seafood · Piñones">Mariscos · Piñones</span></span><span class="card-time">🚗 37 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Frente a la playa en Piñones. Grouper y caldo de mariscos.</span><span class="en">Beachfront in Piñones. Grouper and seafood broth.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=15943160738662629996" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🥞</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=16293139172679211889" target="_blank">Café El Secreto ⭐4.5</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">Brunch · Carolina</span><span class="card-time">🚗 30 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Brunch creativo. Tacos de desayuno y pancakes de calabaza.</span><span class="en">Creative brunch. Breakfast tacos and pumpkin pancakes.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=16293139172679211889" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🥢</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=16233920724859899444" target="_blank">Teppanyaki Asia Cuisine ⭐4.5</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Asiática · Los Colobos" data-en="Asian · Los Colobos">Asiática · Los Colobos</span></span><span class="card-time">🚗 19 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Show de teppanyaki en vivo. Pide el filete mignon.</span><span class="en">Live teppanyaki show. Order the filet mignon.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=16233920724859899444" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🏛️</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=2357372179721159356" target="_blank">Raíces ⭐4.1</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">Viejo San Juan</span><span class="card-time">🚗 55 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Paella y mofongo criollo en el corazón del Viejo San Juan.</span><span class="en">Paella and criollo mofongo in the heart of Old San Juan.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=2357372179721159356" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🛒</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=18317997124358625064" target="_blank">Mercato ⭐4.4</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">Mall of San Juan</span><span class="card-time">🚗 37 min</span><span class="card-price price-3">$$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Mercado gourmet con pizzas, pastas y mariscos frescos.</span><span class="en">Gourmet market with pizzas, pastas and fresh seafood.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=18317997124358625064" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍷</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=1988836791873151510" target="_blank">Vinus ⭐4.2</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">Mall of San Juan</span><span class="card-time">🚗 37 min</span><span class="card-price price-3">$$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Steaks y vinos. Ravioli de short rib imperdible.</span><span class="en">Steaks and wines. Short rib ravioli is a must.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=1988836791873151510" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🌮</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=2353059362817412972" target="_blank">La Placita de Santurce ⭐4.7</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Santurce · Vida nocturna" data-en="Santurce · Nightlife">Santurce · Vida nocturna</span></span><span class="card-time">🚗 48 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Ambiente, música en vivo, salsa y comida típica. Imperdible.</span><span class="en">Atmosphere, live music, salsa and local food. A must-do.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=2353059362817412972" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍣</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Tayzan+Condado+San+Juan+Puerto+Rico" target="_blank">Tayzan Chinese & Japanese Cuisine</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Condado · 12pm–2am" data-en="Condado · 12pm–2am">Condado · 12pm–2am</span></span><span class="card-time">🚗 48 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Fusión chino-japonesa frente a la playa en Condado. El churrasco roll es imperdible.</span><span class="en">Chinese-Japanese fusion by the beach in Condado. The churrasco roll is a must.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Tayzan+Condado+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17879987706">📞 787-998-7706</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RESTAURANTES RÍO GRANDE / LUQUILLO -->
+  <div class="section-group" data-cats="restaurant">
+    <div class="section-title">🍽️ <span class="lbl" data-es="Restaurantes · Río Grande & Luquillo" data-en="Restaurants · Río Grande & Luquillo">Restaurantes · Río Grande & Luquillo</span> <span class="badge">6</span></div>
+    <div class="cards-grid">
+
+      <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🌅</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=14113501838820036048" target="_blank">Richie's Restaurant ⭐4.1</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Río Grande · Vista al mar" data-en="Río Grande · Ocean view">Río Grande · Vista al mar</span></span><span class="card-time">🚗 27 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Vista al atardecer impresionante. Abierto todos los días 11am–9pm.</span><span class="en">Stunning sunset view. Open daily 11am–9pm.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=14113501838820036048" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍔</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=15288689558816255255" target="_blank">Latin Burger Grill ⭐4.5</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Río Grande · Jue–Dom" data-en="Río Grande · Thu–Sun">Río Grande · Jue–Dom</span></span><span class="card-time">🚗 20 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Hamburguesas y costillas espectaculares. Música en vivo.</span><span class="en">Spectacular burgers and ribs. Live music.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=15288689558816255255" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🌮</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=12260628056343523453" target="_blank">Dos Panza Taquería ⭐4.3</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Río Grande · Todos los días" data-en="Río Grande · Daily">Río Grande · Todos los días</span></span><span class="card-time">🚗 25 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Mejor comida mexicana de PR. Burritos enormes y churros.</span><span class="en">Best Mexican food in PR. Huge burritos and churros.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=12260628056343523453" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🥗</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=13038462248460855283" target="_blank">Ekelekua Brunch ⭐4.7</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Río Grande · 7am–3pm" data-en="Río Grande · 7am–3pm">Río Grande · 7am–3pm</span></span><span class="card-time">🚗 18 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Brunch de primera. Benedicts con pork pulled. El favorito local.</span><span class="en">Top-tier brunch. Pulled pork benedict. The local favorite.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=13038462248460855283" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🌳</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=4378203548749881396" target="_blank">El Yunque Treehouse</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Entrada El Yunque · 11am–7pm" data-en="El Yunque entrance · 11am–7pm">Entrada El Yunque · 11am–7pm</span></span><span class="card-time">🚗 24 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Perfecto después de la selva. Arepas de coco y vistas 360°.</span><span class="en">Perfect after the rainforest. Coconut arepas and 360° views.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=4378203548749881396" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🦞</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJi_2qz0GZBIwRRhzx5L4cev4" target="_blank">La Parrilla (Kioskos) ⭐4.4 #1</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Luquillo · 11am–9:30pm" data-en="Luquillo · 11am–9:30pm">Luquillo · 11am–9:30pm</span></span><span class="card-time">🚗 29 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">El mejor mariscos en los Kioskos. Langosta fresca y tostones rellenos.</span><span class="en">Best seafood at the Kioskos. Fresh lobster and stuffed tostones.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJi_2qz0GZBIwRRhzx5L4cev4" target="_blank">🚀 GO</a></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PLAYAS -->
+  <div class="section-group" data-cats="playa">
+    <div class="section-title">🏖️ <span class="lbl" data-es="Playas" data-en="Beaches">Playas</span> <span class="badge">4</span></div>
+    <div class="cards-grid">
+
+      <div class="place-card cat-playa infinity-pick" data-cat="playa">
+        <div class="card-top"><div class="card-icon">🏖️</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJ99T6O2-ZBIwRy9HVhPJXdUM" target="_blank">Balneario Luquillo ⭐4.6</a></div>
+          <div class="card-meta"><span class="card-tag tag-playa">Luquillo</span><span class="card-time">🚗 31 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Una de las mejores playas de PR. Aguas calmadas y claras.</span><span class="en">One of the best beaches in PR. Calm and clear waters.</span></div>
+        <div class="beach-info"><span class="beach-badge lifeguard-yes">🛟 <span class="lbl" data-es="Salvavidas: Sí" data-en="Lifeguard: Yes">Salvavidas: Sí</span></span><span class="beach-badge flag-blue">🚩 <span class="lbl" data-es="Bandera azul" data-en="Blue flag">Bandera azul</span></span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJ99T6O2-ZBIwRy9HVhPJXdUM" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-playa" data-cat="playa">
+        <div class="card-top"><div class="card-icon">🌊</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJtwrrG81lA4wRFeL_m6KZ928" target="_blank">Balneario Carolina / Isla Verde ⭐4.6</a></div>
+          <div class="card-meta"><span class="card-tag tag-playa">Carolina · <span class="lbl" data-es="cerca aeropuerto" data-en="near airport">cerca aeropuerto</span></span><span class="card-time">🚗 37 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Arena dorada y aguas cálidas. Sillas $5 y sombrillas disponibles.</span><span class="en">Golden sand and warm water. $5 chairs and umbrellas available.</span></div>
+        <div class="beach-info"><span class="beach-badge lifeguard-yes">🛟 <span class="lbl" data-es="Salvavidas: Sí" data-en="Lifeguard: Yes">Salvavidas: Sí</span></span><span class="beach-badge flag-blue">🚩 <span class="lbl" data-es="Bandera azul" data-en="Blue flag">Bandera azul</span></span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJtwrrG81lA4wRFeL_m6KZ928" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-playa" data-cat="playa">
+        <div class="card-top"><div class="card-icon">🌊</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Seven+Seas+Beach+Fajardo+Puerto+Rico" target="_blank">Seven Seas</a></div>
+          <div class="card-meta"><span class="card-tag tag-playa">Fajardo</span><span class="card-time">🚗 49 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Aguas cristalinas y tranquilas. Ideal para esnórquel.</span><span class="en">Crystal clear and calm water. Perfect for snorkeling.</span></div>
+        <div class="beach-info"><span class="beach-badge lifeguard-yes">🛟 <span class="lbl" data-es="Salvavidas: Fines de semana" data-en="Lifeguard: Weekends">Salvavidas: Fines de semana</span></span><span class="beach-badge flag-varies">🚩 <span class="lbl" data-es="Bandera varía" data-en="Flag varies">Bandera varía</span></span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Seven+Seas+Beach+Fajardo+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-playa infinity-pick" data-cat="playa">
+        <div class="card-top"><div class="card-icon">🌊</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Piñones+beach+Carolina+Puerto+Rico" target="_blank">Piñones</a></div>
+          <div class="card-meta"><span class="card-tag tag-playa">Carolina</span><span class="card-time">🚗 30 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Playa + kioskos de frituras. Ambiente local auténtico.</span><span class="en">Beach + fried food kiosks. Authentic local atmosphere.</span></div>
+        <div class="beach-info"><span class="beach-badge lifeguard-no">🚫 <span class="lbl" data-es="Sin salvavidas" data-en="No lifeguard">Sin salvavidas</span></span><span class="beach-badge flag-varies">🚩 <span class="lbl" data-es="Bandera varía" data-en="Flag varies">Bandera varía</span></span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Piñones+beach+Carolina+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-playa" data-cat="playa">
+        <div class="card-top"><div class="card-icon">🏖️</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Balneario+El+Escambron+San+Juan+Puerto+Rico" target="_blank">Balneario El Escambrón</a></div>
+          <div class="card-meta"><span class="card-tag tag-playa">San Juan</span><span class="card-time">🚗 ~55 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Playa urbana cerca del Viejo San Juan. Aguas tranquilas, ideal para nadar.</span><span class="en">Urban beach near Old San Juan. Calm waters, great for swimming.</span></div>
+        <div class="beach-info"><span class="beach-badge lifeguard-yes">🛟 <span class="lbl" data-es="Salvavidas: Sí" data-en="Lifeguard: Yes">Salvavidas: Sí</span></span><span class="beach-badge flag-blue">🚩 <span class="lbl" data-es="Bandera azul" data-en="Blue flag">Bandera azul</span></span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Balneario+El+Escambron+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AVENTURAS -->
+  <div class="section-group" data-cats="aventura">
+    <div class="section-title">🌿 <span class="lbl" data-es="Aventuras y naturaleza" data-en="Adventures & Nature">Aventuras y naturaleza</span> <span class="badge">6</span></div>
+    <div class="cards-grid">
+      <div class="place-card cat-aventura infinity-pick" data-cat="aventura">
+        <div class="card-top"><div class="card-icon">🌳</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJydD9LrOhBIwR0SSym7z2QoM" target="_blank">El Yunque National Forest ⭐4.8</a></div>
+          <div class="card-meta"><span class="card-tag tag-aventura">Río Grande</span><span class="card-time">🚗 16 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">La única selva tropical del sistema nacional de EE.UU. Cascadas y senderos.</span><span class="en">The only tropical rainforest in the US national system. Waterfalls and trails.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJydD9LrOhBIwR0SSym7z2QoM" target="_blank">🚀 GO</a></div>
+      </div>
+      <div class="place-card cat-aventura" data-cat="aventura">
+        <div class="card-top"><div class="card-icon">🤸</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJUY9lbdeeBIwR3mPfOacTkXk" target="_blank">Rainforest Zipline Park ⭐4.8</a></div>
+          <div class="card-meta"><span class="card-tag tag-aventura">Río Grande · 9am–5pm</span><span class="card-time">🚗 24 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">8 tirolinas en la selva. Experiencia para toda la familia.</span><span class="en">8 zip lines through the rainforest. Great for all ages.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJUY9lbdeeBIwR3mPfOacTkXk" target="_blank">🚀 GO</a></div>
+      </div>
+      <div class="place-card cat-aventura" data-cat="aventura">
+        <div class="card-top"><div class="card-icon">🏎️</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJD1cjdNOeBIwRHbyLyaI3gCQ" target="_blank">Carabalí Rainforest Park ⭐4.7</a></div>
+          <div class="card-meta"><span class="card-tag tag-aventura">Luquillo · 8am–5pm</span><span class="card-time">🚗 25 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">ATVs, jet skis y tours guiados por la selva.</span><span class="en">ATVs, jet skis and guided rainforest tours.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJD1cjdNOeBIwRHbyLyaI3gCQ" target="_blank">🚀 GO</a></div>
+      </div>
+      <div class="place-card cat-aventura infinity-pick" data-cat="aventura">
+        <div class="card-top"><div class="card-icon">🚣</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Laguna+Grande+Bioluminescent+Bay+Fajardo+Puerto+Rico" target="_blank">Kayak Laguna Bioluminiscente ⭐4.9</a></div>
+          <div class="card-meta"><span class="card-tag tag-aventura"><span class="lbl" data-es="Fajardo · Tour nocturno" data-en="Fajardo · Night tour">Fajardo · Tour nocturno</span></span><span class="card-time">🚗 49 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">La laguna bioluminiscente de Fajardo, Las Croabas. Tours de lunes a sábado, al anochecer. Reserva con anticipación.</span><span class="en">Fajardo's bioluminescent lagoon, Las Croabas. Tours Monday–Saturday, at dusk. Book in advance.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Laguna+Grande+Bioluminescent+Bay+Fajardo+Puerto+Rico" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17878882887">📞 787-888-2887</a>
+        </div>
+      </div>
+      <div class="place-card cat-aventura" data-cat="aventura">
+        <div class="card-top"><div class="card-icon">🪂</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Toroverde+Orocovis" target="_blank">Toroverde PR ⭐4.8</a></div>
+          <div class="card-meta"><span class="card-tag tag-aventura">Orocovis · <span class="lbl" data-es="Lun–Dom 8am–5pm" data-en="Mon–Sun 8am–5pm">Lun–Dom 8am–5pm</span></span><span class="card-time">🚗 ~2h 50min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">La tirolina más larga de América Latina, "La Bestia" y "El Monstruo". Carretera 155 Km 33.</span><span class="en">The longest zip line in Latin America, "La Bestia" and "El Monstruo". Carretera 155 Km 33.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Toroverde+Orocovis" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17878677020">📞 787-867-7020</a>
+        </div>
+      </div>
+      <div class="place-card cat-aventura" data-cat="aventura">
+        <div class="card-top"><div class="card-icon">🏝️</div><div>
+          <div class="card-name"><a href="https://www.discoverpuertorico.com" target="_blank">Vieques & Culebra</a></div>
+          <div class="card-meta"><span class="card-tag tag-aventura"><span class="lbl" data-es="Ferry desde Fajardo" data-en="Ferry from Fajardo">Ferry desde Fajardo</span></span><span class="card-time">🚗 49 min + ⛴️</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Islas paradisíacas. Consulta discoverpuertorico.com para ferries.</span><span class="en">Paradise islands. Check discoverpuertorico.com for ferries.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.discoverpuertorico.com" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-aventura" data-cat="aventura">
+        <div class="card-top"><div class="card-icon">🛶</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/La+Paseadora+Rio+Espiritu+Santo+Rio+Grande+Puerto+Rico" target="_blank">La Paseadora · Río Espíritu Santo</a></div>
+          <div class="card-meta"><span class="card-tag tag-aventura">Río Grande</span><span class="card-time">🚗 ~20 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Paseo en bote por el Río Espíritu Santo, cerca de El Yunque. Naturaleza y tranquilidad.</span><span class="en">Boat ride along Río Espíritu Santo, near El Yunque. Nature and tranquility.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/La+Paseadora+Rio+Espiritu+Santo+Rio+Grande+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-aventura" data-cat="aventura">
+        <div class="card-top"><div class="card-icon">🍫</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Finca+de+Cacao+La+PruVite+Luquillo+Puerto+Rico" target="_blank">Finca De Cacao La PruVite</a></div>
+          <div class="card-meta"><span class="card-tag tag-aventura">Luquillo</span><span class="card-time">🚗 ~30 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Tour por finca de cacao. Aprende el proceso desde la planta hasta el chocolate.</span><span class="en">Cacao farm tour. Learn the process from plant to chocolate.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Finca+de+Cacao+La+PruVite+Luquillo+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-aventura" data-cat="aventura">
+        <div class="card-top"><div class="card-icon">☕</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Hacienda+Muñoz+San+Lorenzo+Puerto+Rico" target="_blank">Hacienda Muñoz</a></div>
+          <div class="card-meta"><span class="card-tag tag-aventura">San Lorenzo</span><span class="card-time">🚗 ~50 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Recorrido por hacienda de café con restaurante. Historia y sabor puertorriqueño.</span><span class="en">Coffee hacienda tour with restaurant. Puerto Rican history and flavor.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Hacienda+Muñoz+San+Lorenzo+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- HIKING -->
+  <div class="section-group" data-cats="hiking">
+    <div class="section-title">🥾 <span class="lbl" data-es="Hiking y senderismo" data-en="Hiking & Trails">Hiking y senderismo</span> <span class="badge">2</span></div>
+    <div class="cards-grid">
+
+      <div class="place-card cat-hiking" data-cat="hiking">
+        <div class="card-top"><div class="card-icon">🥾</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Pico+del+Toro+El+Yunque+Puerto+Rico" target="_blank">Sendero El Toro · Pico del Toro</a></div>
+          <div class="card-meta"><span class="card-tag tag-hiking"><span class="lbl" data-es="El Yunque · Punto más alto" data-en="El Yunque · Highest point">El Yunque · Punto más alto</span></span><span class="card-time">🚗 ~30 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">El punto más alto del Bosque Nacional El Yunque. Sendero desafiante de aprox. 8.5 km. Vistas espectaculares en la cima.</span><span class="en">The highest point in El Yunque National Forest. Challenging ~8.5 km trail. Spectacular summit views.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Pico+del+Toro+El+Yunque+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-hiking" data-cat="hiking">
+        <div class="card-top"><div class="card-icon">🥾</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/La+Mina+Trail+El+Yunque+Puerto+Rico" target="_blank">Sendero La Mina · Cascada</a></div>
+          <div class="card-meta"><span class="card-tag tag-hiking"><span class="lbl" data-es="El Yunque · Fácil" data-en="El Yunque · Easy">El Yunque · Fácil</span></span><span class="card-time">🚗 ~25 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Sendero popular y fácil que lleva a la cascada La Mina. Ideal para familias. Aprox. 1.5 km.</span><span class="en">Popular and easy trail leading to La Mina waterfall. Great for families. About 1.5 km.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/La+Mina+Trail+El+Yunque+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ENTRETENIMIENTO -->
+  <div class="section-group" data-cats="entretenimiento">
+    <div class="section-title">🎮 <span class="lbl" data-es="Entretenimiento y diversión" data-en="Entertainment & Fun">Entretenimiento y diversión</span> <span class="badge">6</span></div>
+    <div class="cards-grid">
+      <div class="place-card cat-entretenimiento infinity-pick" data-cat="entretenimiento">
+        <div class="card-top"><div class="card-icon">🎢</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJjViWNvZhA4wRCm9pPG6ixYc" target="_blank">Sector Sixty6 ⭐4.5</a></div>
+          <div class="card-meta"><span class="card-tag tag-entretenimiento">The Outlet · Canóvanas</span><span class="card-time">🚗 13 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Go-karts, bolos, arcade y cuerdas. Todas las edades.</span><span class="en">Go-karts, bowling, arcade and ropes course. All ages.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJjViWNvZhA4wRCm9pPG6ixYc" target="_blank">🚀 GO</a></div>
+      </div>
+      <div class="place-card cat-entretenimiento" data-cat="entretenimiento">
+        <div class="card-top"><div class="card-icon">🎬</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJC7IS0UpgA4wRVdCImNt78Xo" target="_blank">Caribbean Cinemas ⭐4.4</a></div>
+          <div class="card-meta"><span class="card-tag tag-entretenimiento">The Outlet · Canóvanas</span><span class="card-time">🚗 13 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Cine en The Outlet 66. Reserva asientos en línea.</span><span class="en">Cinema at The Outlet 66. Book seats online.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJC7IS0UpgA4wRVdCImNt78Xo" target="_blank">🚀 GO</a></div>
+      </div>
+      <div class="place-card cat-entretenimiento" data-cat="entretenimiento">
+        <div class="card-top"><div class="card-icon">⚔️</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJn0LcKx9hA4wRAaHaSeR84OY" target="_blank">Viking Arena PR ⭐4.6</a></div>
+          <div class="card-meta"><span class="card-tag tag-entretenimiento">Los Colobos · Carolina</span><span class="card-time">🚗 19 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Trampolines, cuerdas, pickleball y axe throwing.</span><span class="en">Trampolines, ropes, pickleball and axe throwing.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJn0LcKx9hA4wRAaHaSeR84OY" target="_blank">🚀 GO</a></div>
+      </div>
+      <div class="place-card cat-entretenimiento" data-cat="entretenimiento">
+        <div class="card-top"><div class="card-icon">🦘</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJO1IaDiZnA4wRTtE_i0vNZMg" target="_blank">Bounce Trampoline Park ⭐4.4</a></div>
+          <div class="card-meta"><span class="card-tag tag-entretenimiento">Carolina</span><span class="card-time">🚗 25 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Trampolines para niños y adultos.</span><span class="en">Trampolines for kids and adults.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJO1IaDiZnA4wRTtE_i0vNZMg" target="_blank">🚀 GO</a></div>
+      </div>
+      <div class="place-card cat-entretenimiento infinity-pick" data-cat="entretenimiento">
+        <div class="card-top"><div class="card-icon">🏙️</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJG64BzXpvA4wRk_rTlzmNXHM" target="_blank">DISTRITO T-Mobile ⭐4.7</a></div>
+          <div class="card-meta"><span class="card-tag tag-entretenimiento">San Juan · <span class="lbl" data-es="hasta 1am" data-en="until 1am">hasta 1am</span></span><span class="card-time">🚗 52 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Entretenimiento, restaurantes y eventos. Pantalla LED gigante.</span><span class="en">Entertainment, restaurants and events. Giant LED screen.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJG64BzXpvA4wRk_rTlzmNXHM" target="_blank">🚀 GO</a></div>
+      </div>
+      <div class="place-card cat-entretenimiento infinity-pick" data-cat="entretenimiento">
+        <div class="card-top"><div class="card-icon">🏰</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJebNWtrhuA4wRFblqHIhivYY" target="_blank">Viejo San Juan</a></div>
+          <div class="card-meta"><span class="card-tag tag-entretenimiento">San Juan</span><span class="card-time">🚗 55 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">La parada #1 de Puerto Rico. Fortaleza, arte, historia y gastronomía.</span><span class="en">Puerto Rico's #1 stop. Fort, art, history and food.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJebNWtrhuA4wRFblqHIhivYY" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-entretenimiento" data-cat="entretenimiento">
+        <div class="card-top"><div class="card-icon">🐭</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Chuck+E+Cheese+Los+Colobos+Carolina+Puerto+Rico" target="_blank">Chuck E. Cheese</a></div>
+          <div class="card-meta"><span class="card-tag tag-entretenimiento">Los Colobos · Carolina</span><span class="card-time">🚗 19 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Arcade, pizza y shows en vivo para niños. Ideal para cumpleaños.</span><span class="en">Arcade, pizza and live shows for kids. Great for birthdays.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Chuck+E+Cheese+Los+Colobos+Carolina+Puerto+Rico" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17872767700">📞 787-276-7700</a>
+        </div>
+      </div>
+
+      <div class="place-card cat-entretenimiento" data-cat="entretenimiento">
+        <div class="card-top"><div class="card-icon">🎪</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Just4Fun+Carolina+Puerto+Rico" target="_blank">Just4Fun</a></div>
+          <div class="card-meta"><span class="card-tag tag-entretenimiento">Carolina</span><span class="card-time">🚗 ~25 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Centro de diversión para niños con juegos y actividades.</span><span class="en">Kids' entertainment center with games and activities.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Just4Fun+Carolina+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-entretenimiento" data-cat="entretenimiento">
+        <div class="card-top"><div class="card-icon">🤸</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Altitude+Trampoline+Park+Puerto+Rico" target="_blank">Altitude Trampoline Park</a></div>
+          <div class="card-meta"><span class="card-tag tag-entretenimiento"><span class="lbl" data-es="Varios lugares" data-en="Multiple locations">Varios lugares</span></span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Parque de trampolines con varias ubicaciones en Puerto Rico.</span><span class="en">Trampoline park with multiple locations in Puerto Rico.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Altitude+Trampoline+Park+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMPRAS -->
+  <div class="section-group" data-cats="compras">
+    <div class="section-title">🛍️ <span class="lbl" data-es="Centros comerciales" data-en="Shopping Malls">Centros comerciales</span> <span class="badge">5</span></div>
+    <div class="cards-grid">
+      <div class="place-card cat-compras infinity-pick" data-cat="compras">
+        <div class="card-top"><div class="card-icon">🛍️</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">The Outlet 66 Mall ⭐4.6</a></div>
+          <div class="card-meta"><span class="card-tag tag-compras">Canóvanas · 9am–9pm</span><span class="card-time">🚗 14 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Tiendas, entretenimiento, restaurantes y cines. Todo en uno.</span><span class="en">Stores, entertainment, restaurants and cinema. All in one.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">🚀 GO</a></div>
+      </div>
+      <div class="place-card cat-compras" data-cat="compras">
+        <div class="card-top"><div class="card-icon">🏪</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJiUXpAT9mA4wRiROVIaibhiQ" target="_blank">The Mall of San Juan ⭐4.6</a></div>
+          <div class="card-meta"><span class="card-tag tag-compras">San Juan · 10am–9pm</span><span class="card-time">🚗 37 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Mall de lujo: Gucci, Versace, Tiffany, Zara.</span><span class="en">Luxury mall: Gucci, Versace, Tiffany, Zara.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJiUXpAT9mA4wRiROVIaibhiQ" target="_blank">🚀 GO</a></div>
+      </div>
+      <div class="place-card cat-compras" data-cat="compras">
+        <div class="card-top"><div class="card-icon">🏬</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJwwVZuMFoA4wR1wTUeubh2Ds" target="_blank">Plaza Las Américas ⭐4.7</a></div>
+          <div class="card-meta"><span class="card-tag tag-compras">San Juan · 9am–9pm</span><span class="card-time">🚗 45 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">El mall más grande de Puerto Rico. +300 tiendas.</span><span class="en">Puerto Rico's largest mall. +300 stores.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJwwVZuMFoA4wR1wTUeubh2Ds" target="_blank">🚀 GO</a></div>
+      </div>
+      <div class="place-card cat-compras" data-cat="compras">
+        <div class="card-top"><div class="card-icon">🏪</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJvz34891mA4wRb2SFgGo1qTw" target="_blank">Plaza Carolina ⭐4.5</a></div>
+          <div class="card-meta"><span class="card-tag tag-compras">Carolina · 9am–9pm</span><span class="card-time">🚗 28 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Centro comercial familiar cerca del aeropuerto.</span><span class="en">Family mall near the airport.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJvz34891mA4wRb2SFgGo1qTw" target="_blank">🚀 GO</a></div>
+      </div>
+      <div class="place-card cat-compras" data-cat="compras">
+        <div class="card-top"><div class="card-icon">🏷️</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJMWs4pUAfA4wRg0Oehf23i3o" target="_blank">Puerto Rico Premium Outlets ⭐4.6</a></div>
+          <div class="card-meta"><span class="card-tag tag-compras">Barceloneta · 9am–9pm</span><span class="card-time">🚗 ~2h 10min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Grandes marcas con descuentos. Nike, Coach, Calvin Klein.</span><span class="en">Major brands at outlet prices. Nike, Coach, Calvin Klein.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJMWs4pUAfA4wRg0Oehf23i3o" target="_blank">🚀 GO</a></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- LUGARES PARA PASAR EL RATO -->
+  <div class="section-group" data-cats="hangout">
+    <div class="section-title">🌆 <span class="lbl" data-es="Lugares para pasar el rato" data-en="Places to Hang Out">Lugares para pasar el rato</span> <span class="badge">5</span></div>
+    <div class="cards-grid">
+
+      <div class="place-card cat-hangout" data-cat="hangout">
+        <div class="card-top"><div class="card-icon">🦞</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Kioskos+de+Luquillo+Puerto+Rico" target="_blank">Kioskos de Luquillo</a></div>
+          <div class="card-meta"><span class="card-tag tag-hangout">Luquillo</span><span class="card-time">🚗 ~29 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Fila de kioskos de comida frente a la playa. Ambiente festivo y variado.</span><span class="en">Row of food kiosks by the beach. Lively and varied atmosphere.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Kioskos+de+Luquillo+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-hangout" data-cat="hangout">
+        <div class="card-top"><div class="card-icon">🏰</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJebNWtrhuA4wRFblqHIhivYY" target="_blank">Viejo San Juan</a></div>
+          <div class="card-meta"><span class="card-tag tag-hangout">San Juan</span><span class="card-time">🚗 55 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Historia, arte y gastronomía en cada esquina. La joya de San Juan.</span><span class="en">History, art and food on every corner. The jewel of San Juan.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJebNWtrhuA4wRFblqHIhivYY" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-hangout" data-cat="hangout">
+        <div class="card-top"><div class="card-icon">🏙️</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJG64BzXpvA4wRk_rTlzmNXHM" target="_blank">DISTRITO T-Mobile</a></div>
+          <div class="card-meta"><span class="card-tag tag-hangout">San Juan · <span class="lbl" data-es="hasta 1am" data-en="until 1am">hasta 1am</span></span><span class="card-time">🚗 52 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Entretenimiento, restaurantes y eventos con pantalla LED gigante.</span><span class="en">Entertainment, restaurants and events with giant LED screen.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJG64BzXpvA4wRk_rTlzmNXHM" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-hangout" data-cat="hangout">
+        <div class="card-top"><div class="card-icon">🎶</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJZafB0olvA4wRbI8jAAa_pyA" target="_blank">La Placita de Santurce</a></div>
+          <div class="card-meta"><span class="card-tag tag-hangout">Santurce</span><span class="card-time">🚗 48 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Vida nocturna, música en vivo, salsa y comida típica.</span><span class="en">Nightlife, live music, salsa and local food.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJZafB0olvA4wRbI8jAAa_pyA" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-hangout" data-cat="hangout">
+        <div class="card-top"><div class="card-icon">🌃</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Downtown+Cupey+Trujillo+Alto+Puerto+Rico" target="_blank">Downtown Cupey</a></div>
+          <div class="card-meta"><span class="card-tag tag-hangout">Trujillo Alto</span><span class="card-time">🚗 ~40 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Zona de restaurantes y ambiente nocturno en Trujillo Alto.</span><span class="en">Restaurant and nightlife area in Trujillo Alto.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Downtown+Cupey+Trujillo+Alto+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- EVENTOS Y FESTIVALES -->
+  <div class="section-group" data-cats="evento">
+    <div class="section-title">🎉 <span class="lbl" data-es="Eventos y festivales de temporada" data-en="Seasonal Events & Festivals">Eventos y festivales de temporada</span> <span class="badge">4</span></div>
+    <div class="cards-grid">
+
+      <div class="place-card cat-evento" data-cat="evento">
+        <div class="card-top"><div class="card-icon">🎄</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Festival+Navideño+Puerto+Rico" target="_blank">Fiestas Navideñas y Reyes</a></div>
+          <div class="card-meta"><span class="card-tag tag-evento"><span class="lbl" data-es="Diciembre – Enero" data-en="December – January">Diciembre – Enero</span></span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Parrandas, música, comida y el Día de Reyes (6 de enero) en pueblos cercanos.</span><span class="en">Parrandas, music, food and Three Kings Day (Jan 6) in nearby towns.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Festival+Navideño+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-evento" data-cat="evento">
+        <div class="card-top"><div class="card-icon">🎭</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Fiestas+de+la+Calle+San+Sebastian+San+Juan" target="_blank">Fiestas de la Calle San Sebastián</a></div>
+          <div class="card-meta"><span class="card-tag tag-evento"><span class="lbl" data-es="Enero (Viejo San Juan)" data-en="January (Old San Juan)">Enero (Viejo San Juan)</span></span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Uno de los festivales más grandes de PR. Música, arte y comida en las calles del Viejo San Juan.</span><span class="en">One of PR's biggest festivals. Music, art and food in Old San Juan's streets.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Fiestas+de+la+Calle+San+Sebastian+San+Juan" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-evento" data-cat="evento">
+        <div class="card-top"><div class="card-icon">🎪</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Festival+Patronal+Canovanas+Puerto+Rico" target="_blank">Fiestas Patronales de Canóvanas</a></div>
+          <div class="card-meta"><span class="card-tag tag-evento"><span class="lbl" data-es="Variable · consultar" data-en="Variable · check dates">Variable · consultar</span></span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Fiestas locales del pueblo con música en vivo, comida y actividades familiares.</span><span class="en">Local town festival with live music, food and family activities.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Festival+Patronal+Canovanas+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-evento" data-cat="evento">
+        <div class="card-top"><div class="card-icon">🎇</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/eventos+Puerto+Rico+hoy" target="_blank">Eventos y conciertos actuales</a></div>
+          <div class="card-meta"><span class="card-tag tag-evento"><span class="lbl" data-es="Ver calendario" data-en="See calendar">Ver calendario</span></span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Busca conciertos, ferias y eventos especiales durante tu estadía.</span><span class="en">Search for concerts, fairs and special events during your stay.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/eventos+Puerto+Rico+hoy" target="_blank">🚀 GO</a></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="empty-state" id="empty-state">
+    <div class="emoji">🗺️</div>
+    <p id="empty-es">No se encontraron lugares · Intenta otra búsqueda</p>
+    <p id="empty-en" style="display:none">No places found · Try a different search</p>
+  </div>
+
+</div>
+
+<script>
+  let currentLang = 'es';
+  let currentFilter = 'all';
+
+  const placeholders = {
+    es: 'Buscar lugar...', en: 'Search place...', pt: 'Buscar local...', fr: 'Rechercher un lieu...'
+  };
+
+  function setLang(lang) {
+    currentLang = lang;
+    ['es','en','pt','fr'].forEach(l => {
+      const btn = document.getElementById('btn-' + l);
+      if (btn) btn.classList.toggle('active', lang === l);
+    });
+    document.getElementById('subtitle-es').style.display = lang === 'es' ? '' : 'none';
+    document.getElementById('subtitle-en').style.display = lang === 'en' ? '' : 'none';
+    document.getElementById('welcome-text-es').style.display = lang === 'es' ? '' : 'none';
+    document.getElementById('welcome-text-en').style.display = (lang === 'en' || lang === 'pt' || lang === 'fr') ? '' : 'none';
+    document.getElementById('empty-es').style.display = lang === 'es' ? '' : 'none';
+    document.getElementById('empty-en').style.display = lang === 'en' ? '' : 'none';
+    document.querySelectorAll('.lbl').forEach(el => {
+      const val = el.dataset[lang] || el.dataset['en'] || el.dataset['es'];
+      if (val) el.textContent = val;
+    });
+    // Notes: pt/fr fall back to English text since full translation isn't stored per-note
+    document.querySelectorAll('.es').forEach(el => el.style.display = lang === 'es' ? 'inline' : 'none');
+    document.querySelectorAll('.en').forEach(el => el.style.display = (lang === 'en' || lang === 'pt' || lang === 'fr') ? 'inline' : 'none');
+  }
+
+  function filterPlaces(filter, btn) {
+    currentFilter = filter;
+    document.querySelectorAll('.filter-btn[data-filter]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilters('');
+  }
+
+
+  let guestLocation = null;
+
+  function useMyLocation() {
+    const btn = document.getElementById('location-btn');
+    if (!navigator.geolocation) {
+      alert(currentLang === 'es' ? 'Tu navegador no soporta ubicación.' : 'Your browser does not support location.');
+      return;
+    }
+    btn.textContent = '📍 ' + (currentLang === 'es' ? 'Buscando...' : 'Locating...');
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        guestLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        btn.innerHTML = '📍 <span class="lbl" data-es="Ubicación activa" data-en="Location active">Ubicación activa</span>';
+        btn.style.background = 'rgba(102,187,106,0.15)';
+        btn.style.borderColor = '#66bb6a';
+        btn.style.color = '#66bb6a';
+        sortCardsByDistance();
+      },
+      () => {
+        btn.innerHTML = '📍 <span class="lbl" data-es="Usar mi ubicación" data-en="Use my location">Usar mi ubicación</span>';
+        alert(currentLang === 'es' ? 'No se pudo obtener tu ubicación. Revisa los permisos.' : 'Could not get your location. Check permissions.');
+      }
+    );
+  }
+
+  function haversineDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  }
+
+  function sortCardsByDistance() {
+    if (!guestLocation) return;
+    document.querySelectorAll('.cards-grid').forEach(grid => {
+      const cards = Array.from(grid.querySelectorAll('.place-card'));
+      cards.forEach(card => {
+        const link = card.querySelector('.card-name a');
+        if (!link) return;
+        // Extract distance badge if present, otherwise skip reordering for that card
+        card.dataset.guestDist = '';
+      });
+    });
+  }
+
+  function applyFilters(searchVal) {
+    const q = searchVal.toLowerCase().trim();
+    let total = 0;
+    document.querySelectorAll('.section-group').forEach(sec => {
+      let secVisible = false;
+      sec.querySelectorAll('.place-card').forEach(card => {
+        const cardCat = card.dataset.cat;
+        const catMatch = currentFilter === 'all' || cardCat === currentFilter;
+        const searchMatch = !q || card.textContent.toLowerCase().includes(q);
+        if (catMatch && searchMatch) {
+          card.classList.remove('hidden-card');
+          secVisible = true;
+          total++;
+        } else {
+          card.classList.add('hidden-card');
+        }
+      });
+      sec.classList.toggle('hidden', !secVisible);
+    });
+    document.getElementById('visible-count').textContent = total;
+    document.getElementById('empty-state').classList.toggle('visible', total === 0);
+  }
+
+  // Run on page load to count all cards
+  window.addEventListener('load', () => {
+    applyFilters('');
+  });
+</script>
+</body>
+</html>
