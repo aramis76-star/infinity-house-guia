@@ -63,7 +63,20 @@
   .place-card.hidden-card { display: none; }
 
   .card-top { display: flex; align-items: flex-start; gap: 9px; margin-bottom: 7px; }
-  .card-icon { font-size: 1.25rem; flex-shrink: 0; line-height: 1; margin-top: 1px; }
+  .card-icon { font-size: 1.25rem; flex-shrink: 0; line-height: 1; margin-top: 1px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.06); border-radius: 12px; }
+  .cat-emergencia .card-icon { background: rgba(239,83,80,0.15); }
+  .cat-farmacia .card-icon { background: rgba(236,64,122,0.15); }
+  .cat-restaurant .card-icon { background: rgba(255,124,92,0.15); }
+  .cat-supermercado .card-icon { background: rgba(77,182,172,0.15); }
+  .cat-playa .card-icon { background: rgba(41,182,246,0.15); }
+  .cat-aventura .card-icon { background: rgba(102,187,106,0.15); }
+  .cat-entretenimiento .card-icon { background: rgba(171,71,188,0.15); }
+  .cat-compras .card-icon { background: rgba(255,202,40,0.15); }
+  .cat-hangout .card-icon { background: rgba(38,166,154,0.15); }
+  .cat-evento .card-icon { background: rgba(236,64,122,0.15); }
+  .cat-nocturno .card-icon { background: rgba(121,134,203,0.15); }
+  .cat-gasolinera .card-icon { background: rgba(255,167,38,0.15); }
+  .cat-hiking .card-icon { background: rgba(141,110,99,0.15); }
   .card-name { font-size: 0.86rem; font-weight: 600; color: #f0ede6; line-height: 1.3; }
   .card-name a { color: inherit; text-decoration: none; border-bottom: 1px dashed rgba(62,207,178,0.35); transition: color 0.15s; }
   .card-name a:hover { color: #3ecfb2; border-bottom-color: #3ecfb2; }
@@ -195,70 +208,9 @@
 
 <div class="main">
   <div class="stats-bar">
-    <div class="count"><span class="lbl" data-es="Mostrando" data-en="Showing">Mostrando</span> <span id="visible-count">101</span> <span class="lbl" data-es="lugares" data-en="places">lugares</span></div>
+    <div class="count"><span class="lbl" data-es="Mostrando" data-en="Showing">Mostrando</span> <span id="visible-count">123</span> <span class="lbl" data-es="lugares" data-en="places">lugares</span></div>
   </div>
 
-  <!-- EMERGENCIAS -->
-  <div class="section-group" data-cats="emergencia">
-    <div class="section-title">🏥 <span class="lbl" data-es="Emergencias y farmacias" data-en="Emergencies & Pharmacies">Emergencias y farmacias</span> <span class="badge">5</span></div>
-    <div class="cards-grid">
-
-      <div class="place-card cat-emergencia" data-cat="emergencia">
-        <div class="card-top"><div class="card-icon">🚨</div><div>
-          <div class="card-name"><a href="tel:911">911 · Emergencias</a></div>
-          <div class="card-meta"><span class="card-tag tag-emergencia"><span class="lbl" data-es="Puerto Rico" data-en="Puerto Rico">Puerto Rico</span></span><span class="card-time">📞 Gratis</span></div>
-        </div></div>
-        <div class="card-note"><span class="es">Policía, bomberos y ambulancia. Marca 911.</span><span class="en">Police, fire & ambulance. Dial 911.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="tel:911" target="_blank">🚀 GO</a><a class="action-btn call" href="tel:911">📞 911</a></div>
-      </div>
-
-      <div class="place-card cat-emergencia" data-cat="emergencia">
-        <div class="card-top"><div class="card-icon">🏥</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/search/hospital+canóvanas+puerto+rico" target="_blank">Hospital HIMA San Pablo · Caguas</a></div>
-          <div class="card-meta"><span class="card-tag tag-emergencia">Caguas · 24/7</span><span class="card-time">🚗 ~25 min</span></div>
-        </div></div>
-        <div class="card-note"><span class="es">Hospital más cercano con sala de emergencias 24/7.</span><span class="en">Nearest hospital with 24/7 emergency room.</span></div>
-        <div class="card-actions">
-          <a class="action-btn go-btn" href="https://www.google.com/maps/search/hospital+canóvanas+puerto+rico" target="_blank">🚀 GO</a>
-          <a class="action-btn call" href="tel:+17872530505">📞 Llamar</a>
-        </div>
-      </div>
-
-      <div class="place-card cat-emergencia" data-cat="emergencia">
-        <div class="card-top"><div class="card-icon">🏥</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/search/Hospital+Auxilio+Mutuo+San+Juan+Puerto+Rico" target="_blank">Hospital Auxilio Mutuo · San Juan</a></div>
-          <div class="card-meta"><span class="card-tag tag-emergencia">Hato Rey · 24/7</span><span class="card-time">🚗 ~45 min</span></div>
-        </div></div>
-        <div class="card-note"><span class="es">Hospital de referencia en San Juan. Sala de emergencias 24/7.</span><span class="en">Reference hospital in San Juan. 24/7 emergency room.</span></div>
-        <div class="card-actions">
-          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Hospital+Auxilio+Mutuo+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a>
-          <a class="action-btn call" href="tel:+17877580000">📞 Llamar</a>
-        </div>
-      </div>
-
-      <div class="place-card cat-emergencia infinity-pick" data-cat="emergencia">
-        <div class="card-top"><div class="card-icon">🏥</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/search/Hospital+Presbyterian+San+Juan+Puerto+Rico" target="_blank">Hospital Presbyterian · San Juan</a></div>
-          <div class="card-meta"><span class="card-tag tag-emergencia">Santurce · 24/7</span><span class="card-time">🚗 ~50 min</span></div>
-        </div></div>
-        <div class="card-note"><span class="es">Hospital universitario con sala de emergencias 24/7. Santurce.</span><span class="en">University hospital with 24/7 emergency room. Santurce.</span></div>
-        <div class="card-actions">
-          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Hospital+Presbyterian+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a>
-          <a class="action-btn call" href="tel:+17877217300">📞 Llamar</a>
-        </div>
-      </div>
-
-      <div class="place-card cat-emergencia" data-cat="emergencia">
-        <div class="card-top"><div class="card-icon">🦷</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/search/dentista+emergencia+canovanas+puerto+rico" target="_blank">Dentista de emergencia · área</a></div>
-          <div class="card-meta"><span class="card-tag tag-emergencia">Canóvanas / Carolina</span></div>
-        </div></div>
-        <div class="card-note"><span class="es">Busca "dentista emergencia Canóvanas" en Google para opciones del día.</span><span class="en">Search "emergency dentist Canóvanas" on Google for same-day options.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/dentista+emergencia+canovanas+puerto+rico" target="_blank">🚀 GO</a></div>
-      </div>
-
-    </div>
-  </div>
 
   <!-- GASOLINERAS -->
   <div class="section-group" data-cats="gasolinera">
@@ -307,18 +259,18 @@
 
   <!-- FARMACIAS -->
   <div class="section-group" data-cats="farmacia">
-    <div class="section-title">💊 <span class="lbl" data-es="Farmacias" data-en="Pharmacies">Farmacias</span> <span class="badge">3</span></div>
+    <div class="section-title">💊 <span class="lbl" data-es="Farmacias" data-en="Pharmacies">Farmacias</span> <span class="badge">5</span></div>
     <div class="cards-grid">
 
       <div class="place-card cat-farmacia" data-cat="farmacia">
         <div class="card-top"><div class="card-icon">💊</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">Walgreens · The Outlet Canóvanas</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Walgreens+17000+Carr+3+Canovanas+PR" target="_blank">Walgreens · Canóvanas</a></div>
           <div class="card-meta"><span class="card-tag tag-farmacia">Canóvanas · 7am–10pm</span><span class="card-time">🚗 14 min</span></div>
         </div></div>
         <div class="card-note"><span class="es">Farmacia, artículos de salud y básicos del hogar.</span><span class="en">Pharmacy, health items and household basics.</span></div>
         <div class="card-actions">
-          <a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">🚀 GO</a>
-          <a class="action-btn call" href="tel:+17879530295">📞 Llamar</a>
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Walgreens+17000+Carr+3+Canovanas+PR" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17872562121">📞 Llamar</a>
         </div>
       </div>
 
@@ -333,11 +285,35 @@
 
       <div class="place-card cat-farmacia" data-cat="farmacia">
         <div class="card-top"><div class="card-icon">💊</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/search/walgreens+24+horas+isla+verde+carolina" target="_blank">Walgreens 24h · Isla Verde</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Walgreens+5984+Ave+Isla+Verde+Carolina+PR" target="_blank">Walgreens 24h · Isla Verde</a></div>
           <div class="card-meta"><span class="card-tag tag-farmacia">Carolina · 24/7</span><span class="card-time">🚗 35 min</span></div>
         </div></div>
         <div class="card-note"><span class="es">Única Walgreens abierta 24 horas. Para emergencias nocturnas.</span><span class="en">Only 24-hour Walgreens. For night emergencies.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/walgreens+24+horas+isla+verde+carolina" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Walgreens+5984+Ave+Isla+Verde+Carolina+PR" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-farmacia" data-cat="farmacia">
+        <div class="card-top"><div class="card-icon">💊</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Farmacia+Caribe+Carretera+3+Km+26.3+Rio+Grande+PR" target="_blank">Farmacia Caribe</a></div>
+          <div class="card-meta"><span class="card-tag tag-farmacia">Río Grande · 8am–9pm</span><span class="card-time">🚗 ~22 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Farmacia local en Río Grande. Carretera #3 Km 26.3.</span><span class="en">Local pharmacy in Río Grande. Carretera #3 Km 26.3.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Farmacia+Caribe+Carretera+3+Km+26.3+Rio+Grande+PR" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17878881888">📞 Llamar</a>
+        </div>
+      </div>
+
+      <div class="place-card cat-farmacia" data-cat="farmacia">
+        <div class="card-top"><div class="card-icon">💊</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Farmacia+Campo+Rico+Carr+185+Km+5.5+Canovanas+PR" target="_blank">Farmacia Campo Rico</a></div>
+          <div class="card-meta"><span class="card-tag tag-farmacia">Canóvanas · 7am–5:50pm</span><span class="card-time">🚗 ~10 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Farmacia local en la Carr. 185, Bo. Campo Rico, Canóvanas.</span><span class="en">Local pharmacy on Carr. 185, Bo. Campo Rico, Canóvanas.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Farmacia+Campo+Rico+Carr+185+Km+5.5+Canovanas+PR" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17878762571">📞 Llamar</a>
+        </div>
       </div>
 
     </div>
@@ -350,11 +326,14 @@
 
       <div class="place-card cat-supermercado infinity-pick" data-cat="supermercado">
         <div class="card-top"><div class="card-icon">🛒</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJgbxIquVfA4wRyhsjKBkCOSk" target="_blank">Supermercado Único</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/place/849H%2BQHX+Palma+Sola,+00745,+Puerto+Rico" target="_blank">Supermercado Único</a></div>
           <div class="card-meta"><span class="card-tag tag-supermercado"><span class="lbl" data-es="Cerca de la casa" data-en="Near the house">Cerca de la casa</span></span><span class="card-time">🚗 1 min</span><span class="card-price price-1">$</span></div>
         </div></div>
         <div class="card-note"><span class="es">El más cercano. Desayunos, sándwiches, comestibles básicos. 6am–7pm.</span><span class="en">The closest one. Breakfast, sandwiches, basic groceries. 6am–7pm.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJgbxIquVfA4wRyhsjKBkCOSk" target="_blank">🚀 GO</a></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/place/849H%2BQHX+Palma+Sola,+00745,+Puerto+Rico" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17878861420">📞 Llamar</a>
+        </div>
       </div>
 
       <div class="place-card cat-supermercado" data-cat="supermercado">
@@ -382,6 +361,39 @@
         </div></div>
         <div class="card-note"><span class="es">Todo en un lugar. 6am–11pm todos los días.</span><span class="en">Everything in one place. 6am–11pm daily.</span></div>
         <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=587837725042293899" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-supermercado infinity-pick" data-cat="supermercado">
+        <div class="card-top"><div class="card-icon">🛒</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/FAMCOOP+Carr+3+Rio+Grande+PR" target="_blank">FAMCOOP</a></div>
+          <div class="card-meta"><span class="card-tag tag-supermercado"><span class="lbl" data-es="Río Grande · más cercano" data-en="Río Grande · closest">Río Grande · más cercano</span></span><span class="card-time">🚗 22 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">El supermercado más cercano al condominio. Buena variedad y precios razonables.</span><span class="en">Closest grocery store to the unit. Good variety and fair prices.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/FAMCOOP+Carr+3+Rio+Grande+PR" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17878096116">📞 Llamar</a>
+        </div>
+      </div>
+
+      <div class="place-card cat-supermercado" data-cat="supermercado">
+        <div class="card-top"><div class="card-icon">🛒</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Ralph%27s+Food+Warehouse+Carr+3+Km+24.5+Rio+Grande+PR" target="_blank">Ralph's Food Warehouse</a></div>
+          <div class="card-meta"><span class="card-tag tag-supermercado">Río Grande · 6am–10pm</span><span class="card-time">🚗 16 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Supermercado grande con gran variedad. Carr #3 Km 24.5.</span><span class="en">Large supermarket with great variety. Carr #3 Km 24.5.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Ralph%27s+Food+Warehouse+Carr+3+Km+24.5+Rio+Grande+PR" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17877330959">📞 Llamar</a>
+        </div>
+      </div>
+
+      <div class="place-card cat-supermercado" data-cat="supermercado">
+        <div class="card-top"><div class="card-icon">🏪</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Las+Picuas+123+Convenience+Store+Palmer+Rio+Grande+PR" target="_blank">Las Picuas 123 Convenience Store</a></div>
+          <div class="card-meta"><span class="card-tag tag-supermercado"><span class="lbl" data-es="Palmer, Río Grande · básicos" data-en="Palmer, Río Grande · basics">Palmer, Río Grande · básicos</span></span><span class="card-time">🚗 27 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Tienda de conveniencia para esos artículos de último momento.</span><span class="en">Convenience store for those last minute items.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Las+Picuas+123+Convenience+Store+Palmer+Rio+Grande+PR" target="_blank">🚀 GO</a></div>
       </div>
 
     </div>
@@ -449,7 +461,7 @@
       </div>
 
       <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
-        <div class="card-top"><div class="card-icon">🍌</div><div>
+        <div class="card-top"><div class="card-icon">🍲</div><div>
           <div class="card-name"><a href="https://maps.google.com/?cid=2583091817435590426" target="_blank">Campomofongo</a></div>
           <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Criolla · Mié–Dom" data-en="Local · Wed–Sun">Criolla · Mié–Dom</span></span><span class="card-time">🚗 10 min</span><span class="card-price price-2">$$</span></div>
         </div></div>
@@ -535,28 +547,31 @@
       <div class="place-card cat-restaurant" data-cat="restaurant">
         <div class="card-top"><div class="card-icon">☕</div><div>
           <div class="card-name"><a href="https://www.google.com/maps/search/Starbucks+Canovanas+Puerto+Rico" target="_blank">Starbucks</a></div>
-          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Varios lugares" data-en="Multiple locations">Varios lugares</span></span><span class="card-price price-1">$</span></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Varios lugares" data-en="Multiple locations">Varios lugares</span></span><span class="card-time">🚗 ~14 min</span><span class="card-price price-1">$</span></div>
         </div></div>
-        <div class="card-note"><span class="es">Cadena de café con varias ubicaciones en la zona.</span><span class="en">Coffee chain with multiple locations in the area.</span></div>
+        <div class="card-note"><span class="es">Cadena de café con varias ubicaciones en la zona. La más cercana está en The Outlet, Canóvanas.</span><span class="en">Coffee chain with multiple locations in the area. Closest one is at The Outlet, Canóvanas.</span></div>
         <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Starbucks+Canovanas+Puerto+Rico" target="_blank">🚀 GO</a></div>
       </div>
 
       <div class="place-card cat-restaurant" data-cat="restaurant">
         <div class="card-top"><div class="card-icon">🌮</div><div>
           <div class="card-name"><a href="https://www.google.com/maps/search/Tijuana%27s+Puerto+Rico" target="_blank">Tijuana's</a></div>
-          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Varios lugares" data-en="Multiple locations">Varios lugares</span></span><span class="card-price price-1">$</span></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Varios lugares" data-en="Multiple locations">Varios lugares</span></span><span class="card-time">🚗 ~14 min</span><span class="card-price price-1">$</span></div>
         </div></div>
-        <div class="card-note"><span class="es">Comida mexicana rápida y casual. Varias ubicaciones.</span><span class="en">Quick casual Mexican food. Multiple locations.</span></div>
+        <div class="card-note"><span class="es">Comida mexicana rápida y casual. La más cercana está en The Outlet, Canóvanas.</span><span class="en">Quick casual Mexican food. Closest one is at The Outlet, Canóvanas.</span></div>
         <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Tijuana%27s+Puerto+Rico" target="_blank">🚀 GO</a></div>
       </div>
 
       <div class="place-card cat-restaurant" data-cat="restaurant">
         <div class="card-top"><div class="card-icon">🍽️</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/search/Metropol+Restaurant+Puerto+Rico" target="_blank">Metropol Restaurant & Bar</a></div>
-          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Varios lugares" data-en="Multiple locations">Varios lugares</span></span><span class="card-price price-2">$$</span></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Metropol+Restaurant+6600+Ave+Isla+Verde+Carolina+PR" target="_blank">Metropol Restaurant & Bar · Isla Verde</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">Isla Verde · 11am–10pm</span><span class="card-time">🚗 ~36 min</span><span class="card-price price-2">$$</span></div>
         </div></div>
-        <div class="card-note"><span class="es">Cocina cubana-caribeña, cadena reconocida en la isla.</span><span class="en">Cuban-Caribbean cuisine, well-known chain on the island.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Metropol+Restaurant+Puerto+Rico" target="_blank">🚀 GO</a></div>
+        <div class="card-note"><span class="es">Cocina cubana-caribeña. 6600 Ave. Isla Verde, Carolina.</span><span class="en">Cuban-Caribbean cuisine. 6600 Ave. Isla Verde, Carolina.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Metropol+Restaurant+6600+Ave+Isla+Verde+Carolina+PR" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17877915585">📞 Llamar</a>
+        </div>
       </div>
 
     </div>
@@ -564,61 +579,62 @@
 
   <!-- COMIDA EN EL PUNTO DE VENTA (THE OUTLET) -->
   <div class="section-group" data-cats="restaurant">
-    <div class="section-title">🍕 <span class="lbl" data-es="Comida rápida · The Outlet" data-en="Quick Food · The Outlet">Comida rápida · The Outlet</span> <span class="badge">6</span></div>
+    <div class="section-title">🍕 <span class="lbl" data-es="Comida rápida · The Outlet" data-en="Quick Food · The Outlet">Comida rápida · The Outlet</span> <span class="badge">5</span></div>
     <div class="cards-grid">
 
       <div class="place-card cat-restaurant" data-cat="restaurant">
         <div class="card-top"><div class="card-icon">🍕</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">PizzaAt@</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/PizzaAt%40+The+Outlet+66+Canovanas" target="_blank">PizzaAt@</a></div>
           <div class="card-meta"><span class="card-tag tag-restaurant">The Outlet · Canóvanas</span><span class="card-time">🚗 14 min</span><span class="card-price price-1">$</span></div>
         </div></div>
         <div class="card-note"><span class="es">Pizza rápida dentro de The Outlet.</span><span class="en">Quick pizza inside The Outlet.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/PizzaAt%40+The+Outlet+66+Canovanas" target="_blank">🚀 GO</a></div>
       </div>
 
       <div class="place-card cat-restaurant" data-cat="restaurant">
         <div class="card-top"><div class="card-icon">🍌</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">Tostón Express</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Toston+Express+The+Outlet+66+Canovanas" target="_blank">Tostón Express</a></div>
           <div class="card-meta"><span class="card-tag tag-restaurant">The Outlet · Canóvanas</span><span class="card-time">🚗 14 min</span><span class="card-price price-1">$</span></div>
         </div></div>
         <div class="card-note"><span class="es">Tostones y comida criolla rápida en The Outlet.</span><span class="en">Tostones and quick local food in The Outlet.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">🚀 GO</a></div>
-      </div>
-
-      <div class="place-card cat-restaurant" data-cat="restaurant">
-        <div class="card-top"><div class="card-icon">🌮</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">Tijuana's Express</a></div>
-          <div class="card-meta"><span class="card-tag tag-restaurant">The Outlet · Canóvanas</span><span class="card-time">🚗 14 min</span><span class="card-price price-1">$</span></div>
-        </div></div>
-        <div class="card-note"><span class="es">Versión rápida de Tijuana's dentro de The Outlet.</span><span class="en">Quick version of Tijuana's inside The Outlet.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Toston+Express+The+Outlet+66+Canovanas" target="_blank">🚀 GO</a></div>
       </div>
 
       <div class="place-card cat-restaurant" data-cat="restaurant">
         <div class="card-top"><div class="card-icon">🍷</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">Karma's Wine Bar & Beer Garden</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Karma%27s+Wine+Bar+Beer+Garden+The+Outlet+Canovanas" target="_blank">Karma's Wine Bar & Beer Garden</a></div>
           <div class="card-meta"><span class="card-tag tag-restaurant">The Outlet · Canóvanas</span><span class="card-time">🚗 14 min</span><span class="card-price price-2">$$</span></div>
         </div></div>
         <div class="card-note"><span class="es">Bar de vinos y cervezas dentro de The Outlet. Buen ambiente.</span><span class="en">Wine and beer bar inside The Outlet. Good vibe.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Karma%27s+Wine+Bar+Beer+Garden+The+Outlet+Canovanas" target="_blank">🚀 GO</a></div>
       </div>
 
       <div class="place-card cat-restaurant" data-cat="restaurant">
         <div class="card-top"><div class="card-icon">🍗</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">Golden Corral</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Golden+Corral+The+Outlet+66+Canovanas" target="_blank">Golden Corral</a></div>
           <div class="card-meta"><span class="card-tag tag-restaurant">The Outlet · Canóvanas</span><span class="card-time">🚗 14 min</span><span class="card-price price-2">$$</span></div>
         </div></div>
         <div class="card-note"><span class="es">Buffet familiar dentro de The Outlet.</span><span class="en">Family buffet inside The Outlet.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Golden+Corral+The+Outlet+66+Canovanas" target="_blank">🚀 GO</a></div>
       </div>
 
       <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🥪</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/El+Meson+Sandwiches+The+Outlet+Canovanas" target="_blank">El Mesón Sandwiches</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">The Outlet · Canóvanas</span><span class="card-time">🚗 14 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Sándwiches rápidos dentro de The Outlet.</span><span class="en">Quick sandwiches inside The Outlet.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/El+Meson+Sandwiches+The+Outlet+Canovanas" target="_blank">🚀 GO</a></div>
+      </div>
+
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
         <div class="card-top"><div class="card-icon">🍔</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">Comida rápida: BK, KFC, Metro, Wendy's</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/fast+food+The+Outlet+66+Canovanas" target="_blank">Comida rápida: BK, KFC, Metro, Wendy's</a></div>
           <div class="card-meta"><span class="card-tag tag-restaurant">The Outlet · Canóvanas</span><span class="card-time">🚗 14 min</span><span class="card-price price-1">$</span></div>
         </div></div>
         <div class="card-note"><span class="es">Cadenas de comida rápida disponibles en The Outlet.</span><span class="en">Fast food chains available in The Outlet.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/fast+food+The+Outlet+66+Canovanas" target="_blank">🚀 GO</a></div>
       </div>
 
 
@@ -662,6 +678,24 @@
         </div></div>
         <div class="card-note"><span class="es">Show de teppanyaki en vivo. Pide el filete mignon.</span><span class="en">Live teppanyaki show. Order the filet mignon.</span></div>
         <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=16233920724859899444" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🥞</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/IHOP+Los+Colobos+Carolina+Puerto+Rico" target="_blank">IHOP</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">Los Colobos · Carolina</span><span class="card-time">🚗 19 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Desayunos americanos y pancakes.</span><span class="en">American breakfast and pancakes.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/IHOP+Los+Colobos+Carolina+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🌶️</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Chili%27s+Grill+Bar+Los+Colobos+Carolina+Puerto+Rico" target="_blank">Chili's Grill & Bar</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">Los Colobos · Carolina</span><span class="card-time">🚗 19 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Parrilla americana casual. Fajitas y alitas.</span><span class="en">Casual American grill. Fajitas and wings.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Chili%27s+Grill+Bar+Los+Colobos+Carolina+Puerto+Rico" target="_blank">🚀 GO</a></div>
       </div>
 
       <div class="place-card cat-restaurant" data-cat="restaurant">
@@ -767,11 +801,119 @@
 
       <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
         <div class="card-top"><div class="card-icon">🦞</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJi_2qz0GZBIwRRhzx5L4cev4" target="_blank">La Parrilla (Kioskos) ⭐4.4 #1</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/La+Parrilla+Kioskos+Luquillo+Puerto+Rico" target="_blank">La Parrilla (Kioskos) ⭐4.4 #1</a></div>
           <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Luquillo · 11am–9:30pm" data-en="Luquillo · 11am–9:30pm">Luquillo · 11am–9:30pm</span></span><span class="card-time">🚗 29 min</span><span class="card-price price-2">$$</span></div>
         </div></div>
         <div class="card-note"><span class="es">El mejor mariscos en los Kioskos. Langosta fresca y tostones rellenos.</span><span class="en">Best seafood at the Kioskos. Fresh lobster and stuffed tostones.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJi_2qz0GZBIwRRhzx5L4cev4" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/La+Parrilla+Kioskos+Luquillo+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🦞</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Las+Picuas+123+Seafood+Restaurant+Rio+Grande+PR" target="_blank">Las Picuas 123 Seafood</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">Río Grande · 12pm–9pm</span><span class="card-time">🚗 27 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Mariscos excelentes: pargo frito entero, mofongo de langosta, churrasco.</span><span class="en">Excellent seafood: whole fried snapper, lobster mofongo, churrasco.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Las+Picuas+123+Seafood+Restaurant+Rio+Grande+PR" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍕</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Pizzella+Rio+Grande+Puerto+Rico" target="_blank">Pizzella</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">Río Grande</span><span class="card-time">🚗 17 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Pizzería local en Río Grande.</span><span class="en">Local pizzeria in Río Grande.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Pizzella+Rio+Grande+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🥐</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Rico+Pan+Bakery+Rio+Grande+Puerto+Rico" target="_blank">Rico Pan Bakery</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">Río Grande</span><span class="card-time">🚗 17 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Panadería local con pan fresco y pastelería.</span><span class="en">Local bakery with fresh bread and pastries.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Rico+Pan+Bakery+Rio+Grande+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍛</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Don+Pepe+Restaurant+Rio+Grande+Puerto+Rico" target="_blank">Don Pepe Restaurant</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Río Grande · Caribeña" data-en="Río Grande · Caribbean">Río Grande · Caribeña</span></span><span class="card-time">🚗 17 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Comida caribeña y local, cocina casera puertorriqueña.</span><span class="en">Caribbean and local food, homestyle Puerto Rican cooking.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Don+Pepe+Restaurant+Rio+Grande+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍣</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/W+Sushi+Bar+Rio+Grande+Puerto+Rico" target="_blank">W Sushi Bar</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">Río Grande</span><span class="card-time">🚗 17 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Sushi y cocina japonesa en Río Grande.</span><span class="en">Sushi and Japanese cuisine in Río Grande.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/W+Sushi+Bar+Rio+Grande+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍕</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Yunque%27s+Pizza+and+More+Rio+Grande+Puerto+Rico" target="_blank">Yunque's Pizza and More</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">Río Grande</span><span class="card-time">🚗 17 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Pizza y comida variada cerca de El Yunque.</span><span class="en">Pizza and variety food near El Yunque.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Yunque%27s+Pizza+and+More+Rio+Grande+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🥐</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Amor+%2B+Harina+Rio+Grande+Puerto+Rico" target="_blank">Amor + Harina</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Río Grande · Desayunos" data-en="Río Grande · Breakfast">Río Grande · Desayunos</span></span><span class="card-time">🚗 17 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Pan fresco, desayunos y almuerzos artesanales.</span><span class="en">Fresh bread, artisan breakfasts and lunches.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Amor+%2B+Harina+Rio+Grande+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍷</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Lluvia+Deli+Bar+Artefacto+Rio+Grande+Puerto+Rico" target="_blank">Lluvia Deli Bar & Artefacto</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">Río Grande</span><span class="card-time">🚗 17 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Deli bar con ambiente artístico y creativo.</span><span class="en">Deli bar with artistic, creative atmosphere.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Lluvia+Deli+Bar+Artefacto+Rio+Grande+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🥞</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/48+Bakehouse+Rio+Grande+Puerto+Rico" target="_blank">48 Bakehouse</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Río Grande · Desayunos" data-en="Río Grande · Breakfast">Río Grande · Desayunos</span></span><span class="card-time">🚗 17 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Panadería y desayunos artesanales.</span><span class="en">Bakery and artisan breakfasts.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/48+Bakehouse+Rio+Grande+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍫</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Ancestral+by+Hacienda+Chocolat+Rio+Grande+Puerto+Rico" target="_blank">Ancestral by Hacienda Chocolat</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">Río Grande</span><span class="card-time">🚗 17 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Experiencia gastronómica con cacao y chocolate local.</span><span class="en">Gastronomic experience with local cacao and chocolate.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Ancestral+by+Hacienda+Chocolat+Rio+Grande+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍖</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/El+Verde+BBQ+Rio+Grande+Puerto+Rico" target="_blank">El Verde BBQ</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Río Grande · Carry Out" data-en="Río Grande · Carry Out">Río Grande · Carry Out</span></span><span class="card-time">🚗 17 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">BBQ para llevar en Río Grande.</span><span class="en">BBQ for carry-out in Río Grande.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/El+Verde+BBQ+Rio+Grande+Puerto+Rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍹</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/5+o%27Clock+Somewhere+Bar+Grill+Rio+Grande+Puerto+Rico" target="_blank">5 o'Clock Somewhere Bar & Grill</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">Río Grande</span><span class="card-time">🚗 17 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Bar y parrilla con ambiente relajado.</span><span class="en">Bar and grill with a relaxed atmosphere.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/5+o%27Clock+Somewhere+Bar+Grill+Rio+Grande+Puerto+Rico" target="_blank">🚀 GO</a></div>
       </div>
 
     </div>
@@ -779,28 +921,20 @@
 
   <!-- PLAYAS -->
   <div class="section-group" data-cats="playa">
-    <div class="section-title">🏖️ <span class="lbl" data-es="Playas" data-en="Beaches">Playas</span> <span class="badge">4</span></div>
+    <div class="section-title">🏖️ <span class="lbl" data-es="Playas" data-en="Beaches">Playas</span> <span class="badge">3</span></div>
     <div class="cards-grid">
 
       <div class="place-card cat-playa infinity-pick" data-cat="playa">
         <div class="card-top"><div class="card-icon">🏖️</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJ99T6O2-ZBIwRy9HVhPJXdUM" target="_blank">Balneario Luquillo ⭐4.6</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/65+Ave+Infanteria+Luquillo+PR+00773+Balneario" target="_blank">Balneario Luquillo ⭐4.6</a></div>
           <div class="card-meta"><span class="card-tag tag-playa">Luquillo</span><span class="card-time">🚗 31 min</span></div>
         </div></div>
-        <div class="card-note"><span class="es">Una de las mejores playas de PR. Aguas calmadas y claras.</span><span class="en">One of the best beaches in PR. Calm and clear waters.</span></div>
+        <div class="card-note"><span class="es">Una de las mejores playas de PR. Aguas calmadas y claras. También conocida como Balneario La Monserrate.</span><span class="en">One of the best beaches in PR. Calm and clear waters. Also known as Balneario La Monserrate.</span></div>
         <div class="beach-info"><span class="beach-badge lifeguard-yes">🛟 <span class="lbl" data-es="Salvavidas: Sí" data-en="Lifeguard: Yes">Salvavidas: Sí</span></span><span class="beach-badge flag-blue">🚩 <span class="lbl" data-es="Bandera azul" data-en="Blue flag">Bandera azul</span></span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJ99T6O2-ZBIwRy9HVhPJXdUM" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/65+Ave+Infanteria+Luquillo+PR+00773+Balneario" target="_blank">🚀 GO</a></div>
       </div>
 
-      <div class="place-card cat-playa" data-cat="playa">
-        <div class="card-top"><div class="card-icon">🌊</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJtwrrG81lA4wRFeL_m6KZ928" target="_blank">Balneario Carolina / Isla Verde ⭐4.6</a></div>
-          <div class="card-meta"><span class="card-tag tag-playa">Carolina · <span class="lbl" data-es="cerca aeropuerto" data-en="near airport">cerca aeropuerto</span></span><span class="card-time">🚗 37 min</span></div>
-        </div></div>
-        <div class="card-note"><span class="es">Arena dorada y aguas cálidas. Sillas $5 y sombrillas disponibles.</span><span class="en">Golden sand and warm water. $5 chairs and umbrellas available.</span></div>
-        <div class="beach-info"><span class="beach-badge lifeguard-yes">🛟 <span class="lbl" data-es="Salvavidas: Sí" data-en="Lifeguard: Yes">Salvavidas: Sí</span></span><span class="beach-badge flag-blue">🚩 <span class="lbl" data-es="Bandera azul" data-en="Blue flag">Bandera azul</span></span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJtwrrG81lA4wRFeL_m6KZ928" target="_blank">🚀 GO</a></div>
-      </div>
+
 
       <div class="place-card cat-playa" data-cat="playa">
         <div class="card-top"><div class="card-icon">🌊</div><div>
@@ -841,27 +975,33 @@
     <div class="cards-grid">
       <div class="place-card cat-aventura infinity-pick" data-cat="aventura">
         <div class="card-top"><div class="card-icon">🌳</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJydD9LrOhBIwR0SSym7z2QoM" target="_blank">El Yunque National Forest ⭐4.8</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/El+Portal+de+El+Yunque+Visitor+Center+PR-191+Rio+Grande" target="_blank">El Yunque National Forest ⭐4.8</a></div>
           <div class="card-meta"><span class="card-tag tag-aventura">Río Grande</span><span class="card-time">🚗 16 min</span></div>
         </div></div>
-        <div class="card-note"><span class="es">La única selva tropical del sistema nacional de EE.UU. Cascadas y senderos.</span><span class="en">The only tropical rainforest in the US national system. Waterfalls and trails.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJydD9LrOhBIwR0SSym7z2QoM" target="_blank">🚀 GO</a></div>
+        <div class="card-note"><span class="es">La única selva tropical del sistema nacional de EE.UU. Cascadas y senderos. Entrada por El Portal, PR-191.</span><span class="en">The only tropical rainforest in the US national system. Waterfalls and trails. Enter via El Portal, PR-191.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/El+Portal+de+El+Yunque+Visitor+Center+PR-191+Rio+Grande" target="_blank">🚀 GO</a></div>
       </div>
       <div class="place-card cat-aventura" data-cat="aventura">
         <div class="card-top"><div class="card-icon">🤸</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJUY9lbdeeBIwR3mPfOacTkXk" target="_blank">Rainforest Zipline Park ⭐4.8</a></div>
-          <div class="card-meta"><span class="card-tag tag-aventura">Río Grande · 9am–5pm</span><span class="card-time">🚗 24 min</span></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Rainforest+Zipline+Park+Carr+191+Km+1.1+Rio+Grande+PR" target="_blank">Rainforest Zipline Park ⭐4.8</a></div>
+          <div class="card-meta"><span class="card-tag tag-aventura">Río Grande · 10am–5pm</span><span class="card-time">🚗 24 min</span></div>
         </div></div>
-        <div class="card-note"><span class="es">8 tirolinas en la selva. Experiencia para toda la familia.</span><span class="en">8 zip lines through the rainforest. Great for all ages.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJUY9lbdeeBIwR3mPfOacTkXk" target="_blank">🚀 GO</a></div>
+        <div class="card-note"><span class="es">8 tirolinas en la selva. Carr 191 Km 1.1. Experiencia para toda la familia.</span><span class="en">8 zip lines through the rainforest. Carr 191 Km 1.1. Great for all ages.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Rainforest+Zipline+Park+Carr+191+Km+1.1+Rio+Grande+PR" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17873701010">📞 Llamar</a>
+        </div>
       </div>
       <div class="place-card cat-aventura" data-cat="aventura">
         <div class="card-top"><div class="card-icon">🏎️</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJD1cjdNOeBIwRHbyLyaI3gCQ" target="_blank">Carabalí Rainforest Park ⭐4.7</a></div>
-          <div class="card-meta"><span class="card-tag tag-aventura">Luquillo · 8am–5pm</span><span class="card-time">🚗 25 min</span></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Carabali+Rainforest+Park+Road+3+Km+32.4+Luquillo+PR" target="_blank">Carabalí Rainforest Park ⭐4.7</a></div>
+          <div class="card-meta"><span class="card-tag tag-aventura">Luquillo · 8:30am–6pm</span><span class="card-time">🚗 25 min</span></div>
         </div></div>
-        <div class="card-note"><span class="es">ATVs, jet skis y tours guiados por la selva.</span><span class="en">ATVs, jet skis and guided rainforest tours.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJD1cjdNOeBIwRHbyLyaI3gCQ" target="_blank">🚀 GO</a></div>
+        <div class="card-note"><span class="es">ATVs, UTVs, horseback riding y go-karts. Carr 3 Km 32.4, Luquillo.</span><span class="en">ATVs, UTVs, horseback riding and go-karts. Carr 3 Km 32.4, Luquillo.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Carabali+Rainforest+Park+Road+3+Km+32.4+Luquillo+PR" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17878895820">📞 Llamar</a>
+        </div>
       </div>
       <div class="place-card cat-aventura infinity-pick" data-cat="aventura">
         <div class="card-top"><div class="card-icon">🚣</div><div>
@@ -887,11 +1027,11 @@
       </div>
       <div class="place-card cat-aventura" data-cat="aventura">
         <div class="card-top"><div class="card-icon">🏝️</div><div>
-          <div class="card-name"><a href="https://www.discoverpuertorico.com" target="_blank">Vieques & Culebra</a></div>
-          <div class="card-meta"><span class="card-tag tag-aventura"><span class="lbl" data-es="Ferry desde Fajardo" data-en="Ferry from Fajardo">Ferry desde Fajardo</span></span><span class="card-time">🚗 49 min + ⛴️</span></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Ceiba+Ferry+Terminal+PR-3+Km+54.4+Ceiba+PR" target="_blank">Vieques & Culebra</a></div>
+          <div class="card-meta"><span class="card-tag tag-aventura"><span class="lbl" data-es="Ferry desde Ceiba" data-en="Ferry from Ceiba">Ferry desde Ceiba</span></span><span class="card-time">🚗 45 min + ⛴️</span></div>
         </div></div>
-        <div class="card-note"><span class="es">Islas paradisíacas. Consulta discoverpuertorico.com para ferries.</span><span class="en">Paradise islands. Check discoverpuertorico.com for ferries.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.discoverpuertorico.com" target="_blank">🚀 GO</a></div>
+        <div class="card-note"><span class="es">Islas paradisíacas. El ferry sale desde Ceiba (ya NO desde Fajardo), PR-3 Km 54.4. Compra boletos en puertoricoferry.com.</span><span class="en">Paradise islands. Ferry departs from Ceiba (no longer Fajardo), PR-3 Km 54.4. Buy tickets at puertoricoferry.com.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Ceiba+Ferry+Terminal+PR-3+Km+54.4+Ceiba+PR" target="_blank">🚀 GO</a></div>
       </div>
 
       <div class="place-card cat-aventura" data-cat="aventura">
@@ -932,11 +1072,11 @@
 
       <div class="place-card cat-hiking" data-cat="hiking">
         <div class="card-top"><div class="card-icon">🥾</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/search/Pico+del+Toro+El+Yunque+Puerto+Rico" target="_blank">Sendero El Toro · Pico del Toro</a></div>
-          <div class="card-meta"><span class="card-tag tag-hiking"><span class="lbl" data-es="El Yunque · Punto más alto" data-en="El Yunque · Highest point">El Yunque · Punto más alto</span></span><span class="card-time">🚗 ~30 min</span></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/El+Toro+Trailhead+PR-186+Km+10.8+Puerto+Rico" target="_blank">Sendero El Toro · Pico del Toro</a></div>
+          <div class="card-meta"><span class="card-tag tag-hiking"><span class="lbl" data-es="El Yunque · Punto más alto" data-en="El Yunque · Highest point">El Yunque · Punto más alto</span></span><span class="card-time">🚗 ~17 min</span></div>
         </div></div>
-        <div class="card-note"><span class="es">El punto más alto del Bosque Nacional El Yunque. Sendero desafiante de aprox. 8.5 km. Vistas espectaculares en la cima.</span><span class="en">The highest point in El Yunque National Forest. Challenging ~8.5 km trail. Spectacular summit views.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Pico+del+Toro+El+Yunque+Puerto+Rico" target="_blank">🚀 GO</a></div>
+        <div class="card-note"><span class="es">El punto más alto de El Yunque (3,524 pies). Entrada en PR-186 Km 10.8. Sendero desafiante de ~3 horas. Estacionamiento limitado, llega temprano.</span><span class="en">The highest point in El Yunque (3,524 ft). Trailhead at PR-186 Km 10.8. Challenging ~3 hour trail. Limited parking, arrive early.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/El+Toro+Trailhead+PR-186+Km+10.8+Puerto+Rico" target="_blank">🚀 GO</a></div>
       </div>
 
       <div class="place-card cat-hiking" data-cat="hiking">
@@ -957,51 +1097,51 @@
     <div class="cards-grid">
       <div class="place-card cat-entretenimiento infinity-pick" data-cat="entretenimiento">
         <div class="card-top"><div class="card-icon">🎢</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJjViWNvZhA4wRCm9pPG6ixYc" target="_blank">Sector Sixty6 ⭐4.5</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Sector+Sixty6+The+Outlet+Canovanas" target="_blank">Sector Sixty6 ⭐4.5</a></div>
           <div class="card-meta"><span class="card-tag tag-entretenimiento">The Outlet · Canóvanas</span><span class="card-time">🚗 13 min</span></div>
         </div></div>
         <div class="card-note"><span class="es">Go-karts, bolos, arcade y cuerdas. Todas las edades.</span><span class="en">Go-karts, bowling, arcade and ropes course. All ages.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJjViWNvZhA4wRCm9pPG6ixYc" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Sector+Sixty6+The+Outlet+Canovanas" target="_blank">🚀 GO</a></div>
       </div>
       <div class="place-card cat-entretenimiento" data-cat="entretenimiento">
         <div class="card-top"><div class="card-icon">🎬</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJC7IS0UpgA4wRVdCImNt78Xo" target="_blank">Caribbean Cinemas ⭐4.4</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Caribbean+Cinemas+The+Outlet+Canovanas" target="_blank">Caribbean Cinemas ⭐4.4</a></div>
           <div class="card-meta"><span class="card-tag tag-entretenimiento">The Outlet · Canóvanas</span><span class="card-time">🚗 13 min</span></div>
         </div></div>
         <div class="card-note"><span class="es">Cine en The Outlet 66. Reserva asientos en línea.</span><span class="en">Cinema at The Outlet 66. Book seats online.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJC7IS0UpgA4wRVdCImNt78Xo" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Caribbean+Cinemas+The+Outlet+Canovanas" target="_blank">🚀 GO</a></div>
       </div>
       <div class="place-card cat-entretenimiento" data-cat="entretenimiento">
         <div class="card-top"><div class="card-icon">⚔️</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJn0LcKx9hA4wRAaHaSeR84OY" target="_blank">Viking Arena PR ⭐4.6</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Viking+Arena+PR+Los+Colobos+Carolina" target="_blank">Viking Arena PR ⭐4.6</a></div>
           <div class="card-meta"><span class="card-tag tag-entretenimiento">Los Colobos · Carolina</span><span class="card-time">🚗 19 min</span></div>
         </div></div>
         <div class="card-note"><span class="es">Trampolines, cuerdas, pickleball y axe throwing.</span><span class="en">Trampolines, ropes, pickleball and axe throwing.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJn0LcKx9hA4wRAaHaSeR84OY" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Viking+Arena+PR+Los+Colobos+Carolina" target="_blank">🚀 GO</a></div>
       </div>
       <div class="place-card cat-entretenimiento" data-cat="entretenimiento">
         <div class="card-top"><div class="card-icon">🦘</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJO1IaDiZnA4wRTtE_i0vNZMg" target="_blank">Bounce Trampoline Park ⭐4.4</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Bounce+Trampoline+Park+Carolina+Puerto+Rico" target="_blank">Bounce Trampoline Park ⭐4.4</a></div>
           <div class="card-meta"><span class="card-tag tag-entretenimiento">Carolina</span><span class="card-time">🚗 25 min</span></div>
         </div></div>
         <div class="card-note"><span class="es">Trampolines para niños y adultos.</span><span class="en">Trampolines for kids and adults.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJO1IaDiZnA4wRTtE_i0vNZMg" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Bounce+Trampoline+Park+Carolina+Puerto+Rico" target="_blank">🚀 GO</a></div>
       </div>
       <div class="place-card cat-entretenimiento infinity-pick" data-cat="entretenimiento">
         <div class="card-top"><div class="card-icon">🏙️</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJG64BzXpvA4wRk_rTlzmNXHM" target="_blank">DISTRITO T-Mobile ⭐4.7</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Distrito+T-Mobile+San+Juan+Puerto+Rico" target="_blank">DISTRITO T-Mobile ⭐4.7</a></div>
           <div class="card-meta"><span class="card-tag tag-entretenimiento">San Juan · <span class="lbl" data-es="hasta 1am" data-en="until 1am">hasta 1am</span></span><span class="card-time">🚗 52 min</span></div>
         </div></div>
         <div class="card-note"><span class="es">Entretenimiento, restaurantes y eventos. Pantalla LED gigante.</span><span class="en">Entertainment, restaurants and events. Giant LED screen.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJG64BzXpvA4wRk_rTlzmNXHM" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Distrito+T-Mobile+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a></div>
       </div>
       <div class="place-card cat-entretenimiento infinity-pick" data-cat="entretenimiento">
         <div class="card-top"><div class="card-icon">🏰</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJebNWtrhuA4wRFblqHIhivYY" target="_blank">Viejo San Juan</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Old+San+Juan+Puerto+Rico" target="_blank">Viejo San Juan</a></div>
           <div class="card-meta"><span class="card-tag tag-entretenimiento">San Juan</span><span class="card-time">🚗 55 min</span></div>
         </div></div>
         <div class="card-note"><span class="es">La parada #1 de Puerto Rico. Fortaleza, arte, historia y gastronomía.</span><span class="en">Puerto Rico's #1 stop. Fort, art, history and food.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJebNWtrhuA4wRFblqHIhivYY" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Old+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a></div>
       </div>
 
       <div class="place-card cat-entretenimiento" data-cat="entretenimiento">
@@ -1028,9 +1168,9 @@
       <div class="place-card cat-entretenimiento" data-cat="entretenimiento">
         <div class="card-top"><div class="card-icon">🤸</div><div>
           <div class="card-name"><a href="https://www.google.com/maps/search/Altitude+Trampoline+Park+Puerto+Rico" target="_blank">Altitude Trampoline Park</a></div>
-          <div class="card-meta"><span class="card-tag tag-entretenimiento"><span class="lbl" data-es="Varios lugares" data-en="Multiple locations">Varios lugares</span></span></div>
+          <div class="card-meta"><span class="card-tag tag-entretenimiento"><span class="lbl" data-es="Varios lugares" data-en="Multiple locations">Varios lugares</span></span><span class="card-time">🚗 ~27 min</span></div>
         </div></div>
-        <div class="card-note"><span class="es">Parque de trampolines con varias ubicaciones en Puerto Rico.</span><span class="en">Trampoline park with multiple locations in Puerto Rico.</span></div>
+        <div class="card-note"><span class="es">Parque de trampolines con varias ubicaciones. La más cercana está en Gurabo.</span><span class="en">Trampoline park with multiple locations. Closest one is in Gurabo.</span></div>
         <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Altitude+Trampoline+Park+Puerto+Rico" target="_blank">🚀 GO</a></div>
       </div>
 
@@ -1043,43 +1183,43 @@
     <div class="cards-grid">
       <div class="place-card cat-compras infinity-pick" data-cat="compras">
         <div class="card-top"><div class="card-icon">🛍️</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">The Outlet 66 Mall ⭐4.6</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/The+Outlet+66+Mall+Canovanas+Puerto+Rico" target="_blank">The Outlet 66 Mall ⭐4.6</a></div>
           <div class="card-meta"><span class="card-tag tag-compras">Canóvanas · 9am–9pm</span><span class="card-time">🚗 14 min</span></div>
         </div></div>
         <div class="card-note"><span class="es">Tiendas, entretenimiento, restaurantes y cines. Todo en uno.</span><span class="en">Stores, entertainment, restaurants and cinema. All in one.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJEQn8H7VhA4wR5hx49zNJEss" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/The+Outlet+66+Mall+Canovanas+Puerto+Rico" target="_blank">🚀 GO</a></div>
       </div>
       <div class="place-card cat-compras" data-cat="compras">
         <div class="card-top"><div class="card-icon">🏪</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJiUXpAT9mA4wRiROVIaibhiQ" target="_blank">The Mall of San Juan ⭐4.6</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/The+Mall+of+San+Juan+Puerto+Rico" target="_blank">The Mall of San Juan ⭐4.6</a></div>
           <div class="card-meta"><span class="card-tag tag-compras">San Juan · 10am–9pm</span><span class="card-time">🚗 37 min</span></div>
         </div></div>
         <div class="card-note"><span class="es">Mall de lujo: Gucci, Versace, Tiffany, Zara.</span><span class="en">Luxury mall: Gucci, Versace, Tiffany, Zara.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJiUXpAT9mA4wRiROVIaibhiQ" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/The+Mall+of+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a></div>
       </div>
       <div class="place-card cat-compras" data-cat="compras">
         <div class="card-top"><div class="card-icon">🏬</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJwwVZuMFoA4wR1wTUeubh2Ds" target="_blank">Plaza Las Américas ⭐4.7</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Plaza+Las+Americas+San+Juan+Puerto+Rico" target="_blank">Plaza Las Américas ⭐4.7</a></div>
           <div class="card-meta"><span class="card-tag tag-compras">San Juan · 9am–9pm</span><span class="card-time">🚗 45 min</span></div>
         </div></div>
         <div class="card-note"><span class="es">El mall más grande de Puerto Rico. +300 tiendas.</span><span class="en">Puerto Rico's largest mall. +300 stores.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJwwVZuMFoA4wR1wTUeubh2Ds" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Plaza+Las+Americas+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a></div>
       </div>
       <div class="place-card cat-compras" data-cat="compras">
         <div class="card-top"><div class="card-icon">🏪</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJvz34891mA4wRb2SFgGo1qTw" target="_blank">Plaza Carolina ⭐4.5</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Plaza+Carolina+Puerto+Rico" target="_blank">Plaza Carolina ⭐4.5</a></div>
           <div class="card-meta"><span class="card-tag tag-compras">Carolina · 9am–9pm</span><span class="card-time">🚗 28 min</span></div>
         </div></div>
         <div class="card-note"><span class="es">Centro comercial familiar cerca del aeropuerto.</span><span class="en">Family mall near the airport.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJvz34891mA4wRb2SFgGo1qTw" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Plaza+Carolina+Puerto+Rico" target="_blank">🚀 GO</a></div>
       </div>
       <div class="place-card cat-compras" data-cat="compras">
         <div class="card-top"><div class="card-icon">🏷️</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJMWs4pUAfA4wRg0Oehf23i3o" target="_blank">Puerto Rico Premium Outlets ⭐4.6</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Puerto+Rico+Premium+Outlets+Barceloneta" target="_blank">Puerto Rico Premium Outlets ⭐4.6</a></div>
           <div class="card-meta"><span class="card-tag tag-compras">Barceloneta · 9am–9pm</span><span class="card-time">🚗 ~2h 10min</span></div>
         </div></div>
         <div class="card-note"><span class="es">Grandes marcas con descuentos. Nike, Coach, Calvin Klein.</span><span class="en">Major brands at outlet prices. Nike, Coach, Calvin Klein.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJMWs4pUAfA4wRg0Oehf23i3o" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Puerto+Rico+Premium+Outlets+Barceloneta" target="_blank">🚀 GO</a></div>
       </div>
     </div>
   </div>
@@ -1087,7 +1227,7 @@
 
   <!-- LUGARES PARA PASAR EL RATO -->
   <div class="section-group" data-cats="hangout">
-    <div class="section-title">🌆 <span class="lbl" data-es="Lugares para pasar el rato" data-en="Places to Hang Out">Lugares para pasar el rato</span> <span class="badge">5</span></div>
+    <div class="section-title">🌆 <span class="lbl" data-es="Lugares para pasar el rato" data-en="Places to Hang Out">Lugares para pasar el rato</span> <span class="badge">3</span></div>
     <div class="cards-grid">
 
       <div class="place-card cat-hangout" data-cat="hangout">
@@ -1101,29 +1241,29 @@
 
       <div class="place-card cat-hangout" data-cat="hangout">
         <div class="card-top"><div class="card-icon">🏰</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJebNWtrhuA4wRFblqHIhivYY" target="_blank">Viejo San Juan</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Old+San+Juan+Puerto+Rico" target="_blank">Viejo San Juan</a></div>
           <div class="card-meta"><span class="card-tag tag-hangout">San Juan</span><span class="card-time">🚗 55 min</span></div>
         </div></div>
         <div class="card-note"><span class="es">Historia, arte y gastronomía en cada esquina. La joya de San Juan.</span><span class="en">History, art and food on every corner. The jewel of San Juan.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJebNWtrhuA4wRFblqHIhivYY" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Old+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a></div>
       </div>
 
       <div class="place-card cat-hangout" data-cat="hangout">
         <div class="card-top"><div class="card-icon">🏙️</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJG64BzXpvA4wRk_rTlzmNXHM" target="_blank">DISTRITO T-Mobile</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Distrito+T-Mobile+San+Juan+Puerto+Rico" target="_blank">DISTRITO T-Mobile</a></div>
           <div class="card-meta"><span class="card-tag tag-hangout">San Juan · <span class="lbl" data-es="hasta 1am" data-en="until 1am">hasta 1am</span></span><span class="card-time">🚗 52 min</span></div>
         </div></div>
         <div class="card-note"><span class="es">Entretenimiento, restaurantes y eventos con pantalla LED gigante.</span><span class="en">Entertainment, restaurants and events with giant LED screen.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJG64BzXpvA4wRk_rTlzmNXHM" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Distrito+T-Mobile+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a></div>
       </div>
 
       <div class="place-card cat-hangout" data-cat="hangout">
         <div class="card-top"><div class="card-icon">🎶</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/place/?q=place_id:ChIJZafB0olvA4wRbI8jAAa_pyA" target="_blank">La Placita de Santurce</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/La+Placita+de+Santurce+San+Juan+Puerto+Rico" target="_blank">La Placita de Santurce</a></div>
           <div class="card-meta"><span class="card-tag tag-hangout">Santurce</span><span class="card-time">🚗 48 min</span></div>
         </div></div>
         <div class="card-note"><span class="es">Vida nocturna, música en vivo, salsa y comida típica.</span><span class="en">Nightlife, live music, salsa and local food.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/place/?q=place_id:ChIJZafB0olvA4wRbI8jAAa_pyA" target="_blank">🚀 GO</a></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/La+Placita+de+Santurce+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a></div>
       </div>
 
       <div class="place-card cat-hangout" data-cat="hangout">
@@ -1183,6 +1323,67 @@
     </div>
   </div>
 
+  <!-- EMERGENCIAS -->
+  <div class="section-group" data-cats="emergencia">
+    <div class="section-title">🏥 <span class="lbl" data-es="Emergencias y farmacias" data-en="Emergencies & Pharmacies">Emergencias y farmacias</span> <span class="badge">5</span></div>
+    <div class="cards-grid">
+
+      <div class="place-card cat-emergencia" data-cat="emergencia">
+        <div class="card-top"><div class="card-icon">🚨</div><div>
+          <div class="card-name"><a href="tel:911">911 · Emergencias</a></div>
+          <div class="card-meta"><span class="card-tag tag-emergencia"><span class="lbl" data-es="Puerto Rico" data-en="Puerto Rico">Puerto Rico</span></span><span class="card-time">📞 Gratis</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Policía, bomberos y ambulancia. Marca 911.</span><span class="en">Police, fire & ambulance. Dial 911.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="tel:911" target="_blank">🚀 GO</a><a class="action-btn call" href="tel:911">📞 911</a></div>
+      </div>
+
+      <div class="place-card cat-emergencia" data-cat="emergencia">
+        <div class="card-top"><div class="card-icon">🏥</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/hospital+canóvanas+puerto+rico" target="_blank">Hospital HIMA San Pablo · Caguas</a></div>
+          <div class="card-meta"><span class="card-tag tag-emergencia">Caguas · 24/7</span><span class="card-time">🚗 ~25 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Hospital más cercano con sala de emergencias 24/7.</span><span class="en">Nearest hospital with 24/7 emergency room.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/hospital+canóvanas+puerto+rico" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17872530505">📞 Llamar</a>
+        </div>
+      </div>
+
+      <div class="place-card cat-emergencia" data-cat="emergencia">
+        <div class="card-top"><div class="card-icon">🏥</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Hospital+Auxilio+Mutuo+San+Juan+Puerto+Rico" target="_blank">Hospital Auxilio Mutuo · San Juan</a></div>
+          <div class="card-meta"><span class="card-tag tag-emergencia">Hato Rey · 24/7</span><span class="card-time">🚗 ~45 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Hospital de referencia en San Juan. Sala de emergencias 24/7.</span><span class="en">Reference hospital in San Juan. 24/7 emergency room.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Hospital+Auxilio+Mutuo+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17877580000">📞 Llamar</a>
+        </div>
+      </div>
+
+      <div class="place-card cat-emergencia infinity-pick" data-cat="emergencia">
+        <div class="card-top"><div class="card-icon">🏥</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Hospital+Presbyterian+San+Juan+Puerto+Rico" target="_blank">Hospital Presbyterian · San Juan</a></div>
+          <div class="card-meta"><span class="card-tag tag-emergencia">Santurce · 24/7</span><span class="card-time">🚗 ~50 min</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Hospital universitario con sala de emergencias 24/7. Santurce.</span><span class="en">University hospital with 24/7 emergency room. Santurce.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Hospital+Presbyterian+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17877217300">📞 Llamar</a>
+        </div>
+      </div>
+
+      <div class="place-card cat-emergencia" data-cat="emergencia">
+        <div class="card-top"><div class="card-icon">🦷</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/dentista+emergencia+canovanas+puerto+rico" target="_blank">Dentista de emergencia · área</a></div>
+          <div class="card-meta"><span class="card-tag tag-emergencia">Canóvanas / Carolina</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Busca "dentista emergencia Canóvanas" en Google para opciones del día.</span><span class="en">Search "emergency dentist Canóvanas" on Google for same-day options.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/dentista+emergencia+canovanas+puerto+rico" target="_blank">🚀 GO</a></div>
+      </div>
+
+    </div>
+  </div>
   <div class="empty-state" id="empty-state">
     <div class="emoji">🗺️</div>
     <p id="empty-es">No se encontraron lugares · Intenta otra búsqueda</p>
