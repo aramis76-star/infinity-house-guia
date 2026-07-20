@@ -7,7 +7,8 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Inter:wght@400;500;600&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', sans-serif; background: #ffffff; color: #1a1a1a; min-height: 100vh; }
+  html { background: #eaf4fb !important; color-scheme: light; }
+  body { font-family: 'Inter', sans-serif; background: #eaf4fb !important; color: #1a1a1a; min-height: 100vh; }
 
   /* HEADER */
   .header { background: linear-gradient(135deg, #0d1f1a 0%, #1a3a2e 100%); border-bottom: 1px solid #2a4a3a; padding: 16px 20px 12px; }
@@ -53,8 +54,8 @@
   .section-title .badge { background: transparent; border: 1.5px solid #7a9e90; border-radius: 20px; padding: 2px 9px; font-size: 0.7rem; color: #444444; font-weight: 700; letter-spacing: 0; text-transform: none; }
 
   /* CARDS */
-  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 9px; }
-  .place-card { background: #162820; border: 1px solid #1e3028; border-radius: 12px; padding: 13px 14px; transition: all 0.15s; position: relative; overflow: hidden; }
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 14px; }
+  .place-card { background: #162820; border: 1px solid #2a4a3a; border-radius: 12px; padding: 13px 14px; transition: all 0.15s; position: relative; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
   .place-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent, #3ecfb2); opacity: 0; transition: opacity 0.15s; }
   .place-card:hover { border-color: #2a4a3a; background: #1a3028; transform: translateY(-1px); }
   .place-card:hover::before { opacity: 1; }
@@ -207,7 +208,7 @@
     <button class="filter-btn" data-filter="evento" onclick="filterPlaces('evento',this)"><span>🎉</span> <span class="lbl" data-es="Eventos" data-en="Events">Eventos</span></button>
     <button class="filter-btn" data-filter="chef" onclick="filterPlaces('chef',this)"><span>👨‍🍳</span> <span class="lbl" data-es="Chef Privado" data-en="Private Chef">Chef Privado</span></button>
     <button class="filter-btn" data-filter="masaje" onclick="filterPlaces('masaje',this)"><span>💆</span> <span class="lbl" data-es="Masajista" data-en="Massage">Masajista</span></button>
-    <button class="filter-btn" data-filter="nocturno" onclick="filterPlaces('nocturno',this)"><span>🌙</span> <span class="lbl" data-es="Llegar tarde" data-en="Late arrival">Llegar tarde</span></button>
+    <button class="filter-btn" data-filter="nocturno" onclick="filterPlaces('nocturno',this)"><span>🌙</span> <span class="lbl" data-es="24/7" data-en="24/7">24/7</span></button>
     <button class="filter-btn" data-filter="emergencia" onclick="filterPlaces('emergencia',this)"><span>🏥</span> <span class="lbl" data-es="Emergencias" data-en="Emergencies">Emergencias</span></button>
     <button class="filter-btn" data-filter="farmacia" onclick="filterPlaces('farmacia',this)"><span>💊</span> <span class="lbl" data-es="Farmacias" data-en="Pharmacies">Farmacias</span></button>
     <button class="filter-btn" data-filter="gasolinera" onclick="filterPlaces('gasolinera',this)"><span>⛽</span> <span class="lbl" data-es="Gasolineras" data-en="Gas stations">Gasolineras</span></button>
@@ -427,7 +428,7 @@
 
   <!-- LLEGAR TARDE -->
   <div class="section-group" data-cats="nocturno">
-    <div class="section-title">🌙 <span class="lbl" data-es="Para llegar tarde" data-en="Late Arrival">Para llegar tarde</span> <span class="badge">3</span></div>
+    <div class="section-title">🌙 <span class="lbl" data-es="24/7" data-en="24/7">24/7</span> <span class="badge">3</span></div>
     <div class="cards-grid">
 
       <div class="place-card cat-nocturno" data-cat="nocturno">
@@ -471,61 +472,56 @@
 
   <!-- RESTAURANTES CANOVANAS -->
   <div class="section-group" data-cats="restaurant">
-    <div class="section-title">🍽️ <span class="lbl" data-es="Restaurantes · Canóvanas" data-en="Restaurants · Canóvanas">Restaurantes · Canóvanas</span> <span class="badge">11</span></div>
+    <div class="section-title">🍽️ <span class="lbl" data-es="Restaurantes · Canóvanas" data-en="Restaurants · Canóvanas">Restaurantes · Canóvanas</span> <span class="badge">13</span></div>
     <div class="cards-grid">
 
-      <div class="place-card cat-restaurant" data-cat="restaurant">
-        <div class="card-top"><div class="card-icon">☕</div><div>
-          <div class="card-name"><a href="https://maps.google.com/?cid=951084373348984815" target="_blank">Black Coffee House ⭐5.0</a></div>
-          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Café · Mar–Sáb 8am–4pm" data-en="Café · Tue–Sat 8am–4pm">Café · Mar–Sáb 8am–4pm</span></span><span class="card-time">🚗 6 min</span><span class="card-price price-1">$</span></div>
+      <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍲</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Campomofongo+Carr+185+Km+3.2+Campo+Rico+Canovanas+PR" target="_blank">Campomofongo</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Criolla · Mié–Dom" data-en="Local · Wed–Sun">Criolla · Mié–Dom</span></span><span class="card-time">🚗 10 min</span><span class="card-price price-2">$$</span></div>
         </div></div>
-        <div class="card-note"><span class="es">Mejor matcha y café de la zona. Ambiente acogedor.</span><span class="en">Best matcha and coffee in the area. Cozy atmosphere.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=951084373348984815" target="_blank">🚀 GO</a></div>
+        <div class="card-note"><span class="es">Mofongo relleno de churrasco, su especialidad. Dos terrazas al aire libre. Carr. 185 Km 3.2, Bo. Campo Rico.</span><span class="en">Churrasco-stuffed mofongo, their specialty. Two outdoor terraces. Carr. 185 Km 3.2, Bo. Campo Rico.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Campomofongo+Carr+185+Km+3.2+Campo+Rico+Canovanas+PR" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17879018292">📞 Llamar</a>
+          <a class="action-btn go-btn" href="https://www.instagram.com/campomofongo" target="_blank">📷 Instagram</a>
+        </div>
       </div>
 
       <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
         <div class="card-top"><div class="card-icon">🍝</div><div>
-          <div class="card-name"><a href="https://maps.google.com/?cid=10060446833214976331" target="_blank">Restaurante Escobar ⭐4.9</a></div>
-          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Italiana · Lun/Mié–Dom" data-en="Italian · Mon/Wed–Sun">Italiana · Lun/Mié–Dom</span></span><span class="card-time">🚗 15 min</span><span class="card-price price-3">$$$</span></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Escobar+Restaurant+PR-3+Km+16.1+Canovanas+PR" target="_blank">Restaurante Escobar ⭐4.9</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Italiana · Lun–Sáb 9am–8pm" data-en="Italian · Mon–Sat 9am–8pm">Italiana · Lun–Sáb 9am–8pm</span></span><span class="card-time">🚗 15 min</span><span class="card-price price-3">$$$</span></div>
         </div></div>
-        <div class="card-note"><span class="es">Pasta hecha a mano, ambiente romántico. Valet parking. El top de Canóvanas.</span><span class="en">Handmade pasta, romantic atmosphere. Valet parking. Best in Canóvanas.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=10060446833214976331" target="_blank">🚀 GO</a></div>
+        <div class="card-note"><span class="es">Pasta hecha a mano, ambiente romántico. Valet parking. PR-3 Km 16.1, Local B. El top de Canóvanas.</span><span class="en">Handmade pasta, romantic atmosphere. Valet parking. PR-3 Km 16.1, Local B. Best in Canóvanas.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Escobar+Restaurant+PR-3+Km+16.1+Canovanas+PR" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+18883251916">📞 Llamar</a>
+        </div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🥩</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Zimple+Restaurant+Bar+Calle+Calderon+Mujica+75+Canovanas+PR" target="_blank">Restaurante Zimple ⭐4.5</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Steakhouse · Jue–Dom 12pm–10pm" data-en="Steakhouse · Thu–Sun 12pm–10pm">Steakhouse · Jue–Dom 12pm–10pm</span></span><span class="card-time">🚗 16 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Steakhouse & Seafood. Espacio de 3 niveles con lounge y terraza. Calle Calderón Mujica #75, junto a la alcaldía.</span><span class="en">Steakhouse & Seafood. 3-level space with lounge and terrace. Calle Calderón Mujica #75, next to the town hall.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Zimple+Restaurant+Bar+Calle+Calderon+Mujica+75+Canovanas+PR" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17878869665">📞 Llamar</a>
+        </div>
       </div>
 
       <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
-        <div class="card-top"><div class="card-icon">🍲</div><div>
-          <div class="card-name"><a href="https://maps.google.com/?cid=2583091817435590426" target="_blank">Campomofongo</a></div>
-          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Criolla · Mié–Dom" data-en="Local · Wed–Sun">Criolla · Mié–Dom</span></span><span class="card-time">🚗 10 min</span><span class="card-price price-2">$$</span></div>
+        <div class="card-top"><div class="card-icon">🍕</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Pizzeria+Trattoria+Italiana+Calle+Autonomia+76+Canovanas+PR" target="_blank">Pizzería Trattoria Italiana ⭐4.6</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Italiana · Jue–Dom" data-en="Italian · Thu–Sun">Italiana · Jue–Dom</span></span><span class="card-time">🚗 16 min</span><span class="card-price price-2">$$</span></div>
         </div></div>
-        <div class="card-note"><span class="es">Mofongo y comida local en ambiente al aire libre.</span><span class="en">Mofongo and local food in an outdoor setting.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=2583091817435590426" target="_blank">🚀 GO</a></div>
-      </div>
-
-      <div class="place-card cat-restaurant" data-cat="restaurant">
-        <div class="card-top"><div class="card-icon">🥟</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/search/Los+Pastelillos+de+Pochy+Canovanas+Puerto+Rico" target="_blank">Los Pastelillos de Pochy ⭐4.8</a></div>
-          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Frituras · Mié–Dom" data-en="Fried food · Wed–Sun">Frituras · Mié–Dom</span></span><span class="card-time">🚗 9 min</span><span class="card-price price-1">$</span></div>
-        </div></div>
-        <div class="card-note"><span class="es">Los mejores pastelillos y ceviche de la zona.</span><span class="en">The best pastelillos and ceviche in the area.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Los+Pastelillos+de+Pochy+Canovanas+Puerto+Rico" target="_blank">🚀 GO</a></div>
-      </div>
-
-      <div class="place-card cat-restaurant" data-cat="restaurant">
-        <div class="card-top"><div class="card-icon">🥐</div><div>
-          <div class="card-name"><a href="https://maps.google.com/?cid=8562276133288653426" target="_blank">Panadería Jireh</a></div>
-          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Panadería · 6am–7pm" data-en="Bakery · 6am–7pm">Panadería · 6am–7pm</span></span><span class="card-time">🚗 11 min</span><span class="card-price price-1">$</span></div>
-        </div></div>
-        <div class="card-note"><span class="es">Desayunos, sándwiches, pastries y café puertorriqueño.</span><span class="en">Breakfast, sandwiches, pastries and Puerto Rican coffee.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=8562276133288653426" target="_blank">🚀 GO</a></div>
-      </div>
-
-      <div class="place-card cat-restaurant" data-cat="restaurant">
-        <div class="card-top"><div class="card-icon">🍺</div><div>
-          <div class="card-name"><a href="https://maps.google.com/?cid=17404361694633080917" target="_blank">El Vaso Rojo</a></div>
-          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Bar · Mié–Dom" data-en="Bar · Wed–Sun">Bar · Mié–Dom</span></span><span class="card-time">🚗 11 min</span><span class="card-price price-2">$$</span></div>
-        </div></div>
-        <div class="card-note"><span class="es">Buena vibra, música en vivo los viernes. Ambiente familiar.</span><span class="en">Good vibes, live music on Fridays. Family-friendly.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=17404361694633080917" target="_blank">🚀 GO</a></div>
+        <div class="card-note"><span class="es">Pizza y pasta artesanal, ambiente familiar. Calle Autonomía #76.</span><span class="en">Artisan pizza and pasta, family atmosphere. Calle Autonomía #76.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Pizzeria+Trattoria+Italiana+Calle+Autonomia+76+Canovanas+PR" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17876882647">📞 Llamar</a>
+        </div>
       </div>
 
       <div class="place-card cat-restaurant" data-cat="restaurant">
@@ -543,25 +539,69 @@
           <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Brunch · hasta 4pm" data-en="Brunch · until 4pm">Brunch · hasta 4pm</span></span><span class="card-time">🚗 16 min</span><span class="card-price price-2">$$</span></div>
         </div></div>
         <div class="card-note"><span class="es">El mejor brunch de Canóvanas. French toast y eggs benedict.</span><span class="en">Best brunch in Canóvanas. French toast and eggs benedict.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=2402914875345354676" target="_blank">🚀 GO</a></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://maps.google.com/?cid=2402914875345354676" target="_blank">🚀 GO</a>
+          <a class="action-btn go-btn" href="https://www.instagram.com/victoriabistropr" target="_blank">📷 Instagram</a>
+        </div>
       </div>
 
       <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
-        <div class="card-top"><div class="card-icon">🍕</div><div>
-          <div class="card-name"><a href="https://maps.google.com/?cid=10548713727686665089" target="_blank">Pizzería Trattoria Italiana ⭐4.6</a></div>
-          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Italiana · Jue–Dom" data-en="Italian · Thu–Sun">Italiana · Jue–Dom</span></span><span class="card-time">🚗 16 min</span><span class="card-price price-2">$$</span></div>
+        <div class="card-top"><div class="card-icon">🥞</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Bistro+Cafe+Ave+Isla+Verde+Esq+Jupiter+29+Carolina+PR" target="_blank">Bistro Café ⭐4.7</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Isla Verde · Brunch 7am–3pm" data-en="Isla Verde · Brunch 7am–3pm">Isla Verde · Brunch 7am–3pm</span></span><span class="card-time">🚗 ~36 min</span><span class="card-price price-2">$$</span></div>
         </div></div>
-        <div class="card-note"><span class="es">Pizza y pasta artesanal.</span><span class="en">Artisan pizza and pasta.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=10548713727686665089" target="_blank">🚀 GO</a></div>
+        <div class="card-note"><span class="es">Desde 2011. French toast con Nutella, omelettes creativos y mimosas 2x1. Ave. Isla Verde Esq. Jupiter #29.</span><span class="en">Since 2011. Nutella French toast, creative omelettes and 2-for-1 mimosas. Ave. Isla Verde Esq. Jupiter #29.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Bistro+Cafe+Ave+Isla+Verde+Esq+Jupiter+29+Carolina+PR" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17876035757">📞 Llamar</a>
+          <a class="action-btn go-btn" href="https://www.instagram.com/bistrocaferest" target="_blank">📷 Instagram</a>
+        </div>
       </div>
 
       <div class="place-card cat-restaurant" data-cat="restaurant">
-        <div class="card-top"><div class="card-icon">🥩</div><div>
-          <div class="card-name"><a href="https://maps.google.com/?cid=578823869947486147" target="_blank">Restaurante Zimple ⭐4.5</a></div>
-          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Steakhouse · Vie–Dom" data-en="Steakhouse · Fri–Sun">Steakhouse · Vie–Dom</span></span><span class="card-time">🚗 16 min</span><span class="card-price price-2">$$</span></div>
+        <div class="card-top"><div class="card-icon">🥐</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Fusion+Bread+Coffee+Carr+944+Km+2.9+Gurabo+PR" target="_blank">Fusión Bread & Coffee</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Gurabo · Brunch 6:30am–9pm" data-en="Gurabo · Brunch 6:30am–9pm">Gurabo · Brunch 6:30am–9pm</span></span><span class="card-time">🚗 ~27 min</span><span class="card-price price-2">$$</span></div>
         </div></div>
-        <div class="card-note"><span class="es">Steakhouse & Seafood. El pulpo en salsa de ajo es celestial.</span><span class="en">Steakhouse & Seafood. The garlic octopus is divine.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=578823869947486147" target="_blank">🚀 GO</a></div>
+        <div class="card-note"><span class="es">Brunch y coffee shop pet-friendly. Strawberry cheesecake pancakes. Carr. 944 Km 2.9, Bo. Hato Nuevo.</span><span class="en">Pet-friendly brunch and coffee shop. Strawberry cheesecake pancakes. Carr. 944 Km 2.9, Bo. Hato Nuevo.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Fusion+Bread+Coffee+Carr+944+Km+2.9+Gurabo+PR" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17877122929">📞 Llamar</a>
+          <a class="action-btn go-btn" href="https://www.instagram.com/fusionbreadcoffee" target="_blank">📷 Instagram</a>
+        </div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🥟</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Los+Pastelillos+de+Pochy+Canovanas+Puerto+Rico" target="_blank">Los Pastelillos de Pochy ⭐4.8</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Frituras · Mié–Dom" data-en="Fried food · Wed–Sun">Frituras · Mié–Dom</span></span><span class="card-time">🚗 9 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Los mejores pastelillos y ceviche de la zona.</span><span class="en">The best pastelillos and ceviche in the area.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Los+Pastelillos+de+Pochy+Canovanas+Puerto+Rico" target="_blank">🚀 GO</a>
+          <a class="action-btn go-btn" href="https://www.instagram.com/pochysplacepr" target="_blank">📷 Instagram</a>
+        </div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🥐</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=8562276133288653426" target="_blank">Panadería Jireh</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Panadería · 6am–7pm" data-en="Bakery · 6am–7pm">Panadería · 6am–7pm</span></span><span class="card-time">🚗 11 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Desayunos, sándwiches, pastries y café puertorriqueño.</span><span class="en">Breakfast, sandwiches, pastries and Puerto Rican coffee.</span></div>
+        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=8562276133288653426" target="_blank">🚀 GO</a></div>
+      </div>
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍺</div><div>
+          <div class="card-name"><a href="https://maps.google.com/?cid=17404361694633080917" target="_blank">El Vaso Rojo</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Bar · Mié–Dom" data-en="Bar · Wed–Sun">Bar · Mié–Dom</span></span><span class="card-time">🚗 11 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Buena vibra, música en vivo los viernes. Ambiente familiar.</span><span class="en">Good vibes, live music on Fridays. Family-friendly.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://maps.google.com/?cid=17404361694633080917" target="_blank">🚀 GO</a>
+          <a class="action-btn go-btn" href="https://www.instagram.com/elvasorojopr" target="_blank">📷 Instagram</a>
+        </div>
       </div>
 
       <div class="place-card cat-restaurant" data-cat="restaurant">
@@ -577,33 +617,12 @@
       </div>
 
       <div class="place-card cat-restaurant" data-cat="restaurant">
-        <div class="card-top"><div class="card-icon">☕</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/search/Starbucks+Canovanas+Puerto+Rico" target="_blank">Starbucks</a></div>
-          <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Varios lugares" data-en="Multiple locations">Varios lugares</span></span><span class="card-time">🚗 ~14 min</span><span class="card-price price-1">$</span></div>
-        </div></div>
-        <div class="card-note"><span class="es">Cadena de café con varias ubicaciones en la zona. La más cercana está en The Outlet, Canóvanas.</span><span class="en">Coffee chain with multiple locations in the area. Closest one is at The Outlet, Canóvanas.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Starbucks+Canovanas+Puerto+Rico" target="_blank">🚀 GO</a></div>
-      </div>
-
-      <div class="place-card cat-restaurant" data-cat="restaurant">
         <div class="card-top"><div class="card-icon">🌮</div><div>
           <div class="card-name"><a href="https://www.google.com/maps/search/Tijuana%27s+Puerto+Rico" target="_blank">Tijuana's</a></div>
           <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Varios lugares" data-en="Multiple locations">Varios lugares</span></span><span class="card-time">🚗 ~14 min</span><span class="card-price price-1">$</span></div>
         </div></div>
         <div class="card-note"><span class="es">Comida mexicana rápida y casual. La más cercana está en The Outlet, Canóvanas.</span><span class="en">Quick casual Mexican food. Closest one is at The Outlet, Canóvanas.</span></div>
         <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Tijuana%27s+Puerto+Rico" target="_blank">🚀 GO</a></div>
-      </div>
-
-      <div class="place-card cat-restaurant" data-cat="restaurant">
-        <div class="card-top"><div class="card-icon">🍽️</div><div>
-          <div class="card-name"><a href="https://www.google.com/maps/search/Metropol+Restaurant+6600+Ave+Isla+Verde+Carolina+PR" target="_blank">Metropol Restaurant & Bar · Isla Verde</a></div>
-          <div class="card-meta"><span class="card-tag tag-restaurant">Isla Verde · 11am–10pm</span><span class="card-time">🚗 ~36 min</span><span class="card-price price-2">$$</span></div>
-        </div></div>
-        <div class="card-note"><span class="es">Cocina cubana-caribeña. 6600 Ave. Isla Verde, Carolina.</span><span class="en">Cuban-Caribbean cuisine. 6600 Ave. Isla Verde, Carolina.</span></div>
-        <div class="card-actions">
-          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Metropol+Restaurant+6600+Ave+Isla+Verde+Carolina+PR" target="_blank">🚀 GO</a>
-          <a class="action-btn call" href="tel:+17877915585">📞 Llamar</a>
-        </div>
       </div>
 
     </div>
@@ -674,8 +693,33 @@
 
   <!-- RESTAURANTES CAROLINA / SAN JUAN -->
   <div class="section-group" data-cats="restaurant">
-    <div class="section-title">🍽️ <span class="lbl" data-es="Restaurantes · Carolina & San Juan" data-en="Restaurants · Carolina & San Juan">Restaurantes · Carolina & San Juan</span> <span class="badge">9</span></div>
+    <div class="section-title">🍽️ <span class="lbl" data-es="Restaurantes · Carolina & San Juan" data-en="Restaurants · Carolina & San Juan">Restaurantes · Carolina & San Juan</span> <span class="badge">11</span></div>
     <div class="cards-grid">
+
+      <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🌙</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/El+Platanal+Carolina+Puerto+Rico+65+Infanteria" target="_blank">El Platanal <span class="badge-late">24/7</span></a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">Carolina</span><span class="card-time">🚗 30 min</span><span class="card-price price-1">$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Comida caribeña · Abierto las 24 horas. Ave. 65 de Infantería Km 5.1.</span><span class="en">Caribbean food · Open 24 hours. Ave. 65 de Infantería Km 5.1.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/El+Platanal+Carolina+Puerto+Rico+65+Infanteria" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17872761111">📞 Llamar</a>
+        </div>
+      </div>
+
+
+      <div class="place-card cat-restaurant" data-cat="restaurant">
+        <div class="card-top"><div class="card-icon">🍽️</div><div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Metropol+Restaurant+6600+Ave+Isla+Verde+Carolina+PR" target="_blank">Metropol Restaurant & Bar · Isla Verde</a></div>
+          <div class="card-meta"><span class="card-tag tag-restaurant">Isla Verde · 11am–10pm</span><span class="card-time">🚗 ~36 min</span><span class="card-price price-2">$$</span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Cocina cubana-caribeña. 6600 Ave. Isla Verde, Carolina.</span><span class="en">Cuban-Caribbean cuisine. 6600 Ave. Isla Verde, Carolina.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Metropol+Restaurant+6600+Ave+Isla+Verde+Carolina+PR" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17877915585">📞 Llamar</a>
+        </div>
+      </div>
 
       <div class="place-card cat-restaurant" data-cat="restaurant">
         <div class="card-top"><div class="card-icon">🍌</div><div>
@@ -683,7 +727,10 @@
           <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Puertorriqueña · Mar–Dom" data-en="PR food · Tue–Sun">Puertorriqueña · Mar–Dom</span></span><span class="card-time">🚗 27 min</span><span class="card-price price-2">$$</span></div>
         </div></div>
         <div class="card-note"><span class="es">Mofongo churrasco imperdible. Cerca del aeropuerto.</span><span class="en">Must-try mofongo churrasco. Near the airport.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=16412512489290879728" target="_blank">🚀 GO</a></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://maps.google.com/?cid=16412512489290879728" target="_blank">🚀 GO</a>
+          <a class="action-btn go-btn" href="https://www.instagram.com/mofongoscarolina" target="_blank">📷 Instagram</a>
+        </div>
       </div>
 
       <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
@@ -701,7 +748,10 @@
           <div class="card-meta"><span class="card-tag tag-restaurant">Brunch · Carolina</span><span class="card-time">🚗 30 min</span><span class="card-price price-2">$$</span></div>
         </div></div>
         <div class="card-note"><span class="es">Brunch creativo. Tacos de desayuno y pancakes de calabaza.</span><span class="en">Creative brunch. Breakfast tacos and pumpkin pancakes.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=16293139172679211889" target="_blank">🚀 GO</a></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://maps.google.com/?cid=16293139172679211889" target="_blank">🚀 GO</a>
+          <a class="action-btn go-btn" href="https://www.instagram.com/cafeelsecretoaychus" target="_blank">📷 Instagram</a>
+        </div>
       </div>
 
       <div class="place-card cat-restaurant" data-cat="restaurant">
@@ -764,7 +814,10 @@
           <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Santurce · Vida nocturna" data-en="Santurce · Nightlife">Santurce · Vida nocturna</span></span><span class="card-time">🚗 48 min</span><span class="card-price price-2">$$</span></div>
         </div></div>
         <div class="card-note"><span class="es">Ambiente, música en vivo, salsa y comida típica. Imperdible.</span><span class="en">Atmosphere, live music, salsa and local food. A must-do.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=2353059362817412972" target="_blank">🚀 GO</a></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://maps.google.com/?cid=2353059362817412972" target="_blank">🚀 GO</a>
+          <a class="action-btn go-btn" href="https://www.instagram.com/laplacita.pr" target="_blank">📷 Instagram</a>
+        </div>
       </div>
 
       <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
@@ -776,6 +829,7 @@
         <div class="card-actions">
           <a class="action-btn go-btn" href="https://www.google.com/maps/search/Tayzan+Condado+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a>
           <a class="action-btn call" href="tel:+17879987706">📞 787-998-7706</a>
+          <a class="action-btn go-btn" href="https://www.instagram.com/tayzanpr" target="_blank">📷 Instagram</a>
         </div>
       </div>
 
@@ -789,11 +843,14 @@
 
       <div class="place-card cat-restaurant infinity-pick" data-cat="restaurant">
         <div class="card-top"><div class="card-icon">🌅</div><div>
-          <div class="card-name"><a href="https://maps.google.com/?cid=14113501838820036048" target="_blank">Richie's Restaurant ⭐4.1</a></div>
+          <div class="card-name"><a href="https://www.google.com/maps/search/Richie%27s+Restaurant+Carr+968+Km+2.0+Rio+Grande+PR" target="_blank">Richie's Restaurant ⭐4.1</a></div>
           <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Río Grande · Vista al mar" data-en="Río Grande · Ocean view">Río Grande · Vista al mar</span></span><span class="card-time">🚗 27 min</span><span class="card-price price-2">$$</span></div>
         </div></div>
-        <div class="card-note"><span class="es">Vista al atardecer impresionante. Abierto todos los días 11am–9pm.</span><span class="en">Stunning sunset view. Open daily 11am–9pm.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=14113501838820036048" target="_blank">🚀 GO</a></div>
+        <div class="card-note"><span class="es">Vista al atardecer impresionante. Junto al Wyndham Grand Río Mar. Abierto todos los días 11am–9pm.</span><span class="en">Stunning sunset view. Next to Wyndham Grand Río Mar. Open daily 11am–9pm.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Richie%27s+Restaurant+Carr+968+Km+2.0+Rio+Grande+PR" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17878871435">📞 Llamar</a>
+        </div>
       </div>
 
       <div class="place-card cat-restaurant" data-cat="restaurant">
@@ -820,7 +877,10 @@
           <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Río Grande · 7am–3pm" data-en="Río Grande · 7am–3pm">Río Grande · 7am–3pm</span></span><span class="card-time">🚗 18 min</span><span class="card-price price-2">$$</span></div>
         </div></div>
         <div class="card-note"><span class="es">Brunch de primera. Benedicts con pork pulled. El favorito local.</span><span class="en">Top-tier brunch. Pulled pork benedict. The local favorite.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=13038462248460855283" target="_blank">🚀 GO</a></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://maps.google.com/?cid=13038462248460855283" target="_blank">🚀 GO</a>
+          <a class="action-btn go-btn" href="https://www.instagram.com/ekelekuapr" target="_blank">📷 Instagram</a>
+        </div>
       </div>
 
       <div class="place-card cat-restaurant" data-cat="restaurant">
@@ -838,7 +898,10 @@
           <div class="card-meta"><span class="card-tag tag-restaurant"><span class="lbl" data-es="Luquillo · 11am–9:30pm" data-en="Luquillo · 11am–9:30pm">Luquillo · 11am–9:30pm</span></span><span class="card-time">🚗 29 min</span><span class="card-price price-2">$$</span></div>
         </div></div>
         <div class="card-note"><span class="es">El mejor mariscos en los Kioskos. Langosta fresca y tostones rellenos.</span><span class="en">Best seafood at the Kioskos. Fresh lobster and stuffed tostones.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/La+Parrilla+Kioskos+Luquillo+Puerto+Rico" target="_blank">🚀 GO</a></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/La+Parrilla+Kioskos+Luquillo+Puerto+Rico" target="_blank">🚀 GO</a>
+          <a class="action-btn go-btn" href="https://www.instagram.com/laparrillapr" target="_blank">📷 Instagram</a>
+        </div>
       </div>
 
       <div class="place-card cat-restaurant" data-cat="restaurant">
@@ -1287,7 +1350,10 @@
           <div class="card-meta"><span class="card-tag tag-hangout">San Juan · <span class="lbl" data-es="hasta 1am" data-en="until 1am">hasta 1am</span></span><span class="card-time">🚗 52 min</span></div>
         </div></div>
         <div class="card-note"><span class="es">Entretenimiento, restaurantes y eventos con pantalla LED gigante.</span><span class="en">Entertainment, restaurants and events with giant LED screen.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Distrito+T-Mobile+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Distrito+T-Mobile+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a>
+          <a class="action-btn go-btn" href="https://www.instagram.com/distritotmobile" target="_blank">📷 Instagram</a>
+        </div>
       </div>
 
       <div class="place-card cat-hangout" data-cat="hangout">
@@ -1296,7 +1362,10 @@
           <div class="card-meta"><span class="card-tag tag-hangout">Santurce</span><span class="card-time">🚗 48 min</span></div>
         </div></div>
         <div class="card-note"><span class="es">Vida nocturna, música en vivo, salsa y comida típica.</span><span class="en">Nightlife, live music, salsa and local food.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/La+Placita+de+Santurce+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/La+Placita+de+Santurce+San+Juan+Puerto+Rico" target="_blank">🚀 GO</a>
+          <a class="action-btn go-btn" href="https://www.instagram.com/laplacita.pr" target="_blank">📷 Instagram</a>
+        </div>
       </div>
 
       <div class="place-card cat-hangout" data-cat="hangout">
@@ -1305,7 +1374,10 @@
           <div class="card-meta"><span class="card-tag tag-hangout">Trujillo Alto</span><span class="card-time">🚗 ~40 min</span></div>
         </div></div>
         <div class="card-note"><span class="es">Zona de restaurantes y ambiente nocturno en Trujillo Alto.</span><span class="en">Restaurant and nightlife area in Trujillo Alto.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/Downtown+Cupey+Trujillo+Alto+Puerto+Rico" target="_blank">🚀 GO</a></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/Downtown+Cupey+Trujillo+Alto+Puerto+Rico" target="_blank">🚀 GO</a>
+          <a class="action-btn go-btn" href="https://www.instagram.com/downtowncupey" target="_blank">📷 Instagram</a>
+        </div>
       </div>
 
     </div>
