@@ -194,11 +194,11 @@
 <!-- FILTER BAR -->
 <div class="filter-bar">
   <div class="filter-inner">
-    <button class="filter-btn" data-filter="guia" onclick="filterPlaces('guia',this)" style="background:rgba(255,193,7,0.15);border-color:#ffc107;color:#ffc107;font-weight:700;">📋 <span class="lbl" data-es="GUÍA DE LA CASA" data-en="HOUSE GUIDE">GUÍA DE LA CASA</span></button>
+    <button class="filter-btn active" data-filter="guia" onclick="filterPlaces('guia',this)" style="background:rgba(255,193,7,0.15);border-color:#ffc107;color:#ffc107;font-weight:700;">📋 <span class="lbl" data-es="GUÍA DE LA CASA" data-en="HOUSE GUIDE">GUÍA DE LA CASA</span></button>
     <button class="filter-btn home-btn" onclick="window.open('https://www.google.com/maps?q=18.3155200,-65.8706680','_blank')">🏠 INFINITY HOUSE</button>
     <button class="filter-btn" onclick="useMyLocation()" id="location-btn" style="border-color:#ff7a45;">📍 <span class="lbl" data-es="Usar mi ubicación" data-en="Use my location">Usar mi ubicación</span></button>
 
-    <button class="filter-btn active" data-filter="all" onclick="filterPlaces('all',this)"><span>🗺️</span> <span class="lbl" data-es="Todos" data-en="All">Todos</span></button>
+    <button class="filter-btn" data-filter="all" onclick="filterPlaces('all',this)"><span>🗺️</span> <span class="lbl" data-es="Todos" data-en="All">Todos</span></button>
     <button class="filter-btn" data-filter="restaurant" onclick="filterPlaces('restaurant',this)"><span>🍽️</span> <span class="lbl" data-es="Restaurantes" data-en="Restaurants">Restaurantes</span></button>
     <button class="filter-btn" data-filter="supermercado" onclick="filterPlaces('supermercado',this)"><span>🛒</span> <span class="lbl" data-es="Supermercados" data-en="Groceries">Supermercados</span></button>
     <button class="filter-btn" data-filter="playa" onclick="filterPlaces('playa',this)"><span>🏖️</span> <span class="lbl" data-es="Playas" data-en="Beaches">Playas</span></button>
@@ -350,7 +350,7 @@
 
   <!-- SUPERMERCADOS -->
   <div class="section-group" data-cats="supermercado">
-    <div class="section-title">🛒 <span class="lbl" data-es="Supermercados" data-en="Grocery Stores">Supermercados</span> <span class="badge">4</span></div>
+    <div class="section-title">🛒 <span class="lbl" data-es="Supermercados" data-en="Grocery Stores">Supermercados</span> <span class="badge">5</span></div>
     <div class="cards-grid">
 
       <div class="place-card cat-supermercado infinity-pick" data-cat="supermercado">
@@ -388,8 +388,11 @@
           <div class="card-name"><a href="https://maps.google.com/?cid=587837725042293899" target="_blank">Walmart Supercenter</a></div>
           <div class="card-meta"><span class="card-tag tag-supermercado">Canóvanas</span><span class="card-time">🚗 15 min</span><span class="card-price price-1">$</span></div>
         </div></div>
-        <div class="card-note"><span class="es">Todo en un lugar. 6am–11pm todos los días.</span><span class="en">Everything in one place. 6am–11pm daily.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://maps.google.com/?cid=587837725042293899" target="_blank">🚀 GO</a></div>
+        <div class="card-note"><span class="es">Todo en un lugar. Farmacia y óptica. Store #5802, Plaza Canóvanas. 6am–11pm todos los días.</span><span class="en">Everything in one place. Pharmacy and optical. Store #5802, Plaza Canóvanas. 6am–11pm daily.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://maps.google.com/?cid=587837725042293899" target="_blank">🚀 GO</a>
+          <a class="action-btn call" href="tel:+17879572700">📞 787-957-2700</a>
+        </div>
       </div>
 
       <div class="place-card cat-supermercado" data-cat="supermercado">
@@ -412,7 +415,18 @@
         <div class="card-note"><span class="es">Supermercado grande con gran variedad. Carr #3 Km 24.5.</span><span class="en">Large supermarket with great variety. Carr #3 Km 24.5.</span></div>
         <div class="card-actions">
           <a class="action-btn go-btn" href="https://www.google.com/maps/search/Ralph%27s+Food+Warehouse+Carr+3+Km+24.5+Rio+Grande+PR" target="_blank">🚀 GO</a>
-          <a class="action-btn call" href="tel:+17877330959">📞 Llamar</a>
+          <a class="action-btn call" href="tel:+17876570779">📞 787-657-0779</a>
+        </div>
+      </div>
+
+      <div class="place-card cat-supermercado infinity-pick" data-cat="supermercado">
+        <div class="card-top"><div class="card-icon">📦</div><div>
+          <div class="card-name"><a href="https://www.supermaxonline.com" target="_blank">SuperMax Online · Delivery</a></div>
+          <div class="card-meta"><span class="card-tag tag-supermercado"><span class="lbl" data-es="Compra desde el celular" data-en="Shop from your phone">Compra desde el celular</span></span></div>
+        </div></div>
+        <div class="card-note"><span class="es">Ordena tu compra online y recíbela en la puerta. Mínimo $50. Envío: $10 ($50–$100) · $8 ($100–$150) · $6 (+$150). Pago con tarjeta de crédito. Mismos precios y ofertas que la tienda física: frescos, carnes, licores y deli.</span><span class="en">Order groceries online and get them delivered. $50 minimum. Delivery: $10 ($50–$100) · $8 ($100–$150) · $6 (+$150). Credit card payment. Same prices and specials as in-store: fresh produce, meats, liquors and deli.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.supermaxonline.com" target="_blank">🌐 <span class="lbl" data-es="Sitio web" data-en="Website">Sitio web</span></a>
         </div>
       </div>
 
@@ -1188,8 +1202,11 @@
           <div class="card-name"><a href="https://www.google.com/maps/search/La+Paseadora+Rio+Espiritu+Santo+Rio+Grande+Puerto+Rico" target="_blank">La Paseadora · Río Espíritu Santo</a></div>
           <div class="card-meta"><span class="card-tag tag-aventura">Río Grande</span><span class="card-time">🚗 ~20 min</span></div>
         </div></div>
-        <div class="card-note"><span class="es">Paseo en bote por el Río Espíritu Santo, cerca de El Yunque. Naturaleza y tranquilidad.</span><span class="en">Boat ride along Río Espíritu Santo, near El Yunque. Nature and tranquility.</span></div>
-        <div class="card-actions"><a class="action-btn go-btn" href="https://www.google.com/maps/search/La+Paseadora+Rio+Espiritu+Santo+Rio+Grande+Puerto+Rico" target="_blank">🚀 GO</a></div>
+        <div class="card-note"><span class="es">Paseo en bote por el Río Espíritu Santo, cerca de El Yunque. Único río navegable de Puerto Rico. Naturaleza y tranquilidad.</span><span class="en">Boat ride along Río Espíritu Santo, near El Yunque. Puerto Rico's only navigable river. Nature and tranquility.</span></div>
+        <div class="card-actions">
+          <a class="action-btn go-btn" href="https://www.google.com/maps/search/La+Paseadora+Rio+Espiritu+Santo+Rio+Grande+Puerto+Rico" target="_blank">🚀 GO</a>
+          <a class="action-btn go-btn" href="https://www.instagram.com/la_paseadora" target="_blank">📷 Instagram</a>
+        </div>
       </div>
 
       <div class="place-card cat-aventura" data-cat="aventura">
@@ -1726,7 +1743,7 @@
 
 <script>
   let currentLang = 'es';
-  let currentFilter = 'all';
+  let currentFilter = 'guia';
 
   const placeholders = {
     es: 'Buscar lugar...', en: 'Search place...', pt: 'Buscar local...', fr: 'Rechercher un lieu...'
