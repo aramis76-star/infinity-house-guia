@@ -1987,11 +1987,15 @@
   function shareToFacebook(e) {
     e.preventDefault();
     document.getElementById('share-menu').classList.remove('open');
-    // Abre el cuadro OFICIAL de compartir de Facebook (sharer.php) en una
-    // pestaña/ventana nueva, con el enlace de Airbnb precargado como el
-    // contenido a compartir. Facebook no permite precargar el texto del
-    // comentario del usuario por diseño, así que no se intenta.
-    window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fes-l.airbnb.com%2Frooms%2F1431433978579772222%3Funique_share_id%3D23142d2a-d57e-4b71-b9f2-3dde821f796f%26viralityEntryPoint%3D1%26s%3D76', '_blank', 'noopener');
+    var fbLink = 'https%3A%2F%2Fes-l.airbnb.com%2Frooms%2F1431433978579772222%3Funique_share_id%3D23142d2a-d57e-4b71-b9f2-3dde821f796f%26viralityEntryPoint%3D1%26s%3D76';
+    var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    // En móvil se usa m.facebook.com: la app de Facebook intercepta los enlaces
+    // www.facebook.com y descarta la ruta del sharer (abre solo el inicio).
+    // La versión móvil del sharer sí abre el cuadro de compartir con el enlace cargado.
+    var sharerUrl = (isMobile
+      ? 'https://m.facebook.com/sharer/sharer.php?u='
+      : 'https://www.facebook.com/sharer/sharer.php?u=') + fbLink;
+    window.open(sharerUrl, '_blank', 'noopener');
   }
   function shareToInstagram(e) {
     e.preventDefault();
