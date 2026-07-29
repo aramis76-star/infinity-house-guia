@@ -209,6 +209,23 @@
   .home-btn { background: linear-gradient(135deg, #0284c7, #38bdf8) !important; border-color: transparent !important; color: #ffffff !important; font-weight: 700; box-shadow: 0 3px 10px rgba(2,132,199,0.35); }
   .home-btn:hover { filter: brightness(1.08); }
   .share-wrap { position: relative; display: inline-block; }
+  .share-cta-btn {
+    background: linear-gradient(135deg, #ff4d6d, #ff7a45);
+    border: none;
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.95rem;
+    padding: 12px 24px;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(255,77,109,0.45);
+    animation: shareGlow 2s ease-in-out infinite;
+  }
+  .share-cta-btn:hover { filter: brightness(1.08); }
+  @keyframes shareGlow {
+    0%, 100% { box-shadow: 0 4px 16px rgba(255,77,109,0.45); transform: scale(1); }
+    50% { box-shadow: 0 4px 26px rgba(255,77,109,0.85); transform: scale(1.035); }
+  }
   .share-menu { display: none; position: absolute; top: calc(100% + 6px); right: 0; z-index: 200; background: #0d1f1a; border: 1px solid #2a4a3a; border-radius: 10px; padding: 6px; min-width: 170px; box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
   .share-menu.open { display: flex; flex-direction: column; gap: 2px; }
   .share-menu a { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px; color: #ffffff; text-decoration: none; font-size: 0.85rem; font-weight: 600; white-space: nowrap; }
@@ -327,8 +344,11 @@
 <div id="welcome-banner" style="background: linear-gradient(135deg, #1a3a2e 0%, #0d1f1a 100%); padding: 10px 20px; text-align: center; border-bottom: 1px solid #2a4a3a;">
   <p id="welcome-text-es" style="color: #ffffff; font-size: 0.85rem; font-weight: 600;">🌴 Bienvenidos a Infinity House, familia Cantú y amigos. Les deseamos una estancia maravillosa y llena de momentos especiales.</p>
   <p id="welcome-text-en" style="display:none; color: #3ecfb2; font-size: 0.85rem; font-weight: 600;">🌴 Welcome to Infinity House, Cantú family and friends. We wish you a wonderful stay full of special moments.</p>
-  <div class="share-wrap" style="margin-top:8px;">
-    <button class="filter-btn home-btn" id="share-btn" onclick="toggleShareMenu(event)">❤️ <span class="lbl" data-es="Comparte a Infinity House" data-en="Share Infinity House">Comparte a Infinity House</span></button>
+  <p style="color:#ffd9b3; font-size:0.78rem; font-weight:600; margin:10px 0 6px;">
+    <span class="lbl" data-es="¿Les está gustando la casa? ¡Recomiéndanos!" data-en="Enjoying your stay? Recommend us!">¿Les está gustando la casa? ¡Recomiéndanos!</span>
+  </p>
+  <div class="share-wrap">
+    <button class="share-cta-btn" id="share-btn" onclick="toggleShareMenu(event)">❤️ <span class="lbl" data-es="Comparte a Infinity House" data-en="Share Infinity House">Comparte a Infinity House</span></button>
     <div class="share-menu" id="share-menu">
       <a href="#" onclick="shareToWhatsApp(event)">💬 WhatsApp</a>
       <a href="#" onclick="shareToFacebook(event)">📘 Facebook</a>
@@ -1989,32 +2009,31 @@
     document.getElementById('share-menu').classList.remove('open');
     var airbnbUrl = 'https://es-l.airbnb.com/rooms/1431433978579772222?unique_share_id=0a4a965b-e015-4d67-9d24-483c611d10ba&viralityEntryPoint=1&s=76';
     var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    if (isMobile && navigator.share) {
-      // En celular: menú nativo de compartir del sistema. Al elegir Facebook,
-      // el sistema entrega el enlace directamente al compositor de la app,
-      // que es la única vía confiable (la app intercepta y descarta sharer.php).
-      navigator.share({ url: airbnbUrl }).catch(function(){});
-      return;
+    function openFacebook() {
+      if (isMobile) {
+        // La app de Facebook ignora los parámetros de sharer.php y siempre
+        // abre el cuadro de "¿Qué estás pensando?" — por eso copiamos el
+        // enlace antes: el usuario solo tiene que pegarlo ahí.
+        window.open('https://www.facebook.com/', '_blank');
+      } else {
+        window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(airbnbUrl), '_blank', 'noopener');
+      }
     }
-    var sharerUrl = (isMobile
-      ? 'https://m.facebook.com/sharer/sharer.php?u='
-      : 'https://www.facebook.com/sharer/sharer.php?u=') + encodeURIComponent(airbnbUrl);
-    window.open(sharerUrl, '_blank', 'noopener');
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(airbnbUrl).then(function() {
+        alert(currentLang === 'en'
+          ? 'Link copied! Paste it (long press → Paste) into the Facebook post box that opens next.'
+          : '¡Enlace copiado! Pégalo (mantén presionado → Pegar) en el cuadro de publicar de Facebook que se va a abrir.');
+        openFacebook();
+      }).catch(openFacebook);
+    } else {
+      openFacebook();
+    }
   }
   function shareToInstagram(e) {
     e.preventDefault();
     document.getElementById('share-menu').classList.remove('open');
-    if (navigator.share) {
-      navigator.share({ title: 'Infinity House', text: shareText, url: shareUrl }).catch(function(){});
-    } else if (navigator.clipboard) {
-      navigator.clipboard.writeText(shareUrl).then(function() {
-        alert(currentLang === 'en'
-          ? 'Link copied! Paste it in your Instagram story or bio.'
-          : '¡Enlace copiado! Pégalo en tu historia o bio de Instagram.');
-      });
-    } else {
-      window.open('https://www.instagram.com/', '_blank');
-    }
+    window.open('https://www.instagram.com/infinityhousepr?igsh=d3Jsc3Uzc2M0NXVk', '_blank', 'noopener');
   }
 
   function setLang(lang) {
