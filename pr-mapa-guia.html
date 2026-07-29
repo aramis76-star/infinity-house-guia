@@ -1975,7 +1975,7 @@
       menu.classList.remove('open');
     }
   });
-  const shareUrl = 'https://es-l.airbnb.com/rooms/1431433978579772222?unique_share_id=943be24f-569b-4501-9996-ec6089dae8a9&viralityEntryPoint=1&s=76';
+  const shareUrl = 'https://es-l.airbnb.com/rooms/1431433978579772222?unique_share_id=0a4a965b-e015-4d67-9d24-483c611d10ba&viralityEntryPoint=1&s=76';
   const shareText = (currentLang === 'en')
     ? 'I recommend Infinity House in Puerto Rico! We had an amazing stay. If you\'re looking for a spectacular house with an infinity pool and incredible views, you can see it here:'
     : '🌴 ¡Te recomiendo Infinity House en Puerto Rico! Disfrutamos muchísimo nuestra estadía. Si buscas una casa espectacular con piscina infinity y vistas increíbles, aquí puedes verla:';
@@ -1987,14 +1987,18 @@
   function shareToFacebook(e) {
     e.preventDefault();
     document.getElementById('share-menu').classList.remove('open');
-    var fbLink = 'https%3A%2F%2Fes-l.airbnb.com%2Frooms%2F1431433978579772222%3Funique_share_id%3D23142d2a-d57e-4b71-b9f2-3dde821f796f%26viralityEntryPoint%3D1%26s%3D76';
+    var airbnbUrl = 'https://es-l.airbnb.com/rooms/1431433978579772222?unique_share_id=0a4a965b-e015-4d67-9d24-483c611d10ba&viralityEntryPoint=1&s=76';
     var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    // En móvil se usa m.facebook.com: la app de Facebook intercepta los enlaces
-    // www.facebook.com y descarta la ruta del sharer (abre solo el inicio).
-    // La versión móvil del sharer sí abre el cuadro de compartir con el enlace cargado.
+    if (isMobile && navigator.share) {
+      // En celular: menú nativo de compartir del sistema. Al elegir Facebook,
+      // el sistema entrega el enlace directamente al compositor de la app,
+      // que es la única vía confiable (la app intercepta y descarta sharer.php).
+      navigator.share({ url: airbnbUrl }).catch(function(){});
+      return;
+    }
     var sharerUrl = (isMobile
       ? 'https://m.facebook.com/sharer/sharer.php?u='
-      : 'https://www.facebook.com/sharer/sharer.php?u=') + fbLink;
+      : 'https://www.facebook.com/sharer/sharer.php?u=') + encodeURIComponent(airbnbUrl);
     window.open(sharerUrl, '_blank', 'noopener');
   }
   function shareToInstagram(e) {
