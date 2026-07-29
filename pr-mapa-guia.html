@@ -1986,8 +1986,10 @@
   }
   function shareToFacebook(e) {
     e.preventDefault();
-    window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fes-l.airbnb.com%2Frooms%2F1431433978579772222%3Funique_share_id%3D943be24f-569b-4501-9996-ec6089dae8a9%26viralityEntryPoint%3D1%26s%3D76', '_blank');
     document.getElementById('share-menu').classList.remove('open');
+    // Navegación directa (no window.open) para que iOS/Android puedan
+    // interceptar el enlace facebook.com y abrir la app nativa si está instalada.
+    window.location.href = 'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fes-l.airbnb.com%2Frooms%2F1431433978579772222%3Funique_share_id%3D943be24f-569b-4501-9996-ec6089dae8a9%26viralityEntryPoint%3D1%26s%3D76';
   }
   function shareToInstagram(e) {
     e.preventDefault();
