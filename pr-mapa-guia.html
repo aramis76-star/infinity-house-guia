@@ -214,11 +214,11 @@
     border: none;
     color: #fff;
     font-weight: 800;
-    font-size: 0.95rem;
-    padding: 12px 24px;
-    border-radius: 30px;
+    font-size: 0.78rem;
+    padding: 8px 16px;
+    border-radius: 24px;
     cursor: pointer;
-    box-shadow: 0 4px 16px rgba(255,77,109,0.45);
+    box-shadow: 0 3px 12px rgba(255,77,109,0.45);
     animation: shareGlow 2s ease-in-out infinite;
   }
   .share-cta-btn:hover { filter: brightness(1.08); }
@@ -309,7 +309,7 @@
   .video-embed { border: 1px solid #e3ecf2; background: #f2f7fa; border-radius: 12px; }
 
   /* NOTA LEGAL (servicios independientes) */
-  .section-group p[style*="italic"] { color: #3f5c70 !important; }
+  .section-group p[style*="italic"] { color: #ffffff !important; }
 
   /* EMPTY STATE */
   .empty-state { color: #33566e; }
@@ -342,16 +342,13 @@
 
 <!-- WELCOME MESSAGE BANNER -->
 <div id="welcome-banner" style="background: linear-gradient(135deg, #1a3a2e 0%, #0d1f1a 100%); padding: 10px 20px; text-align: center; border-bottom: 1px solid #2a4a3a;">
-  <p id="welcome-text-es" style="color: #ffffff; font-size: 0.85rem; font-weight: 600;">🌴 Bienvenidos a Infinity House, familia Cantú y amigos. Les deseamos una estancia maravillosa y llena de momentos especiales.</p>
-  <p id="welcome-text-en" style="display:none; color: #3ecfb2; font-size: 0.85rem; font-weight: 600;">🌴 Welcome to Infinity House, Cantú family and friends. We wish you a wonderful stay full of special moments.</p>
-  <p style="color:#ffd9b3; font-size:0.78rem; font-weight:600; margin:10px 0 6px;">
-    <span class="lbl" data-es="¿Les está gustando la casa? ¡Recomiéndanos!" data-en="Enjoying your stay? Recommend us!">¿Les está gustando la casa? ¡Recomiéndanos!</span>
-  </p>
+  <p id="welcome-text-es" style="color: #ffffff; font-size: 1.05rem; font-weight: 700;">🌴 Bienvenidos a Infinity House, familia Cantú y amigos. Les deseamos una estancia maravillosa y llena de momentos especiales.</p>
+  <p id="welcome-text-en" style="display:none; color: #3ecfb2; font-size: 1.05rem; font-weight: 700;">🌴 Welcome to Infinity House, Cantú family and friends. We wish you a wonderful stay full of special moments.</p>
   <div class="share-wrap">
     <button class="share-cta-btn" id="share-btn" onclick="toggleShareMenu(event)">❤️ <span class="lbl" data-es="Comparte a Infinity House" data-en="Share Infinity House">Comparte a Infinity House</span></button>
     <div class="share-menu" id="share-menu">
       <a href="#" onclick="shareToWhatsApp(event)">💬 WhatsApp</a>
-      <a href="#" onclick="shareToFacebook(event)">📘 Facebook</a>
+      <a href="#" onclick="shareToAirbnb(event)">🏡 Airbnb</a>
       <a href="#" onclick="shareToInstagram(event)">📸 Instagram</a>
     </div>
   </div>
@@ -1767,7 +1764,7 @@
       </div>
 
     </div>
-    <p style="font-size: 0.68rem; color: #ffffff; margin-top: 10px; line-height: 1.5; font-style: italic;">
+    <p style="font-size: 0.72rem; color: #ffffff; margin-top: 10px; line-height: 1.5; font-style: italic; background: rgba(13,31,26,0.85); padding: 10px 12px; border-radius: 8px; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
       <span class="es">Estos profesionales ofrecen sus servicios de forma independiente. No están afiliados a nosotros. Puedes contactarlos directamente para solicitar sus servicios.<br><br>Como huésped, eres responsable de la unidad y de cualquier daño que un tercero pueda causar de forma no intencional.</span>
       <span class="en" style="display:none;">These professionals offer their services independently. They are not affiliated with us. You can contact them to request their services directly.<br><br>As a guest, you are responsible for the unit and any damage that a third party may cause unintentionally.</span>
     </p>
@@ -1791,7 +1788,7 @@
       </div>
 
     </div>
-    <p style="font-size: 0.68rem; color: #ffffff; margin-top: 10px; line-height: 1.5; font-style: italic;">
+    <p style="font-size: 0.72rem; color: #ffffff; margin-top: 10px; line-height: 1.5; font-style: italic; background: rgba(13,31,26,0.85); padding: 10px 12px; border-radius: 8px; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
       <span class="es">Estos profesionales ofrecen sus servicios de forma independiente. No están afiliados a nosotros. Puedes contactarlos directamente para solicitar sus servicios.<br><br>Como huésped, eres responsable de la unidad y de cualquier daño que un tercero pueda causar de forma no intencional.</span>
       <span class="en" style="display:none;">These professionals offer their services independently. They are not affiliated with us. You can contact them to request their services directly.<br><br>As a guest, you are responsible for the unit and any damage that a third party may cause unintentionally.</span>
     </p>
@@ -2004,31 +2001,11 @@
     window.open('https://wa.me/?text=' + encodeURIComponent(shareText + '\n\n' + shareUrl), '_blank');
     document.getElementById('share-menu').classList.remove('open');
   }
-  function shareToFacebook(e) {
+  function shareToAirbnb(e) {
     e.preventDefault();
     document.getElementById('share-menu').classList.remove('open');
     var airbnbUrl = 'https://es-l.airbnb.com/rooms/1431433978579772222?unique_share_id=0a4a965b-e015-4d67-9d24-483c611d10ba&viralityEntryPoint=1&s=76';
-    var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    function openFacebook() {
-      if (isMobile) {
-        // La app de Facebook ignora los parámetros de sharer.php y siempre
-        // abre el cuadro de "¿Qué estás pensando?" — por eso copiamos el
-        // enlace antes: el usuario solo tiene que pegarlo ahí.
-        window.open('https://www.facebook.com/', '_blank');
-      } else {
-        window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(airbnbUrl), '_blank', 'noopener');
-      }
-    }
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(airbnbUrl).then(function() {
-        alert(currentLang === 'en'
-          ? 'Link copied! Paste it (long press → Paste) into the Facebook post box that opens next.'
-          : '¡Enlace copiado! Pégalo (mantén presionado → Pegar) en el cuadro de publicar de Facebook que se va a abrir.');
-        openFacebook();
-      }).catch(openFacebook);
-    } else {
-      openFacebook();
-    }
+    window.open(airbnbUrl, '_blank', 'noopener');
   }
   function shareToInstagram(e) {
     e.preventDefault();
