@@ -2041,7 +2041,9 @@
 
 <script>
   // ===== PIN de acceso · cambia este valor para cada huésped/reservación =====
-  const GUEST_PIN = '0000';
+  const GUEST_PIN = '3167';
+  // ===== PIN de administración · funciona siempre, además del PIN del huésped =====
+  const ADMIN_PIN = '0000';
 
   (function initPinLock() {
     const overlay = document.getElementById('pin-lock-overlay');
@@ -2075,8 +2077,9 @@
       hintEl.innerHTML = pinText.hintPre + '<a href="https://wa.me/17875310123" target="_blank" rel="noopener" style="color:#3ecfb2; font-weight:600; text-decoration:none;">Loly</a>' + pinText.hintPost;
     }
 
-    // Si ya desbloqueó con el PIN vigente en este navegador, saltar el candado
-    if (localStorage.getItem('ih_pin_ok') === GUEST_PIN) {
+    // Si ya desbloqueó con algún PIN válido en este navegador, saltar el candado
+    const savedPin = localStorage.getItem('ih_pin_ok');
+    if (savedPin === GUEST_PIN || savedPin === ADMIN_PIN) {
       overlay.style.display = 'none';
       return;
     }
@@ -2087,8 +2090,8 @@
       dots.forEach((d, i) => d.classList.toggle('filled', i < entered.length));
     }
 
-    function unlock() {
-      localStorage.setItem('ih_pin_ok', GUEST_PIN);
+    function unlock(pin) {
+      localStorage.setItem('ih_pin_ok', pin);
       overlay.style.transition = 'opacity 0.3s ease';
       overlay.style.opacity = '0';
       setTimeout(() => {
@@ -2098,8 +2101,8 @@
     }
 
     function checkPin() {
-      if (entered === GUEST_PIN) {
-        unlock();
+      if (entered === GUEST_PIN || entered === ADMIN_PIN) {
+        unlock(entered);
       } else {
         errorEl.textContent = pinText.wrong;
         const box = overlay.querySelector('.pin-box');
