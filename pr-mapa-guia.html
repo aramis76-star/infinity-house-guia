@@ -2018,16 +2018,15 @@
     if (!overlay) return;
 
     // Detectar idioma del teléfono del huésped y ajustar los textos
-    const isEnglish = (navigator.language || navigator.userLanguage || '').toLowerCase().startsWith('en');
-    const pinText = isEnglish ? {
-      title: 'Welcome to Infinity House!',
-      subtitle: 'Tap the button to view your guide.',
-      button: 'Enter'
-    } : {
-      title: '¡Bienvenido a Infinity House!',
-      subtitle: 'Toca el botón para ver tu guía.',
-      button: 'Entrar'
+    const browserLang = (navigator.language || navigator.userLanguage || 'es').toLowerCase();
+    const pinTexts = {
+      en: { title: 'Welcome to Infinity House!', subtitle: 'Tap the button to view your guide.', button: 'Enter' },
+      pt: { title: 'Bem-vindo à Infinity House!', subtitle: 'Toque no botão para ver seu guia.', button: 'Entrar' },
+      fr: { title: 'Bienvenue à Infinity House !', subtitle: 'Appuyez sur le bouton pour voir votre guide.', button: 'Entrer' },
+      es: { title: '¡Bienvenido a Infinity House!', subtitle: 'Toca el botón para ver tu guía.', button: 'Entrar' }
     };
+    const langKey = ['en', 'pt', 'fr'].find(l => browserLang.startsWith(l)) || 'es';
+    const pinText = pinTexts[langKey];
 
     const titleEl = document.getElementById('pin-title');
     const subtitleEl = document.getElementById('pin-subtitle');
