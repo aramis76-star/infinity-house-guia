@@ -417,15 +417,6 @@
   </div>
 </div>
 
-<!-- SEARCH BAR -->
-<div class="search-bar">
-  <div style="position:relative;">
-    <span style="position:absolute; left:12px; top:50%; transform:translateY(-50%); opacity:0.6; pointer-events:none;">🔍</span>
-    <input type="text" id="page-search-input" class="search-input" oninput="searchPlaces(this.value)"
-      data-ph-es="Buscar en la guía..." data-ph-en="Search the guide..." data-ph-pt="Buscar no guia..." data-ph-fr="Rechercher dans le guide...">
-  </div>
-</div>
-
 <div class="main">
   <div class="stats-bar">
     <div class="count"><span class="lbl" data-es="Mostrando" data-en="Showing">Mostrando</span> <span id="visible-count">123</span> <span class="lbl" data-es="lugares" data-en="places">lugares</span></div>
@@ -2111,10 +2102,6 @@
       const btn = document.getElementById('btn-' + l);
       if (btn) btn.classList.toggle('active', lang === l);
     });
-    const searchInput = document.getElementById('page-search-input');
-    if (searchInput) {
-      searchInput.placeholder = searchInput.dataset['ph' + lang.charAt(0).toUpperCase() + lang.slice(1)] || searchInput.dataset.phEs;
-    }
     document.getElementById('subtitle-es').style.display = lang === 'es' ? '' : 'none';
     document.getElementById('subtitle-en').style.display = lang === 'en' ? '' : 'none';
     document.getElementById('welcome-text-es').style.display = lang === 'es' ? '' : 'none';
@@ -2130,23 +2117,11 @@
     document.querySelectorAll('.en').forEach(el => el.style.display = (lang === 'en' || lang === 'pt' || lang === 'fr') ? 'inline' : 'none');
   }
 
-  function searchPlaces(val) {
-    if (val && val.trim()) {
-      // Al buscar texto, cambiar a "Todos" para buscar en todas las categorías
-      currentFilter = 'all';
-      document.querySelectorAll('.filter-btn[data-filter]').forEach(b => {
-        b.classList.toggle('active', b.dataset.filter === 'all');
-      });
-    }
-    applyFilters(val);
-  }
-
   function filterPlaces(filter, btn) {
     currentFilter = filter;
     document.querySelectorAll('.filter-btn[data-filter]').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    const searchInput = document.getElementById('page-search-input');
-    applyFilters(searchInput ? searchInput.value : '');
+    applyFilters('');
   }
 
 
