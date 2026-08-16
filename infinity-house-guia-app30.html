@@ -435,6 +435,31 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
 </head>
 <body>
 
+<!--
+  ============================================================
+  INFORMACIÓN ADICIONAL (NO VISIBLE PARA LOS HUÉSPEDES)
+  ============================================================
+  Todo lo que escribas dentro del div de abajo NO se ve en la
+  página (está oculto con display:none), pero SÍ lo puede leer
+  "Pregúntale a la Casa" porque el asistente lee el texto
+  completo del HTML, incluido el contenido oculto.
+
+  Úsalo para cosas que quieres que el asistente sepa pero que
+  no quieres mostrar visualmente a los huéspedes: códigos,
+  instrucciones internas, notas para casos especiales, etc.
+
+  Simplemente agrega líneas de texto dentro del <div>. No
+  necesitas ningún formato especial, solo texto simple.
+  ============================================================
+-->
+<div id="info-oculta-asistente" style="display:none">
+  Gas: si el gas se acaba durante la estadía, el huésped debe notificar a la administración de inmediato para que abran el tanque nuevo. No hay forma de que el huésped lo resuelva por su cuenta.
+  Código de la caja fuerte: [agrega aquí]
+  Ubicación del breaker eléctrico principal: [agrega aquí]
+  Instrucciones para reiniciar el router de WiFi: [agrega aquí]
+  Nota interna: [agrega aquí cualquier otra información]
+</div>
+
 <!-- PIN LOCK OVERLAY -->
 <div id="pin-lock-overlay">
   <div class="pin-box">
