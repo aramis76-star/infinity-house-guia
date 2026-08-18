@@ -2764,7 +2764,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     }
   };
   // pt/fr guests get the English chat text, matching the rest of the guide's fallback behavior
-  let pcLangInitialized = false;
+  let pcWelcomeEl = null;
   let pcCurrentLang = 'es';
 
   function pcGetStrings() {
@@ -2774,7 +2774,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
 
   function pcApplyLang() {
     const lang = (typeof currentLang !== 'undefined') ? currentLang : 'es';
-    if (lang === pcCurrentLang && pcLangInitialized) return;
+    if (lang === pcCurrentLang && pcWelcomeEl) return;
     pcCurrentLang = lang;
     const t = pcGetStrings();
     const header = document.getElementById('pregunta-casa-header');
@@ -2784,10 +2784,16 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     }
     const input = document.getElementById('pregunta-casa-input');
     if (input) input.placeholder = t.placeholder;
-    if (!pcLangInitialized) {
-      pcAddMessage(t.welcome, 'bot');
-      pcLangInitialized = true;
+
+    const messages = document.getElementById('pregunta-casa-messages');
+    if (!pcWelcomeEl) {
+      // Primer mensaje de bienvenida
+      pcWelcomeEl = pcAddMessage(t.welcome, 'bot');
+    } else if (messages.childElementCount === 1) {
+      // El huésped aún no ha escrito nada: seguimos actualizando el mensaje al idioma correcto
+      pcWelcomeEl.textContent = t.welcome;
     }
+    // Si ya hay conversación (childElementCount > 1), dejamos el mensaje de bienvenida como está
   }
 
   function pcToggleChat() {
