@@ -2717,6 +2717,22 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     30% { transform: translateY(-4px); opacity: 1; }
   }
 
+  .pc-msg.bot .pc-line { margin: 0 0 2px; }
+  .pc-msg.bot .pc-line-gap { height: 8px; }
+  .pc-msg.bot .pc-list { margin: 2px 0; }
+  .pc-msg.bot .pc-list-item {
+    display: flex;
+    gap: 6px;
+    margin: 6px 0;
+  }
+  .pc-msg.bot .pc-list-num {
+    font-weight: 700;
+    color: var(--ih-green2);
+    flex-shrink: 0;
+  }
+  .pc-msg.bot .pc-list-text { flex: 1; }
+  .pc-msg.bot strong { color: var(--ih-green2); font-weight: 700; }
+
   #pregunta-casa-suggested {
     display: flex;
     flex-direction: column;
@@ -2889,11 +2905,50 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     document.getElementById('pregunta-casa-window').classList.toggle('open');
   }
 
+  function pcEscapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function pcFormatBotText(raw) {
+    const lines = raw.split('\n');
+    let html = '';
+    let inList = false;
+
+    lines.forEach(function (line) {
+      const trimmed = line.trim();
+      const numberedMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
+
+      if (numberedMatch) {
+        if (!inList) { html += '<div class="pc-list">'; inList = true; }
+        const num = numberedMatch[1];
+        const rest = pcEscapeHtml(numberedMatch[2]).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        html += '<div class="pc-list-item"><span class="pc-list-num">' + num + '.</span><span class="pc-list-text">' + rest + '</span></div>';
+        return;
+      }
+
+      if (inList) { html += '</div>'; inList = false; }
+
+      if (trimmed === '') { html += '<div class="pc-line-gap"></div>'; return; }
+
+      const escaped = pcEscapeHtml(trimmed).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      html += '<div class="pc-line">' + escaped + '</div>';
+    });
+
+    if (inList) html += '</div>';
+    return html;
+  }
+
   function pcAddMessage(text, sender) {
     const messages = document.getElementById('pregunta-casa-messages');
     const div = document.createElement('div');
     div.className = 'pc-msg ' + sender;
-    div.textContent = text;
+    if (sender === 'bot') {
+      div.innerHTML = pcFormatBotText(text);
+    } else {
+      div.textContent = text;
+    }
     messages.appendChild(div);
     messages.scrollTop = messages.scrollHeight;
     return div;
