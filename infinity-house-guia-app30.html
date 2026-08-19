@@ -2657,8 +2657,8 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     max-width: 80%;
     padding: 10px 14px;
     border-radius: 14px;
-    font-size: clamp(13px, 3.2vw, 14px);
-    line-height: 1.4;
+    font-size: clamp(14.5px, 3.6vw, 15.5px);
+    line-height: 1.45;
     word-break: break-word;
   }
   .pc-msg.bot {
@@ -2677,6 +2677,32 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     color: #999;
     font-style: italic;
   }
+
+  #pregunta-casa-suggested {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 12px 4px;
+    background: #f7f7f9;
+    flex-shrink: 0;
+  }
+  .pc-suggested-chip {
+    background: #ffffff;
+    border: 1px solid #d9ede2;
+    color: #128C7E;
+    border-radius: 14px;
+    padding: 10px 14px;
+    font-size: clamp(12.5px, 3.2vw, 13.5px);
+    line-height: 1.35;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: background .15s ease;
+  }
+  .pc-suggested-chip:hover { background: #eef9f2; }
+  .pc-suggested-chip:disabled { opacity: 0.5; cursor: default; }
 
   #pregunta-casa-input-area {
     display: flex;
@@ -2734,6 +2760,11 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     <span id="pregunta-casa-close" onclick="pcToggleChat()">&times;</span>
   </div>
   <div id="pregunta-casa-messages"></div>
+  <div id="pregunta-casa-suggested">
+    <button class="pc-suggested-chip" data-es="¿Qué restaurantes recomiendas cerca?" data-en="What restaurants do you recommend nearby?" onclick="pcSendSuggested(this)">¿Qué restaurantes recomiendas cerca?</button>
+    <button class="pc-suggested-chip" data-es="¿Qué actividades puedo hacer hoy?" data-en="What activities can I do today?" onclick="pcSendSuggested(this)">¿Qué actividades puedo hacer hoy?</button>
+    <button class="pc-suggested-chip" data-es="¿Hay algún chef privado que pueda contratar?" data-en="Is there a private chef I can hire?" onclick="pcSendSuggested(this)">¿Hay algún chef privado que pueda contratar?</button>
+  </div>
   <div id="pregunta-casa-input-area">
     <input type="text" id="pregunta-casa-input" placeholder="Escribe tu pregunta..." onkeypress="if(event.key==='Enter') pcSendMessage()">
     <button id="pregunta-casa-send" onclick="pcSendMessage()">➤</button>
@@ -2785,6 +2816,13 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     const input = document.getElementById('pregunta-casa-input');
     if (input) input.placeholder = t.placeholder;
 
+    const suggested = document.getElementById('pregunta-casa-suggested');
+    if (suggested) {
+      suggested.querySelectorAll('.pc-suggested-chip').forEach(function (btn) {
+        btn.textContent = btn.dataset[lang] || btn.dataset.es;
+      });
+    }
+
     const messages = document.getElementById('pregunta-casa-messages');
     if (!pcWelcomeEl) {
       // Primer mensaje de bienvenida
@@ -2811,6 +2849,13 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     return div;
   }
 
+  function pcSendSuggested(btn) {
+    if (btn.disabled) return;
+    const input = document.getElementById('pregunta-casa-input');
+    input.value = btn.textContent;
+    pcSendMessage();
+  }
+
   async function pcSendMessage() {
     const input = document.getElementById('pregunta-casa-input');
     const sendBtn = document.getElementById('pregunta-casa-send');
@@ -2818,6 +2863,9 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     if (!message) return;
 
     const t = pcGetStrings();
+
+    const suggested = document.getElementById('pregunta-casa-suggested');
+    if (suggested) suggested.style.display = 'none';
 
     pcAddMessage(message, 'user');
     input.value = '';
