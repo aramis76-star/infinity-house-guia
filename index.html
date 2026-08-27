@@ -2584,23 +2584,19 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
 
   #pregunta-casa-window {
     position: fixed;
-    right: calc(var(--pc-edge) + var(--pc-safe-r));
-    bottom: calc(var(--pc-edge) + var(--pc-bubble-size) + var(--pc-gap) + var(--pc-safe-b));
-    width: min(370px, calc(100vw - (2 * var(--pc-edge)) - var(--pc-safe-l) - var(--pc-safe-r)));
-    /* vh fallback first for older browsers, then dvh (accounts for mobile browser toolbars) */
-    height: min(520px, calc(100vh - var(--pc-edge) - var(--pc-bubble-size) - var(--pc-gap) - var(--pc-safe-b) - var(--pc-edge) - var(--pc-safe-t)));
-    height: min(520px, calc(100dvh - var(--pc-edge) - var(--pc-bubble-size) - var(--pc-gap) - var(--pc-safe-b) - var(--pc-edge) - var(--pc-safe-t)));
-    max-height: calc(100vh - var(--pc-edge) - var(--pc-bubble-size) - var(--pc-gap) - var(--pc-safe-b) - var(--pc-edge) - var(--pc-safe-t));
-    min-height: 220px;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
     background: var(--ih-white);
-    border-radius: 24px;
-    box-shadow: 0 20px 60px rgba(15,45,37,0.28), 0 4px 16px rgba(15,45,37,0.14);
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
     display: none;
     flex-direction: column;
     overflow: hidden;
     z-index: 9999;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    border: 1px solid rgba(255,255,255,0.6);
   }
   #pregunta-casa-window.open {
     display: flex;
@@ -2616,6 +2612,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     justify-content: center;
     padding: 18px 14px;
     overflow-y: auto;
+    overscroll-behavior: contain;
     background:
       radial-gradient(circle at 25% 10%, rgba(255,255,255,0.55) 0%, transparent 55%),
       linear-gradient(165deg, #e7ede8 0%, #d6e0d8 45%, #b9c9be 100%);
@@ -2698,22 +2695,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     to { opacity: 1; transform: translateY(0) scale(1); }
   }
 
-  /* Short / landscape screens: cap the window height so it never overflows */
-  @media (max-height: 480px) {
-    #pregunta-casa-window {
-      height: min(300px, calc(100vh - var(--pc-edge) - var(--pc-bubble-size) - var(--pc-gap) - var(--pc-safe-b) - 10px));
-      height: min(300px, calc(100dvh - var(--pc-edge) - var(--pc-bubble-size) - var(--pc-gap) - var(--pc-safe-b) - 10px));
-      max-height: calc(100vh - var(--pc-edge) - var(--pc-bubble-size) - var(--pc-gap) - var(--pc-safe-b) - 10px);
-    }
-  }
-  @media (orientation: landscape) and (max-width: 900px) {
-    #pregunta-casa-window { width: min(360px, calc(60vw)); }
-  }
-
-  /* Desktop / large screens: comfortable fixed size, no need to hug the viewport */
-  @media (min-width: 901px) {
-    #pregunta-casa-window { width: 370px; height: 520px; max-height: calc(100vh - 140px); }
-  }
+  /* La ventana de "Pregúntale a la Casa" ahora es pantalla completa en todos los tamaños */
 
   #pregunta-casa-header {
     background: linear-gradient(120deg, var(--ih-green2) 0%, var(--ih-green) 100%);
@@ -3138,10 +3120,31 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     });
   })();
 
+  let pcScrollY = 0;
+
+  function pcLockBodyScroll() {
+    pcScrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = '-' + pcScrollY + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+  }
+
+  function pcUnlockBodyScroll() {
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    window.scrollTo(0, pcScrollY);
+  }
+
   function pcToggleChat() {
     pcApplyLang();
     pcUpdateLockState();
-    document.getElementById('pregunta-casa-window').classList.toggle('open');
+    const isOpen = document.getElementById('pregunta-casa-window').classList.toggle('open');
+    if (isOpen) { pcLockBodyScroll(); } else { pcUnlockBodyScroll(); }
   }
 
   function pcEscapeHtml(str) {
