@@ -2614,8 +2614,8 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     overflow-y: auto;
     overscroll-behavior: contain;
     background:
-      radial-gradient(circle at 25% 10%, rgba(255,255,255,0.55) 0%, transparent 55%),
-      linear-gradient(165deg, #e7ede8 0%, #d6e0d8 45%, #b9c9be 100%);
+      radial-gradient(circle at 25% 10%, rgba(255,255,255,0.6) 0%, transparent 55%),
+      linear-gradient(165deg, var(--ih-sand) 0%, #dcebe4 45%, var(--ih-mint) 140%);
   }
   #pregunta-casa-window.pc-locked #pc-lock-screen { display: flex; }
   #pregunta-casa-window.pc-locked #pregunta-casa-header,
@@ -2642,14 +2642,14 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     font-weight: 700;
     line-height: 1;
     margin-bottom: 2px;
-    background: linear-gradient(100deg, #b98a3a 0%, #ecd696 45%, #b98a3a 100%);
+    background: linear-gradient(100deg, var(--ih-green2) 0%, var(--ih-mint) 45%, var(--ih-green2) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .pc-lock-brand-name { font-family: 'Syne', sans-serif; font-weight: 800; letter-spacing: 2px; font-size: 0.8rem; color: #1c2f4a; }
+  .pc-lock-brand-name { font-family: 'Syne', sans-serif; font-weight: 800; letter-spacing: 2px; font-size: 0.8rem; color: var(--ih-green2); }
   .pc-lock-brand-sub { font-size: 0.58rem; letter-spacing: 3px; color: #6b7686; margin-bottom: 14px; }
-  .pc-lock-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; line-height: 1.15; color: #1c2f4a; margin: 4px 0 8px; text-transform: uppercase; }
+  .pc-lock-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; line-height: 1.15; color: var(--ih-green2); margin: 4px 0 8px; text-transform: uppercase; }
   .pc-lock-subtitle { font-size: 0.76rem; color: #5c6675; line-height: 1.35; margin-bottom: 16px; }
   .pc-lock-field {
     display: flex;
@@ -2663,29 +2663,30 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     box-shadow: 0 2px 6px rgba(20,35,55,0.05);
   }
   .pc-lock-icon { width: 18px; height: 18px; color: #8a94a3; flex-shrink: 0; }
-  .pc-lock-input { border: none; outline: none; flex: 1; min-width: 0; font-size: 0.85rem; color: #1c2f4a; font-family: 'Inter', sans-serif; background: transparent; }
+  .pc-lock-input { border: none; outline: none; flex: 1; min-width: 0; font-size: 0.85rem; color: var(--ih-green2); font-family: 'Inter', sans-serif; background: transparent; }
   .pc-lock-input::placeholder { color: #9aa3ad; }
   .pc-lock-pin-row { flex-wrap: wrap; }
   .pc-lock-pin-label { flex: 1; font-size: 0.72rem; color: #9aa3ad; text-align: left; }
   .pc-pin-boxes { display: flex; gap: 6px; }
-  .pc-pin-box { width: 32px; height: 32px; text-align: center; border: 1px solid #e4e4e4; border-radius: 8px; font-size: 0.95rem; color: #1c2f4a; outline: none; font-family: 'Inter', sans-serif; }
-  .pc-pin-box:focus { border-color: #1c2f4a; }
+  .pc-pin-box { width: 32px; height: 32px; text-align: center; border: 1px solid #e4e4e4; border-radius: 8px; font-size: 0.95rem; color: var(--ih-green2); outline: none; font-family: 'Inter', sans-serif; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+  .pc-pin-box:focus { border-color: var(--ih-mint); box-shadow: 0 0 0 3px rgba(100,212,181,0.25); }
   #pin-error { color: #d1495b; font-size: 0.72rem; min-height: 15px; margin: 2px 0 6px; font-weight: 600; }
   .pc-lock-continue {
     width: 100%;
     padding: 13px;
     border: none;
     border-radius: 999px;
-    background: linear-gradient(135deg, #1c2f4a 0%, #223a5e 100%);
+    background: linear-gradient(135deg, var(--ih-green2) 0%, var(--ih-green) 100%);
     color: #fff;
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 0.85rem;
     letter-spacing: 0.5px;
     cursor: pointer;
-    box-shadow: 0 8px 18px rgba(28,47,74,0.3);
-    transition: transform 0.15s ease;
+    box-shadow: 0 8px 18px rgba(15,45,37,0.3);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
+  .pc-lock-continue:hover { box-shadow: 0 10px 22px rgba(15,45,37,0.38); }
   .pc-lock-continue:active { transform: scale(0.97); }
   .pc-lock-note { display: flex; align-items: flex-start; gap: 6px; margin-top: 12px; text-align: left; }
   .pc-lock-shield { width: 16px; height: 16px; color: #c9a227; flex-shrink: 0; margin-top: 1px; }
@@ -2704,10 +2705,33 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 12px;
     flex-shrink: 0;
   }
+  #pregunta-casa-header-left { display: flex; align-items: center; gap: 11px; min-width: 0; }
+  #pregunta-casa-avatar {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--ih-mint) 0%, #3fb894 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
   #pregunta-casa-header h3 { margin: 0; font-size: clamp(15px, 3.8vw, 17px); font-weight: 700; letter-spacing: -0.01em; }
-  #pregunta-casa-header p { margin: 3px 0 0; font-size: clamp(11.5px, 3.1vw, 12.5px); color: var(--ih-mint); opacity: 0.95; }
+  #pregunta-casa-header p { margin: 3px 0 0; font-size: clamp(11.5px, 3.1vw, 12.5px); color: var(--ih-mint); opacity: 0.95; display: flex; align-items: center; gap: 5px; }
+  #pregunta-casa-header p::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 0 2px rgba(74,222,128,0.25);
+    flex-shrink: 0;
+  }
   #pregunta-casa-close {
     cursor: pointer;
     font-size: 20px;
@@ -2745,6 +2769,11 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     font-size: clamp(14.5px, 3.6vw, 15.5px);
     line-height: 1.45;
     word-break: break-word;
+    animation: pcMsgIn 0.22s ease-out both;
+  }
+  @keyframes pcMsgIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
   }
   .pc-msg.bot {
     background: var(--ih-white);
@@ -2927,9 +2956,12 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     </div>
   </div>
   <div id="pregunta-casa-header">
-    <div>
-      <h3>¡Hola, soy Infinity! 👋</h3>
-      <p>¿En qué puedo ayudarte?</p>
+    <div id="pregunta-casa-header-left">
+      <div id="pregunta-casa-avatar">🏡</div>
+      <div>
+        <h3>¡Hola, soy Infinity! 👋</h3>
+        <p>En línea ahora</p>
+      </div>
     </div>
     <span id="pregunta-casa-close" onclick="pcToggleChat()">&times;</span>
   </div>
@@ -2941,7 +2973,9 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
   </div>
   <div id="pregunta-casa-input-area">
     <input type="text" id="pregunta-casa-input" placeholder="Escribe tu pregunta..." onkeypress="if(event.key==='Enter') pcSendMessage()">
-    <button id="pregunta-casa-send" onclick="pcSendMessage()">➤</button>
+    <button id="pregunta-casa-send" onclick="pcSendMessage()" aria-label="Enviar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="19" height="19"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2" fill="white" stroke="none"/></svg>
+    </button>
   </div>
 </div>
 
@@ -2951,7 +2985,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
   const PC_I18N = {
     es: {
       title: '¡Hola, soy Infinity! 👋',
-      subtitle: '¿En qué puedo ayudarte?',
+      subtitle: 'En línea ahora',
       welcome: '¡Bienvenido a Infinity House! 🏡 Puedo ayudarte con información de la casa, el WiFi, la piscina y el check-in, o recomendarte restaurantes, playas y lugares cercanos. ¿Qué deseas saber? 🌴',
       placeholder: 'Escribe tu pregunta...',
       typing: 'Escribiendo...',
@@ -2969,7 +3003,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     },
     en: {
       title: "Hi, I'm Infinity! 👋",
-      subtitle: 'How can I help you?',
+      subtitle: 'Online now',
       welcome: "Welcome to Infinity House! 🏡 I can help with house info, WiFi, the pool, and check-in, or recommend restaurants, beaches, and nearby spots. What would you like to know? 🌴",
       placeholder: 'Type your question...',
       typing: 'Typing...',
