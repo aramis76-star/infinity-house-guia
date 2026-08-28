@@ -2614,8 +2614,8 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     overflow-y: auto;
     overscroll-behavior: contain;
     background:
-      radial-gradient(circle at 25% 10%, rgba(255,255,255,0.6) 0%, transparent 55%),
-      linear-gradient(165deg, var(--ih-sand) 0%, #dcebe4 45%, var(--ih-mint) 140%);
+      radial-gradient(circle at 25% 10%, rgba(255,255,255,0.55) 0%, transparent 55%),
+      linear-gradient(165deg, #e7ede8 0%, #d6e0d8 45%, #b9c9be 100%);
   }
   #pregunta-casa-window.pc-locked #pc-lock-screen { display: flex; }
   #pregunta-casa-window.pc-locked #pregunta-casa-header,
@@ -2642,14 +2642,14 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     font-weight: 700;
     line-height: 1;
     margin-bottom: 2px;
-    background: linear-gradient(100deg, var(--ih-green2) 0%, var(--ih-mint) 45%, var(--ih-green2) 100%);
+    background: linear-gradient(100deg, #b98a3a 0%, #ecd696 45%, #b98a3a 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .pc-lock-brand-name { font-family: 'Syne', sans-serif; font-weight: 800; letter-spacing: 2px; font-size: 0.8rem; color: var(--ih-green2); }
+  .pc-lock-brand-name { font-family: 'Syne', sans-serif; font-weight: 800; letter-spacing: 2px; font-size: 0.8rem; color: #1c2f4a; }
   .pc-lock-brand-sub { font-size: 0.58rem; letter-spacing: 3px; color: #6b7686; margin-bottom: 14px; }
-  .pc-lock-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; line-height: 1.15; color: var(--ih-green2); margin: 4px 0 8px; text-transform: uppercase; }
+  .pc-lock-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; line-height: 1.15; color: #1c2f4a; margin: 4px 0 8px; text-transform: uppercase; }
   .pc-lock-subtitle { font-size: 0.76rem; color: #5c6675; line-height: 1.35; margin-bottom: 16px; }
   .pc-lock-field {
     display: flex;
@@ -2663,30 +2663,29 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     box-shadow: 0 2px 6px rgba(20,35,55,0.05);
   }
   .pc-lock-icon { width: 18px; height: 18px; color: #8a94a3; flex-shrink: 0; }
-  .pc-lock-input { border: none; outline: none; flex: 1; min-width: 0; font-size: 0.85rem; color: var(--ih-green2); font-family: 'Inter', sans-serif; background: transparent; }
+  .pc-lock-input { border: none; outline: none; flex: 1; min-width: 0; font-size: 0.85rem; color: #1c2f4a; font-family: 'Inter', sans-serif; background: transparent; }
   .pc-lock-input::placeholder { color: #9aa3ad; }
   .pc-lock-pin-row { flex-wrap: wrap; }
   .pc-lock-pin-label { flex: 1; font-size: 0.72rem; color: #9aa3ad; text-align: left; }
   .pc-pin-boxes { display: flex; gap: 6px; }
-  .pc-pin-box { width: 32px; height: 32px; text-align: center; border: 1px solid #e4e4e4; border-radius: 8px; font-size: 0.95rem; color: var(--ih-green2); outline: none; font-family: 'Inter', sans-serif; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
-  .pc-pin-box:focus { border-color: var(--ih-mint); box-shadow: 0 0 0 3px rgba(100,212,181,0.25); }
+  .pc-pin-box { width: 32px; height: 32px; text-align: center; border: 1px solid #e4e4e4; border-radius: 8px; font-size: 0.95rem; color: #1c2f4a; outline: none; font-family: 'Inter', sans-serif; }
+  .pc-pin-box:focus { border-color: #1c2f4a; }
   #pin-error { color: #d1495b; font-size: 0.72rem; min-height: 15px; margin: 2px 0 6px; font-weight: 600; }
   .pc-lock-continue {
     width: 100%;
     padding: 13px;
     border: none;
     border-radius: 999px;
-    background: linear-gradient(135deg, var(--ih-green2) 0%, var(--ih-green) 100%);
+    background: linear-gradient(135deg, #1c2f4a 0%, #223a5e 100%);
     color: #fff;
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 0.85rem;
     letter-spacing: 0.5px;
     cursor: pointer;
-    box-shadow: 0 8px 18px rgba(15,45,37,0.3);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 8px 18px rgba(28,47,74,0.3);
+    transition: transform 0.15s ease;
   }
-  .pc-lock-continue:hover { box-shadow: 0 10px 22px rgba(15,45,37,0.38); }
   .pc-lock-continue:active { transform: scale(0.97); }
   .pc-lock-note { display: flex; align-items: flex-start; gap: 6px; margin-top: 12px; text-align: left; }
   .pc-lock-shield { width: 16px; height: 16px; color: #c9a227; flex-shrink: 0; margin-top: 1px; }
@@ -2699,77 +2698,80 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
   /* La ventana de "Pregúntale a la Casa" ahora es pantalla completa en todos los tamaños */
 
   #pregunta-casa-header {
-    background: linear-gradient(120deg, var(--ih-green2) 0%, var(--ih-green) 100%);
+    background: linear-gradient(135deg, var(--ih-green2) 0%, var(--ih-green) 55%, #1a4d3e 100%);
     color: white;
-    padding: clamp(14px, 3.4vw, 18px) clamp(16px, 3.6vw, 20px);
+    padding: calc(clamp(14px, 3.4vw, 18px) + var(--pc-safe-t)) clamp(16px, 3.6vw, 20px) clamp(14px, 3.4vw, 18px);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-shrink: 0;
+    position: relative;
     gap: 12px;
-    flex-shrink: 0;
   }
-  #pregunta-casa-header-left { display: flex; align-items: center; gap: 11px; min-width: 0; }
+  #pregunta-casa-header::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 14px;
+    background: linear-gradient(to bottom, rgba(15,45,37,0.10), transparent);
+    pointer-events: none;
+  }
+  #pregunta-casa-header-inner { display: flex; align-items: center; gap: 12px; min-width: 0; }
   #pregunta-casa-avatar {
-    width: 38px;
-    height: 38px;
-    flex-shrink: 0;
+    width: 40px; height: 40px; flex-shrink: 0;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--ih-mint) 0%, #3fb894 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.18), inset 0 0 0 2px rgba(255,255,255,0.25);
   }
-  #pregunta-casa-header h3 { margin: 0; font-size: clamp(15px, 3.8vw, 17px); font-weight: 700; letter-spacing: -0.01em; }
-  #pregunta-casa-header p { margin: 3px 0 0; font-size: clamp(11.5px, 3.1vw, 12.5px); color: var(--ih-mint); opacity: 0.95; display: flex; align-items: center; gap: 5px; }
+  #pregunta-casa-header h3 { margin: 0; font-size: clamp(15px, 3.8vw, 17.5px); font-weight: 800; letter-spacing: -0.01em; }
+  #pregunta-casa-header p { margin: 2px 0 0; font-size: clamp(11.5px, 3.1vw, 12.5px); color: var(--ih-mint); opacity: 0.95; display: flex; align-items: center; gap: 5px; }
   #pregunta-casa-header p::before {
-    content: '';
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #4ade80;
-    box-shadow: 0 0 0 2px rgba(74,222,128,0.25);
-    flex-shrink: 0;
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: #4ade80; box-shadow: 0 0 6px #4ade80; flex-shrink: 0;
   }
   #pregunta-casa-close {
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1;
     color: white;
-    opacity: 0.85;
-    width: 30px;
-    height: 30px;
+    opacity: 0.9;
+    width: 34px;
+    height: 34px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: rgba(255,255,255,0.12);
-    transition: background 0.15s ease, opacity 0.15s ease;
+    background: rgba(255,255,255,0.14);
+    backdrop-filter: blur(4px);
+    transition: background 0.15s ease, opacity 0.15s ease, transform 0.12s ease;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+    flex-shrink: 0;
   }
-  #pregunta-casa-close:hover { background: rgba(255,255,255,0.22); opacity: 1; }
+  #pregunta-casa-close:hover { background: rgba(255,255,255,0.24); opacity: 1; }
+  #pregunta-casa-close:active { transform: scale(0.9); }
 
   #pregunta-casa-messages {
     flex: 1;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    padding: clamp(12px, 3.2vw, 18px);
+    padding: clamp(14px, 3.5vw, 20px);
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     background: var(--ih-sand);
     overscroll-behavior: contain;
   }
   .pc-msg {
     max-width: 82%;
-    padding: 11px 15px;
-    border-radius: 18px;
+    padding: 12px 16px;
+    border-radius: 20px;
     font-size: clamp(14.5px, 3.6vw, 15.5px);
-    line-height: 1.45;
+    line-height: 1.5;
     word-break: break-word;
-    animation: pcMsgIn 0.22s ease-out both;
+    animation: pcMsgIn 0.25s ease both;
   }
   @keyframes pcMsgIn {
     from { opacity: 0; transform: translateY(6px); }
@@ -2780,25 +2782,27 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     color: var(--ih-ink);
     align-self: flex-start;
     border-bottom-left-radius: 6px;
-    box-shadow: 0 2px 8px rgba(15,45,37,0.08);
+    box-shadow: 0 3px 12px rgba(15,45,37,0.07);
+    border: 1px solid rgba(15,45,37,0.04);
   }
   .pc-msg.user {
-    background: linear-gradient(135deg, var(--ih-mint) 0%, #3fb894 100%);
-    color: var(--ih-green2);
+    background: linear-gradient(135deg, var(--ih-mint) 0%, #2fa584 100%);
+    color: #06261d;
     font-weight: 500;
     align-self: flex-end;
     border-bottom-right-radius: 6px;
-    box-shadow: 0 2px 8px rgba(100,212,181,0.35);
+    box-shadow: 0 4px 14px rgba(47,165,132,0.32);
   }
   .pc-msg.typing {
     background: var(--ih-white);
     align-self: flex-start;
     border-bottom-left-radius: 6px;
-    box-shadow: 0 2px 8px rgba(15,45,37,0.08);
+    box-shadow: 0 3px 12px rgba(15,45,37,0.07);
+    border: 1px solid rgba(15,45,37,0.04);
     display: flex;
     align-items: center;
     gap: 4px;
-    padding: 14px 16px;
+    padding: 15px 17px;
   }
   .pc-msg.typing span {
     width: 6px;
@@ -2841,61 +2845,65 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
   }
   .pc-suggested-chip {
     background: var(--ih-white);
-    border: 1.5px solid var(--ih-line);
+    border: 1px solid rgba(15,45,37,0.08);
     color: var(--ih-green2);
-    border-radius: 999px;
-    padding: 10px 16px;
+    border-radius: 16px;
+    padding: 11px 16px;
     font-size: clamp(12.5px, 3.2vw, 13.5px);
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.3;
     text-align: left;
     cursor: pointer;
-    box-shadow: 0 1px 4px rgba(15,45,37,0.06);
+    box-shadow: 0 2px 8px rgba(15,45,37,0.05);
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
-    transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
-  .pc-suggested-chip:hover { background: #eefaf5; border-color: var(--ih-mint); }
+  .pc-suggested-chip::before { content: '💬'; font-size: 13px; flex-shrink: 0; opacity: 0.7; }
+  .pc-suggested-chip:hover { background: #eefaf5; border-color: var(--ih-mint); box-shadow: 0 4px 12px rgba(15,45,37,0.09); transform: translateY(-1px); }
   .pc-suggested-chip:active { transform: scale(0.98); }
   .pc-suggested-chip:disabled { opacity: 0.5; cursor: default; }
 
   #pregunta-casa-input-area {
     display: flex;
     align-items: center;
-    padding: 12px 14px;
-    padding-bottom: calc(12px + var(--pc-safe-b, 0px) * 0.4);
-    gap: 9px;
-    border-top: 1px solid var(--ih-line);
+    padding: 14px;
+    padding-bottom: calc(14px + var(--pc-safe-b, 0px));
+    gap: 10px;
+    border-top: 1px solid rgba(15,45,37,0.08);
     background: var(--ih-white);
     flex-shrink: 0;
   }
   #pregunta-casa-input {
     flex: 1;
     min-width: 0;
-    border: 1.5px solid var(--ih-line);
+    border: 1.5px solid rgba(15,45,37,0.09);
     border-radius: 999px;
-    padding: 11px 16px;
+    padding: 12px 18px;
     font-size: 16px; /* 16px prevents iOS Safari from auto-zooming on focus */
     color: var(--ih-ink);
     background: var(--ih-sand);
     outline: none;
-    transition: border-color 0.15s ease, background 0.15s ease;
+    transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
   }
-  #pregunta-casa-input:focus { border-color: var(--ih-mint); background: var(--ih-white); }
+  #pregunta-casa-input:focus { border-color: var(--ih-mint); background: var(--ih-white); box-shadow: 0 0 0 4px rgba(100,212,181,0.15); }
   #pregunta-casa-send {
     background: linear-gradient(135deg, var(--ih-mint) 0%, var(--ih-green2) 100%);
     color: white;
     border: none;
     border-radius: 50%;
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    box-shadow: 0 3px 10px rgba(15,45,37,0.25);
+    box-shadow: 0 4px 12px rgba(15,45,37,0.28);
     transition: transform 0.12s ease, box-shadow 0.12s ease;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
@@ -2956,7 +2964,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     </div>
   </div>
   <div id="pregunta-casa-header">
-    <div id="pregunta-casa-header-left">
+    <div id="pregunta-casa-header-inner">
       <div id="pregunta-casa-avatar">🏡</div>
       <div>
         <h3>¡Hola, soy Infinity! 👋</h3>
@@ -2973,9 +2981,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
   </div>
   <div id="pregunta-casa-input-area">
     <input type="text" id="pregunta-casa-input" placeholder="Escribe tu pregunta..." onkeypress="if(event.key==='Enter') pcSendMessage()">
-    <button id="pregunta-casa-send" onclick="pcSendMessage()" aria-label="Enviar">
-      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="19" height="19"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2" fill="white" stroke="none"/></svg>
-    </button>
+    <button id="pregunta-casa-send" onclick="pcSendMessage()">➤</button>
   </div>
 </div>
 
@@ -2986,7 +2992,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     es: {
       title: '¡Hola, soy Infinity! 👋',
       subtitle: 'En línea ahora',
-      welcome: '¡Bienvenido a Infinity House! 🏡 Puedo ayudarte con información de la casa, el WiFi, la piscina y el check-in, o recomendarte restaurantes, playas y lugares cercanos. ¿Qué deseas saber? 🌴',
+      welcome: '{greeting}¡Bienvenido a Infinity House! 🏡 Puedo ayudarte con información de la casa, el WiFi, la piscina y el check-in, o recomendarte restaurantes, playas y lugares cercanos. ¿Qué deseas saber? 🌴',
       placeholder: 'Escribe tu pregunta...',
       typing: 'Escribiendo...',
       errorServer: 'Lo siento, hubo un problema. Intenta de nuevo o contacta a los anfitriones directamente.',
@@ -3004,7 +3010,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     en: {
       title: "Hi, I'm Infinity! 👋",
       subtitle: 'Online now',
-      welcome: "Welcome to Infinity House! 🏡 I can help with house info, WiFi, the pool, and check-in, or recommend restaurants, beaches, and nearby spots. What would you like to know? 🌴",
+      welcome: "{greeting}Welcome to Infinity House! 🏡 I can help with house info, WiFi, the pool, and check-in, or recommend restaurants, beaches, and nearby spots. What would you like to know? 🌴",
       placeholder: 'Type your question...',
       typing: 'Typing...',
       errorServer: 'Sorry, something went wrong. Please try again or contact the hosts directly.',
@@ -3027,6 +3033,19 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
   function pcGetStrings() {
     const lang = (typeof currentLang !== 'undefined' && currentLang === 'es') ? 'es' : 'en';
     return PC_I18N[lang];
+  }
+
+  function pcGetGuestFirstName() {
+    try {
+      const full = (localStorage.getItem('ih_pc_name') || '').trim();
+      return full ? full.split(/\s+/)[0] : '';
+    } catch (e) { return ''; }
+  }
+
+  function pcBuildWelcomeText(t) {
+    const name = pcGetGuestFirstName();
+    const greeting = name ? ((pcCurrentLang === 'es') ? ('¡Hola, ' + name + '! 👋 ') : ('Hi ' + name + '! 👋 ')) : '';
+    return t.welcome.replace('{greeting}', greeting);
   }
 
   function pcApplyLang() {
@@ -3067,13 +3086,23 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     const messages = document.getElementById('pregunta-casa-messages');
     if (!pcWelcomeEl) {
       // Primer mensaje de bienvenida
-      pcWelcomeEl = pcAddMessage(t.welcome, 'bot');
+      pcWelcomeEl = pcAddMessage(pcBuildWelcomeText(t), 'bot');
     } else if (messages.childElementCount === 1) {
       // El huésped aún no ha escrito nada: seguimos actualizando el mensaje al idioma correcto
-      pcWelcomeEl.textContent = t.welcome;
+      pcWelcomeEl.textContent = pcBuildWelcomeText(t);
     }
     // Si ya hay conversación (childElementCount > 1), dejamos el mensaje de bienvenida como está
   }
+
+  (function pcCheckResetParam() {
+    try {
+      if (new URLSearchParams(window.location.search).get('resetpc') === '1') {
+        localStorage.removeItem('ih_pc_unlocked');
+        localStorage.removeItem('ih_pc_name');
+        localStorage.removeItem('ih_pc_email');
+      }
+    } catch (e) {}
+  })();
 
   function pcIsUnlocked() {
     try { return localStorage.getItem('ih_pc_unlocked') === '1'; } catch (e) { return false; }
@@ -3127,7 +3156,15 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
       body: JSON.stringify({ name: name, email: email, lang: leadLang, timestamp: new Date().toISOString() })
     }).catch(function () {});
 
+    pcRefreshWelcomeName();
     pcUpdateLockState();
+  }
+
+  function pcRefreshWelcomeName() {
+    const messages = document.getElementById('pregunta-casa-messages');
+    if (pcWelcomeEl && messages && messages.childElementCount === 1) {
+      pcWelcomeEl.textContent = pcBuildWelcomeText(pcGetStrings());
+    }
   }
 
   function pcUpdateLockState() {
