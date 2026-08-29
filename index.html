@@ -2176,7 +2176,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
 
 <script>
   // ===== PIN de acceso · cambia este valor para cada huésped/reservación =====
-  const GUEST_PIN = '0000';
+  const GUEST_PIN = '9005';
   // ===== PIN de administración · funciona siempre, además del PIN del huésped =====
   const ADMIN_PIN = '3167';
 
@@ -2925,6 +2925,8 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     width: 44px;
     height: 44px;
     min-width: 44px;
+    font-size: 20px;
+    line-height: 1;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -2934,7 +2936,8 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     transition: transform 0.12s ease, box-shadow 0.12s ease;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
-  }
+    padding-left: 2px;
+  } 
   #pregunta-casa-send:hover { transform: scale(1.06); }
   #pregunta-casa-send:active { transform: scale(0.93); }
   #pregunta-casa-send:disabled { opacity: 0.5; cursor: default; transform: none; }
