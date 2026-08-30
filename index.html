@@ -2177,8 +2177,19 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
 <script>
   // ===== PIN de acceso · cambia este valor para cada huésped/reservación =====
   const GUEST_PIN = '9005';
+  // ===== Fecha en que activaste este PIN de huésped (AAAA-MM-DD) · el PIN deja de funcionar 8 días después =====
+  const GUEST_PIN_START = '2026-08-30';
+  const GUEST_PIN_DAYS = 8;
   // ===== PIN de administración · funciona siempre, además del PIN del huésped =====
   const ADMIN_PIN = '3167';
+
+  function isGuestPinActive() {
+    try {
+      const start = new Date(GUEST_PIN_START + 'T00:00:00');
+      const expires = new Date(start.getTime() + GUEST_PIN_DAYS * 24 * 60 * 60 * 1000);
+      return new Date() < expires;
+    } catch (e) { return true; }
+  }
 
   (function initPinLock() {
     const overlay = document.getElementById('pin-lock-overlay');
@@ -3036,7 +3047,8 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
       continueBtn: 'CONTINUAR',
       noteText: 'Tu información se usa solo para mejorar tu estadía y mantener tu seguridad.',
       errorFields: 'Completa todos los campos correctamente.',
-      pinWrong: 'PIN incorrecto'
+      pinWrong: 'PIN incorrecto',
+      pinExpired: 'Este PIN ya expiró. Contacta a tus anfitriones.'
     },
     en: {
       title: "Hi, I'm Infinity! 👋",
@@ -3054,7 +3066,8 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
       continueBtn: 'CONTINUE',
       noteText: 'Your information is only used to improve your stay and keep you safe.',
       errorFields: 'Please fill in all fields correctly.',
-      pinWrong: 'Incorrect PIN'
+      pinWrong: 'Incorrect PIN',
+      pinExpired: 'This PIN has expired. Please contact your hosts.'
     }
   };
   // pt/fr guests get the English chat text, matching the rest of the guide's fallback behavior
@@ -3136,7 +3149,13 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
   })();
 
   function pcIsUnlocked() {
-    try { return localStorage.getItem('ih_pc_unlocked') === '1'; } catch (e) { return false; }
+    try {
+      if (localStorage.getItem('ih_pc_unlocked') !== '1') return false;
+      const pinUsed = localStorage.getItem('ih_pc_unlocked_pin') || '';
+      if (pinUsed === ADMIN_PIN) return true;
+      if (pinUsed === GUEST_PIN && isGuestPinActive()) return true;
+      return false;
+    } catch (e) { return false; }
   }
 
   function pcGetPinFromBoxes() {
@@ -3166,8 +3185,10 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
       pcShakeLock();
       return;
     }
-    if (pin !== GUEST_PIN && pin !== ADMIN_PIN) {
-      if (errEl) errEl.textContent = t.pinWrong;
+    const guestPinOk = (pin === GUEST_PIN) && isGuestPinActive();
+    if (!guestPinOk && pin !== ADMIN_PIN) {
+      const expired = (pin === GUEST_PIN) && !isGuestPinActive();
+      if (errEl) errEl.textContent = expired ? t.pinExpired : t.pinWrong;
       document.querySelectorAll('#pc-lock-screen .pc-pin-box').forEach(function (b) { b.value = ''; });
       const first = document.querySelector('#pc-lock-screen .pc-pin-box');
       if (first) first.focus();
@@ -3176,6 +3197,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     }
     try {
       localStorage.setItem('ih_pc_unlocked', '1');
+      localStorage.setItem('ih_pc_unlocked_pin', pin);
       localStorage.setItem('ih_pc_name', name);
       localStorage.setItem('ih_pc_email', email);
     } catch (e) {}
