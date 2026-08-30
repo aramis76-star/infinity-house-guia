@@ -2599,6 +2599,8 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     width: 100%;
     height: 100vh;
     height: 100dvh;
+    height: var(--pc-vh, 100dvh);
+    max-height: var(--pc-vh, 100dvh);
     background: var(--ih-white);
     border-radius: 0;
     box-shadow: none;
@@ -3264,9 +3266,21 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     window.scrollTo(0, pcScrollY);
   }
 
+  function pcSyncViewportHeight() {
+    try {
+      const h = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
+      document.documentElement.style.setProperty('--pc-vh', h + 'px');
+    } catch (e) {}
+  }
+  pcSyncViewportHeight();
+  window.addEventListener('resize', pcSyncViewportHeight);
+  window.addEventListener('orientationchange', function () { setTimeout(pcSyncViewportHeight, 200); });
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', pcSyncViewportHeight);
+
   function pcToggleChat() {
     pcApplyLang();
     pcUpdateLockState();
+    pcSyncViewportHeight();
     const isOpen = document.getElementById('pregunta-casa-window').classList.toggle('open');
     if (isOpen) { pcLockBodyScroll(); } else { pcUnlockBodyScroll(); }
   }
