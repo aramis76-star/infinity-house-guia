@@ -2703,6 +2703,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     overflow: hidden;
     z-index: 9999;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    transition: transform 0.12s ease-out;
   }
   #pregunta-casa-window.open {
     display: flex;
@@ -3361,14 +3362,31 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
 
   function pcSyncViewportHeight() {
     try {
-      const h = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
+      const vv = window.visualViewport;
+      const h = (vv ? vv.height : window.innerHeight);
       document.documentElement.style.setProperty('--pc-vh', h + 'px');
+      // En iOS Safari, al enfocar el input el navegador desplaza el viewport visual
+      // para mantenerlo a la vista (visualViewport.offsetTop). Si no compensamos ese
+      // desplazamiento, la ventana fija del chat queda desalineada / "fuera de proporción".
+      const win = document.getElementById('pregunta-casa-window');
+      if (win) {
+        win.style.transform = vv ? 'translateY(' + vv.offsetTop + 'px)' : '';
+      }
     } catch (e) {}
   }
   pcSyncViewportHeight();
   window.addEventListener('resize', pcSyncViewportHeight);
   window.addEventListener('orientationchange', function () { setTimeout(pcSyncViewportHeight, 200); });
-  if (window.visualViewport) window.visualViewport.addEventListener('resize', pcSyncViewportHeight);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', pcSyncViewportHeight);
+    window.visualViewport.addEventListener('scroll', pcSyncViewportHeight);
+  }
+  document.addEventListener('focusin', function (e) {
+    if (e.target && e.target.id === 'pregunta-casa-input') setTimeout(pcSyncViewportHeight, 50);
+  });
+  document.addEventListener('focusout', function (e) {
+    if (e.target && e.target.id === 'pregunta-casa-input') setTimeout(pcSyncViewportHeight, 50);
+  });
 
   function pcToggleChat() {
     pcApplyLang();
