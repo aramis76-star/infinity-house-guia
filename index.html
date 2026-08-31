@@ -2663,6 +2663,16 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     display: none !important;
   }
 
+  /* Bloqueo de scroll mientras el chat está abierto (ver pcLockBodyScroll).
+     Usamos overflow:hidden en vez de position:fixed para no crear una segunda
+     capa completa de la página detrás de la ventana del chat. */
+  html.pc-scroll-lock,
+  body.pc-scroll-lock {
+    overflow: hidden !important;
+    height: 100% !important;
+    overscroll-behavior: none;
+  }
+
   #pregunta-casa-bubble {
     position: fixed;
     bottom: calc(var(--pc-edge) + var(--pc-safe-b));
@@ -3354,21 +3364,21 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
 
   let pcScrollY = 0;
 
+  // NOTA: antes usábamos el truco de "position:fixed + top negativo" para bloquear
+  // el scroll del body. Ese truco crea una segunda "capa" completa de la página
+  // detrás de la ventana del chat, y en WebKit (Safari/Chrome en iOS) esa capa a
+  // veces se asoma por una franja cuando el teclado aparece — es lo que se veía
+  // "fantasma" del fondo. Usamos overflow:hidden en su lugar: es más simple, no
+  // mueve nada, y no le da a WebKit una segunda capa que pueda filtrarse.
   function pcLockBodyScroll() {
     pcScrollY = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = '-' + pcScrollY + 'px';
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-    document.body.style.width = '100%';
+    document.documentElement.classList.add('pc-scroll-lock');
+    document.body.classList.add('pc-scroll-lock');
   }
 
   function pcUnlockBodyScroll() {
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.left = '';
-    document.body.style.right = '';
-    document.body.style.width = '';
+    document.documentElement.classList.remove('pc-scroll-lock');
+    document.body.classList.remove('pc-scroll-lock');
     window.scrollTo(0, pcScrollY);
   }
 
@@ -3377,17 +3387,6 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
       const vv = window.visualViewport;
       const h = (vv ? vv.height : window.innerHeight);
       document.documentElement.style.setProperty('--pc-vh', h + 'px');
-      // En iOS Safari, al enfocar el input el navegador desplaza el viewport visual
-      // hacia abajo (visualViewport.offsetTop) para mantenerlo a la vista sobre el
-      // teclado. Usamos "top" (no transform) para reposicionar la ventana: un cambio
-      // de "top" fuerza un reflow/repintado real, mientras que animar con "transform"
-      // deja capas compuestas a medio pintar y aparece contenido "fantasma" de la
-      // página de atrás en la franja que queda expuesta.
-      const win = document.getElementById('pregunta-casa-window');
-      if (win) {
-        win.style.top = vv ? vv.offsetTop + 'px' : '0px';
-        win.style.height = h + 'px';
-      }
     } catch (e) {}
   }
   pcSyncViewportHeight();
