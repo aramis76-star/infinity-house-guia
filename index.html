@@ -2664,12 +2664,17 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
   }
 
   /* Bloqueo de scroll mientras el chat está abierto (ver pcLockBodyScroll).
-     Usamos overflow:hidden en vez de position:fixed para no crear una segunda
-     capa completa de la página detrás de la ventana del chat. */
-  html.pc-scroll-lock,
+     "overflow:hidden" NO es suficiente en iOS: Safari/Chrome igual desplazan
+     toda la página al enfocar un campo de texto, aunque tenga overflow:hidden
+     (es un comportamiento nativo de iOS, no algo que se pueda desactivar por
+     CSS). Por eso usamos "position:fixed" para fijar el body en su sitio de
+     verdad — es más "pesado" pero es lo único que realmente evita que la
+     página se mueva detrás del chat en iOS. */
   body.pc-scroll-lock {
-    overflow: hidden !important;
-    height: 100% !important;
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
     overscroll-behavior: none;
   }
 
@@ -2705,7 +2710,6 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     height: 100vh;
     height: 100dvh;
     height: var(--pc-vh, 100dvh);
-    max-height: var(--pc-vh, 100dvh);
     background: var(--ih-white);
     border-radius: 0;
     box-shadow: none;
@@ -3364,29 +3368,37 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
 
   let pcScrollY = 0;
 
-  // NOTA: antes usábamos el truco de "position:fixed + top negativo" para bloquear
-  // el scroll del body. Ese truco crea una segunda "capa" completa de la página
-  // detrás de la ventana del chat, y en WebKit (Safari/Chrome en iOS) esa capa a
-  // veces se asoma por una franja cuando el teclado aparece — es lo que se veía
-  // "fantasma" del fondo. Usamos overflow:hidden en su lugar: es más simple, no
-  // mueve nada, y no le da a WebKit una segunda capa que pueda filtrarse.
+  // "overflow:hidden" no basta en iOS (Safari/Chrome mueven la página igual al
+  // enfocar un input). Usamos "position:fixed" en el body, que sí lo evita.
   function pcLockBodyScroll() {
     pcScrollY = window.scrollY;
-    document.documentElement.classList.add('pc-scroll-lock');
+    document.body.style.top = '-' + pcScrollY + 'px';
     document.body.classList.add('pc-scroll-lock');
   }
 
   function pcUnlockBodyScroll() {
-    document.documentElement.classList.remove('pc-scroll-lock');
     document.body.classList.remove('pc-scroll-lock');
+    document.body.style.top = '';
     window.scrollTo(0, pcScrollY);
   }
+
+  // Margen de seguridad: hacemos la ventana del chat un poco más alta que el
+  // viewport visual calculado. El sobrante queda oculto detrás del teclado
+  // (que siempre está por encima de cualquier contenido web), así que no se
+  // ve ni causa scroll — pero garantiza que nunca quede un hueco expuesto
+  // aunque el cálculo de altura llegue con un pequeño margen de error.
+  const PC_HEIGHT_BUFFER = 60;
 
   function pcSyncViewportHeight() {
     try {
       const vv = window.visualViewport;
       const h = (vv ? vv.height : window.innerHeight);
       document.documentElement.style.setProperty('--pc-vh', h + 'px');
+      const win = document.getElementById('pregunta-casa-window');
+      if (win) {
+        win.style.top = vv ? vv.offsetTop + 'px' : '0px';
+        win.style.height = (h + PC_HEIGHT_BUFFER) + 'px';
+      }
     } catch (e) {}
   }
   pcSyncViewportHeight();
