@@ -2705,6 +2705,17 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     overflow: hidden;
     z-index: 9999;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    /* Fuerza a iOS/WebKit a tratar esta ventana como su propia capa de render,
+       aislada del contenido de atrás. Sin esto, cuando aparece el teclado,
+       WebKit a veces "pega" temporalmente un pedazo viejo de la página detrás
+       en vez de repintar esta ventana limpia. */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: transform;
+    isolation: isolate;
+    contain: layout paint;
   }
   #pregunta-casa-window.open {
     display: flex;
