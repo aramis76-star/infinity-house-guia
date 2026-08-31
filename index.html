@@ -2688,7 +2688,9 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
 
   #pregunta-casa-window {
     position: fixed;
-    inset: 0;
+    left: 0;
+    right: 0;
+    top: 0;
     width: 100%;
     height: 100vh;
     height: 100dvh;
@@ -2703,7 +2705,6 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     overflow: hidden;
     z-index: 9999;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    transition: transform 0.12s ease-out;
   }
   #pregunta-casa-window.open {
     display: flex;
@@ -3366,11 +3367,15 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
       const h = (vv ? vv.height : window.innerHeight);
       document.documentElement.style.setProperty('--pc-vh', h + 'px');
       // En iOS Safari, al enfocar el input el navegador desplaza el viewport visual
-      // para mantenerlo a la vista (visualViewport.offsetTop). Si no compensamos ese
-      // desplazamiento, la ventana fija del chat queda desalineada / "fuera de proporción".
+      // hacia abajo (visualViewport.offsetTop) para mantenerlo a la vista sobre el
+      // teclado. Usamos "top" (no transform) para reposicionar la ventana: un cambio
+      // de "top" fuerza un reflow/repintado real, mientras que animar con "transform"
+      // deja capas compuestas a medio pintar y aparece contenido "fantasma" de la
+      // página de atrás en la franja que queda expuesta.
       const win = document.getElementById('pregunta-casa-window');
       if (win) {
-        win.style.transform = vv ? 'translateY(' + vv.offsetTop + 'px)' : '';
+        win.style.top = vv ? vv.offsetTop + 'px' : '0px';
+        win.style.height = h + 'px';
       }
     } catch (e) {}
   }
