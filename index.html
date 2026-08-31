@@ -3017,7 +3017,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     display: flex;
     align-items: center;
     padding: 14px;
-    padding-bottom: calc(14px + var(--pc-safe-b, 0px));
+    padding-bottom: calc(14px + var(--pc-safe-b, 0px) + var(--pc-kb-extra, 0px));
     gap: 10px;
     border-top: 1px solid rgba(15,45,37,0.08);
     background: var(--ih-white);
@@ -3398,10 +3398,23 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     window.visualViewport.addEventListener('scroll', pcSyncViewportHeight);
   }
   document.addEventListener('focusin', function (e) {
-    if (e.target && e.target.id === 'pregunta-casa-input') setTimeout(pcSyncViewportHeight, 50);
+    if (e.target && e.target.id === 'pregunta-casa-input') {
+      setTimeout(pcSyncViewportHeight, 50);
+      // En iOS Chrome, la barra de autocompletar (contraseñas/tarjetas/ubicación)
+      // se dibuja encima del teclado y visualViewport no la reporta, así que
+      // añadimos un colchón extra para que no tape el campo de texto.
+      document.documentElement.style.setProperty('--pc-kb-extra', '54px');
+      setTimeout(function () {
+        const inputArea = document.getElementById('pregunta-casa-input-area');
+        if (inputArea) inputArea.scrollIntoView({ block: 'end', behavior: 'smooth' });
+      }, 250);
+    }
   });
   document.addEventListener('focusout', function (e) {
-    if (e.target && e.target.id === 'pregunta-casa-input') setTimeout(pcSyncViewportHeight, 50);
+    if (e.target && e.target.id === 'pregunta-casa-input') {
+      setTimeout(pcSyncViewportHeight, 50);
+      document.documentElement.style.setProperty('--pc-kb-extra', '0px');
+    }
   });
 
   function pcToggleChat() {
