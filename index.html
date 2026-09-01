@@ -3392,26 +3392,25 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     } catch (e) {}
   }
 
-  // La barra de herramientas del teclado (autocompletar, contraseñas, sugerencias)
-  // se dibuja encima del teclado y visualViewport NO la incluye en su altura, así
-  // que puede tapar el campo de escribir. Medimos el hueco real entre el fondo del
-  // campo y el fondo del viewport visual, y añadimos solo lo que falte. Si la barra
-  // no está, el valor queda en 0 y no deja espacio en blanco.
+  // La barra de herramientas del teclado (flechas ▲▼, autocompletar, "Listo") se
+  // dibuja ENCIMA del teclado y iOS no la reporta en visualViewport.height, así que
+  // es imposible medirla: siempre da 0. En su lugar detectamos si el teclado está
+  // abierto (el viewport visual se encoge bastante respecto al de la página) y en
+  // ese caso reservamos el alto típico de esa barra para que no tape el campo.
   function pcSyncKeyboardBar() {
     try {
       const input = document.getElementById('pregunta-casa-input');
       const win = document.getElementById('pregunta-casa-window');
       if (!input || !win || !win.classList.contains('open')) return;
-      if (document.activeElement !== input) {
-        document.documentElement.style.setProperty('--pc-kb-extra', '0px');
-        return;
-      }
+
       const vv = window.visualViewport;
-      const viewportBottom = vv ? vv.height : window.innerHeight;
-      const inputBottom = input.getBoundingClientRect().bottom;
-      // Cuánto del campo queda por debajo del área visible (tapado por la barra).
-      const hidden = Math.round(inputBottom - viewportBottom);
-      const extra = hidden > 0 ? Math.min(hidden + 12, 90) : 0;
+      const visibleH = vv ? vv.height : window.innerHeight;
+      const fullH = window.innerHeight;
+      // El teclado ocupa siempre bastante más de 120px; una barra de navegación
+      // apareciendo/desapareciendo nunca llega a tanto.
+      const keyboardOpen = (fullH - visibleH) > 120;
+
+      const extra = (keyboardOpen && document.activeElement === input) ? 48 : 0;
       document.documentElement.style.setProperty('--pc-kb-extra', extra + 'px');
     } catch (e) {}
   }
