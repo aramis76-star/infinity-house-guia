@@ -2663,21 +2663,6 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     display: none !important;
   }
 
-  /* Bloqueo de scroll mientras el chat está abierto (ver pcLockBodyScroll).
-     "overflow:hidden" NO es suficiente en iOS: Safari/Chrome igual desplazan
-     toda la página al enfocar un campo de texto, aunque tenga overflow:hidden
-     (es un comportamiento nativo de iOS, no algo que se pueda desactivar por
-     CSS). Por eso usamos "position:fixed" para fijar el body en su sitio de
-     verdad — es más "pesado" pero es lo único que realmente evita que la
-     página se mueva detrás del chat en iOS. */
-  body.pc-scroll-lock {
-    position: fixed !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    overscroll-behavior: none;
-  }
-
   #pregunta-casa-bubble {
     position: fixed;
     bottom: calc(var(--pc-edge) + var(--pc-safe-b));
@@ -2710,6 +2695,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     height: 100vh;
     height: 100dvh;
     height: var(--pc-vh, 100dvh);
+    max-height: var(--pc-vh, 100dvh);
     background: var(--ih-white);
     border-radius: 0;
     box-shadow: none;
@@ -3031,7 +3017,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     display: flex;
     align-items: center;
     padding: 14px;
-    padding-bottom: calc(14px + var(--pc-safe-b, 0px));
+    padding-bottom: calc(14px + var(--pc-safe-b, 0px) + var(--pc-kb-extra, 0px));
     gap: 10px;
     border-top: 1px solid rgba(15,45,37,0.08);
     background: var(--ih-white);
@@ -3368,36 +3354,39 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
 
   let pcScrollY = 0;
 
-  // "overflow:hidden" no basta en iOS (Safari/Chrome mueven la página igual al
-  // enfocar un input). Usamos "position:fixed" en el body, que sí lo evita.
   function pcLockBodyScroll() {
     pcScrollY = window.scrollY;
+    document.body.style.position = 'fixed';
     document.body.style.top = '-' + pcScrollY + 'px';
-    document.body.classList.add('pc-scroll-lock');
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
   }
 
   function pcUnlockBodyScroll() {
-    document.body.classList.remove('pc-scroll-lock');
+    document.body.style.position = '';
     document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
     window.scrollTo(0, pcScrollY);
   }
-
-  // Margen de seguridad: hacemos la ventana del chat un poco más alta que el
-  // viewport visual calculado. El sobrante queda oculto detrás del teclado
-  // (que siempre está por encima de cualquier contenido web), así que no se
-  // ve ni causa scroll — pero garantiza que nunca quede un hueco expuesto
-  // aunque el cálculo de altura llegue con un pequeño margen de error.
-  const PC_HEIGHT_BUFFER = 60;
 
   function pcSyncViewportHeight() {
     try {
       const vv = window.visualViewport;
       const h = (vv ? vv.height : window.innerHeight);
       document.documentElement.style.setProperty('--pc-vh', h + 'px');
+      // En iOS Safari, al enfocar el input el navegador desplaza el viewport visual
+      // hacia abajo (visualViewport.offsetTop) para mantenerlo a la vista sobre el
+      // teclado. Usamos "top" (no transform) para reposicionar la ventana: un cambio
+      // de "top" fuerza un reflow/repintado real, mientras que animar con "transform"
+      // deja capas compuestas a medio pintar y aparece contenido "fantasma" de la
+      // página de atrás en la franja que queda expuesta.
       const win = document.getElementById('pregunta-casa-window');
       if (win) {
         win.style.top = vv ? vv.offsetTop + 'px' : '0px';
-        win.style.height = (h + PC_HEIGHT_BUFFER) + 'px';
+        win.style.height = h + 'px';
       }
     } catch (e) {}
   }
@@ -3408,20 +3397,24 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     window.visualViewport.addEventListener('resize', pcSyncViewportHeight);
     window.visualViewport.addEventListener('scroll', pcSyncViewportHeight);
   }
-  // Reintentos escalonados: en algunos navegadores (ej. Chrome iOS) el evento final
-  // de resize/scroll del teclado no siempre llega a tiempo, y la ventana se queda
-  // con una medida "a medio camino" dejando un espacio en blanco de más. Volvemos a
-  // medir varias veces mientras el teclado termina de animar, por si acaso.
-  function pcSyncViewportHeightRetries() {
-    [0, 60, 150, 300, 500, 800].forEach(function (delay) {
-      setTimeout(pcSyncViewportHeight, delay);
-    });
-  }
   document.addEventListener('focusin', function (e) {
-    if (e.target && e.target.id === 'pregunta-casa-input') pcSyncViewportHeightRetries();
+    if (e.target && e.target.id === 'pregunta-casa-input') {
+      setTimeout(pcSyncViewportHeight, 50);
+      // En iOS Chrome, la barra de autocompletar (contraseñas/tarjetas/ubicación)
+      // se dibuja encima del teclado y visualViewport no la reporta, así que
+      // añadimos un colchón extra para que no tape el campo de texto.
+      document.documentElement.style.setProperty('--pc-kb-extra', '54px');
+      setTimeout(function () {
+        const inputArea = document.getElementById('pregunta-casa-input-area');
+        if (inputArea) inputArea.scrollIntoView({ block: 'end', behavior: 'smooth' });
+      }, 250);
+    }
   });
   document.addEventListener('focusout', function (e) {
-    if (e.target && e.target.id === 'pregunta-casa-input') pcSyncViewportHeightRetries();
+    if (e.target && e.target.id === 'pregunta-casa-input') {
+      setTimeout(pcSyncViewportHeight, 50);
+      document.documentElement.style.setProperty('--pc-kb-extra', '0px');
+    }
   });
 
   function pcToggleChat() {
