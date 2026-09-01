@@ -3035,9 +3035,16 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     box-shadow: 0 -6px 24px rgba(15,45,37,0.07);
     flex-shrink: 0;
   }
-  /* Con el teclado abierto (JS pone --pc-vvh) el safe-area inferior ya no aplica */
+  /* Con el teclado abierto: margen de seguridad extra debajo del área de
+     escribir, porque los navegadores in-app (WhatsApp) ponen una barra de
+     herramientas sobre el teclado que no incluyen en la medida del viewport */
   #pregunta-casa-window.pc-kb-open #pregunta-casa-input-area {
-    padding-bottom: 12px;
+    padding-bottom: 58px;
+  }
+  /* Respaldo: si el navegador no reporta el teclado en absoluto, damos aún
+     más espacio para que el auto-desplazamiento de iOS deje el área visible */
+  #pregunta-casa-window.pc-kb-fallback #pregunta-casa-input-area {
+    padding-bottom: 84px;
   }
   .pc-icon-btn {
     background: transparent;
@@ -3490,6 +3497,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
       win.style.transform = top > 1 ? 'translateY(' + top + 'px)' : '';
       const kbOpen = (window.innerHeight - h) > 120;
       win.classList.toggle('pc-kb-open', kbOpen);
+      if (kbOpen) win.classList.remove('pc-kb-fallback'); /* ya tenemos medida real */
       const messages = document.getElementById('pregunta-casa-messages');
       if (messages) messages.scrollTop = messages.scrollHeight;
     }
@@ -3510,6 +3518,30 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     }
     pcVvLoopId = requestAnimationFrame(pcVvTick);
   }
+
+  /* Respaldo para navegadores que no reportan el teclado (algunos in-app):
+     al enfocar el campo, esperamos medio segundo; si el bucle no detectó
+     el teclado, activamos el modo de espacio extra */
+  (function () {
+    const input = document.getElementById('pregunta-casa-input');
+    if (!input) return;
+    input.addEventListener('focus', function () {
+      setTimeout(function () {
+        const win = document.getElementById('pregunta-casa-window');
+        if (!win || !win.classList.contains('open')) return;
+        if (window.innerWidth > 900) return;
+        if (!win.classList.contains('pc-kb-open')) {
+          win.classList.add('pc-kb-fallback');
+        }
+        const messages = document.getElementById('pregunta-casa-messages');
+        if (messages) messages.scrollTop = messages.scrollHeight;
+      }, 500);
+    });
+    input.addEventListener('blur', function () {
+      const win = document.getElementById('pregunta-casa-window');
+      if (win) win.classList.remove('pc-kb-fallback');
+    });
+  })();
 
   function pcEscapeHtml(str) {
     const div = document.createElement('div');
