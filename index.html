@@ -2702,7 +2702,9 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     min-height: 220px;
     background: var(--ih-white);
     border-radius: 0;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    /* Sombra gigante: cubre y oscurece la página detrás para que nunca
+       se asome contenido cuando la ventana se encoge por el teclado */
+    box-shadow: 0 0 0 200vmax rgba(15, 45, 37, 0.55);
     display: none;
     flex-direction: column;
     overflow: hidden;
@@ -2725,6 +2727,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
       height: 520px;
       max-height: calc(100vh - 140px);
       border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
     }
   }
 
@@ -3453,61 +3456,60 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
   }
 
   /* --- Ajuste de teclado: mantiene el área de escritura visible ---
-     Usa visualViewport para medir el espacio real disponible cuando el
-     teclado está abierto y fija el alto de la ventana con --pc-vvh.
-     Si visualViewport no existe o reporta valores raros (navegadores
-     in-app como WhatsApp), se ignora y queda el respaldo de 100dvh. */
+     El navegador interno de WhatsApp (y otros in-app) no dispara los eventos
+     de visualViewport de forma confiable, así que en vez de escuchar eventos
+     usamos un bucle continuo (requestAnimationFrame) mientras el chat está
+     abierto: cada cuadro leemos el alto real del viewport y la posición, y
+     solo tocamos el DOM cuando algo cambió. */
+  let pcVvLoopId = null;
+  let pcLastVvH = 0;
+  let pcLastVvTop = -1;
+
   function pcResetViewport() {
     document.documentElement.style.removeProperty('--pc-vvh');
     const win = document.getElementById('pregunta-casa-window');
     if (win) { win.style.transform = ''; win.classList.remove('pc-kb-open'); }
+    pcLastVvH = 0;
+    pcLastVvTop = -1;
   }
 
-  function pcSyncViewport() {
+  function pcApplyViewport() {
     const win = document.getElementById('pregunta-casa-window');
     if (!win || !win.classList.contains('open')) return;
     if (window.innerWidth > 900) return; /* escritorio: ventana flotante, no aplica */
     const vv = window.visualViewport;
     if (!vv) return;
     const h = Math.round(vv.height);
-    const kbOpen = (window.innerHeight - h) > 120; /* diferencia grande = teclado abierto */
-    if (h > 200 && h <= window.innerHeight + 2) {
+    const top = Math.round(vv.offsetTop);
+    if (h === pcLastVvH && top === pcLastVvTop) return; /* nada cambió */
+    pcLastVvH = h;
+    pcLastVvTop = top;
+    if (h > 200) {
       document.documentElement.style.setProperty('--pc-vvh', h + 'px');
-      /* iOS puede desplazar el viewport visual; compensamos con translate */
-      win.style.transform = vv.offsetTop > 1 ? 'translateY(' + Math.round(vv.offsetTop) + 'px)' : '';
+      /* iOS desplaza el viewport visual al abrir el teclado; compensamos */
+      win.style.transform = top > 1 ? 'translateY(' + top + 'px)' : '';
+      const kbOpen = (window.innerHeight - h) > 120;
       win.classList.toggle('pc-kb-open', kbOpen);
-    } else {
-      /* Valor sospechoso: no forzamos nada y dejamos el respaldo de 100dvh */
-      pcResetViewport();
-      win.classList.add('open');
+      const messages = document.getElementById('pregunta-casa-messages');
+      if (messages) messages.scrollTop = messages.scrollHeight;
     }
-    const messages = document.getElementById('pregunta-casa-messages');
-    if (messages) messages.scrollTop = messages.scrollHeight;
-    window.scrollTo(0, 0);
   }
 
-  (function () {
-    const vv = window.visualViewport;
-    if (!vv) return;
-    let pcVvRaf = null;
-    function onVvChange() {
-      if (pcVvRaf) cancelAnimationFrame(pcVvRaf);
-      pcVvRaf = requestAnimationFrame(pcSyncViewport);
-    }
-    vv.addEventListener('resize', onVvChange);
-    vv.addEventListener('scroll', onVvChange);
-    document.addEventListener('DOMContentLoaded', function () {
-      const input = document.getElementById('pregunta-casa-input');
-      if (input) {
-        input.addEventListener('focus', function () {
-          setTimeout(pcSyncViewport, 250); /* dar tiempo a que el teclado termine de abrir */
-        });
-        input.addEventListener('blur', function () {
-          setTimeout(pcSyncViewport, 150);
-        });
+  function pcSyncViewport() {
+    /* Inicia el bucle de monitoreo (si no está corriendo ya) */
+    if (pcVvLoopId) return;
+    function pcVvTick() {
+      const win = document.getElementById('pregunta-casa-window');
+      if (!win || !win.classList.contains('open')) {
+        pcVvLoopId = null;
+        pcResetViewport();
+        return; /* chat cerrado: detener el bucle */
       }
-    });
-  })();
+      pcApplyViewport();
+      pcVvLoopId = requestAnimationFrame(pcVvTick);
+    }
+    pcVvLoopId = requestAnimationFrame(pcVvTick);
+  }
 
   function pcEscapeHtml(str) {
     const div = document.createElement('div');
