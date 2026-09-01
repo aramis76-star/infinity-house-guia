@@ -2686,6 +2686,21 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
   #pregunta-casa-bubble:active { transform: scale(0.94); }
   #pregunta-casa-bubble svg { width: 48%; height: 48%; fill: white; pointer-events: none; }
 
+  /* Fondo de respaldo fijo a pantalla completa. Si el navegador in-app (como el
+     de WhatsApp) calcula mal el alto de #pregunta-casa-window al abrir el
+     teclado y deja un hueco, este fondo liso se ve detrás en vez de la página
+     real. No participa en ningún cálculo de JS: solo cubre. */
+  #pregunta-casa-backdrop {
+    position: fixed;
+    inset: 0;
+    height: 100vh;
+    height: 100dvh;
+    background: var(--ih-white);
+    z-index: 9998;
+    display: none;
+  }
+  #pregunta-casa-backdrop.show { display: block; }
+
   #pregunta-casa-window {
     position: fixed;
     left: 0;
@@ -3072,6 +3087,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
   <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
 </div>
 
+<div id="pregunta-casa-backdrop"></div>
 <div id="pregunta-casa-window">
   <div id="pc-lock-screen">
     <span id="pc-lock-close" onclick="pcToggleChat()">&times;</span>
@@ -3409,6 +3425,8 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     pcUpdateLockState();
     pcSyncViewportHeight();
     const isOpen = document.getElementById('pregunta-casa-window').classList.toggle('open');
+    const backdrop = document.getElementById('pregunta-casa-backdrop');
+    if (backdrop) backdrop.classList.toggle('show', isOpen);
     if (isOpen) { pcLockBodyScroll(); } else { pcUnlockBodyScroll(); }
   }
 
