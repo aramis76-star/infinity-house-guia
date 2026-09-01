@@ -2686,55 +2686,45 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
   #pregunta-casa-bubble:active { transform: scale(0.94); }
   #pregunta-casa-bubble svg { width: 48%; height: 48%; fill: white; pointer-events: none; }
 
-  /* Fondo de respaldo fijo a pantalla completa. Si el navegador in-app (como el
-     de WhatsApp) calcula mal el alto de #pregunta-casa-window al abrir el
-     teclado y deja un hueco, este fondo liso se ve detrás en vez de la página
-     real. No participa en ningún cálculo de JS: solo cubre. */
-  #pregunta-casa-backdrop {
-    position: fixed;
-    inset: 0;
-    height: 100vh;
-    height: 100dvh;
-    background: var(--ih-white);
-    z-index: 9998;
-    display: none;
-  }
-  #pregunta-casa-backdrop.show { display: block; }
-
   #pregunta-casa-window {
     position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    height: var(--pc-vh, 100dvh);
-    max-height: var(--pc-vh, 100dvh);
+    right: calc(var(--pc-edge) + var(--pc-safe-r));
+    bottom: calc(var(--pc-edge) + var(--pc-bubble-size) + var(--pc-gap) + var(--pc-safe-b));
+    width: min(370px, calc(100vw - (2 * var(--pc-edge)) - var(--pc-safe-l) - var(--pc-safe-r)));
+    /* dvh se ajusta solo cuando aparece el teclado, sin necesidad de JS que
+       intente calcular el alto — así evitamos los problemas de navegadores
+       in-app (como el de WhatsApp) que no reportan bien el visualViewport. */
+    height: min(520px, calc(100vh - var(--pc-edge) - var(--pc-bubble-size) - var(--pc-gap) - var(--pc-safe-b) - var(--pc-edge) - var(--pc-safe-t)));
+    height: min(520px, calc(100dvh - var(--pc-edge) - var(--pc-bubble-size) - var(--pc-gap) - var(--pc-safe-b) - var(--pc-edge) - var(--pc-safe-t)));
+    max-height: calc(100vh - var(--pc-edge) - var(--pc-bubble-size) - var(--pc-gap) - var(--pc-safe-b) - var(--pc-edge) - var(--pc-safe-t));
+    min-height: 220px;
     background: var(--ih-white);
-    border-radius: 0;
-    box-shadow: none;
-    border: none;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
     display: none;
     flex-direction: column;
     overflow: hidden;
     z-index: 9999;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    /* Fuerza a iOS/WebKit a tratar esta ventana como su propia capa de render,
-       aislada del contenido de atrás. Sin esto, cuando aparece el teclado,
-       WebKit a veces "pega" temporalmente un pedazo viejo de la página detrás
-       en vez de repintar esta ventana limpia. */
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    will-change: transform;
-    isolation: isolate;
-    contain: layout paint;
   }
   #pregunta-casa-window.open {
     display: flex;
     animation: pcWindowIn 0.22s ease-out;
+  }
+
+  /* Pantallas bajas / apaisadas: limitar el alto para que nunca se desborde */
+  @media (max-height: 480px) {
+    #pregunta-casa-window {
+      height: min(300px, calc(100vh - var(--pc-edge) - var(--pc-bubble-size) - var(--pc-gap) - var(--pc-safe-b) - 10px));
+      height: min(300px, calc(100dvh - var(--pc-edge) - var(--pc-bubble-size) - var(--pc-gap) - var(--pc-safe-b) - 10px));
+      max-height: calc(100vh - var(--pc-edge) - var(--pc-bubble-size) - var(--pc-gap) - var(--pc-safe-b) - 10px);
+    }
+  }
+  @media (orientation: landscape) and (max-width: 900px) {
+    #pregunta-casa-window { width: min(360px, calc(60vw)); }
+  }
+  @media (min-width: 901px) {
+    #pregunta-casa-window { width: 370px; height: 520px; max-height: calc(100vh - 140px); }
   }
 
   /* Pantalla previa (nombre, email y PIN) antes de poder chatear con la casa */
@@ -3087,7 +3077,6 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
   <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
 </div>
 
-<div id="pregunta-casa-backdrop"></div>
 <div id="pregunta-casa-window">
   <div id="pc-lock-screen">
     <span id="pc-lock-close" onclick="pcToggleChat()">&times;</span>
@@ -3388,45 +3377,10 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     window.scrollTo(0, pcScrollY);
   }
 
-  function pcSyncViewportHeight() {
-    try {
-      const vv = window.visualViewport;
-      const h = (vv ? vv.height : window.innerHeight);
-      document.documentElement.style.setProperty('--pc-vh', h + 'px');
-      // En iOS Safari, al enfocar el input el navegador desplaza el viewport visual
-      // hacia abajo (visualViewport.offsetTop) para mantenerlo a la vista sobre el
-      // teclado. Usamos "top" (no transform) para reposicionar la ventana: un cambio
-      // de "top" fuerza un reflow/repintado real, mientras que animar con "transform"
-      // deja capas compuestas a medio pintar y aparece contenido "fantasma" de la
-      // página de atrás en la franja que queda expuesta.
-      const win = document.getElementById('pregunta-casa-window');
-      if (win) {
-        win.style.top = vv ? vv.offsetTop + 'px' : '0px';
-        win.style.height = h + 'px';
-      }
-    } catch (e) {}
-  }
-  pcSyncViewportHeight();
-  window.addEventListener('resize', pcSyncViewportHeight);
-  window.addEventListener('orientationchange', function () { setTimeout(pcSyncViewportHeight, 200); });
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', pcSyncViewportHeight);
-    window.visualViewport.addEventListener('scroll', pcSyncViewportHeight);
-  }
-  document.addEventListener('focusin', function (e) {
-    if (e.target && e.target.id === 'pregunta-casa-input') setTimeout(pcSyncViewportHeight, 50);
-  });
-  document.addEventListener('focusout', function (e) {
-    if (e.target && e.target.id === 'pregunta-casa-input') setTimeout(pcSyncViewportHeight, 50);
-  });
-
   function pcToggleChat() {
     pcApplyLang();
     pcUpdateLockState();
-    pcSyncViewportHeight();
     const isOpen = document.getElementById('pregunta-casa-window').classList.toggle('open');
-    const backdrop = document.getElementById('pregunta-casa-backdrop');
-    if (backdrop) backdrop.classList.toggle('show', isOpen);
     if (isOpen) { pcLockBodyScroll(); } else { pcUnlockBodyScroll(); }
   }
 
