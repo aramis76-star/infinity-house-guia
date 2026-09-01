@@ -3017,7 +3017,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     display: flex;
     align-items: center;
     padding: 14px;
-    padding-bottom: calc(14px + var(--pc-safe-b, 0px));
+    padding-bottom: calc(14px + var(--pc-safe-b, 0px) + var(--pc-kb-extra, 0px));
     gap: 10px;
     border-top: 1px solid rgba(15,45,37,0.08);
     background: var(--ih-white);
@@ -3388,6 +3388,31 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
         win.style.top = vv ? vv.offsetTop + 'px' : '0px';
         win.style.height = h + 'px';
       }
+      pcSyncKeyboardBar();
+    } catch (e) {}
+  }
+
+  // La barra de herramientas del teclado (autocompletar, contraseñas, sugerencias)
+  // se dibuja encima del teclado y visualViewport NO la incluye en su altura, así
+  // que puede tapar el campo de escribir. Medimos el hueco real entre el fondo del
+  // campo y el fondo del viewport visual, y añadimos solo lo que falte. Si la barra
+  // no está, el valor queda en 0 y no deja espacio en blanco.
+  function pcSyncKeyboardBar() {
+    try {
+      const input = document.getElementById('pregunta-casa-input');
+      const win = document.getElementById('pregunta-casa-window');
+      if (!input || !win || !win.classList.contains('open')) return;
+      if (document.activeElement !== input) {
+        document.documentElement.style.setProperty('--pc-kb-extra', '0px');
+        return;
+      }
+      const vv = window.visualViewport;
+      const viewportBottom = vv ? vv.height : window.innerHeight;
+      const inputBottom = input.getBoundingClientRect().bottom;
+      // Cuánto del campo queda por debajo del área visible (tapado por la barra).
+      const hidden = Math.round(inputBottom - viewportBottom);
+      const extra = hidden > 0 ? Math.min(hidden + 12, 90) : 0;
+      document.documentElement.style.setProperty('--pc-kb-extra', extra + 'px');
     } catch (e) {}
   }
   pcSyncViewportHeight();
@@ -3398,10 +3423,19 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     window.visualViewport.addEventListener('scroll', pcSyncViewportHeight);
   }
   document.addEventListener('focusin', function (e) {
-    if (e.target && e.target.id === 'pregunta-casa-input') setTimeout(pcSyncViewportHeight, 50);
+    if (e.target && e.target.id === 'pregunta-casa-input') {
+      // La barra del teclado aparece con retraso y en varias etapas, así que
+      // volvemos a medir unas cuantas veces hasta que se estabilice.
+      [50, 200, 400, 700].forEach(function (ms) {
+        setTimeout(pcSyncViewportHeight, ms);
+      });
+    }
   });
   document.addEventListener('focusout', function (e) {
-    if (e.target && e.target.id === 'pregunta-casa-input') setTimeout(pcSyncViewportHeight, 50);
+    if (e.target && e.target.id === 'pregunta-casa-input') {
+      document.documentElement.style.setProperty('--pc-kb-extra', '0px');
+      setTimeout(pcSyncViewportHeight, 50);
+    }
   });
 
   function pcToggleChat() {
