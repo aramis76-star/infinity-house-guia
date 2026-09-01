@@ -3017,7 +3017,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     display: flex;
     align-items: center;
     padding: 14px;
-    padding-bottom: calc(14px + var(--pc-safe-b, 0px) + var(--pc-kb-extra, 0px));
+    padding-bottom: calc(14px + var(--pc-safe-b, 0px));
     gap: 10px;
     border-top: 1px solid rgba(15,45,37,0.08);
     background: var(--ih-white);
@@ -3388,30 +3388,6 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
         win.style.top = vv ? vv.offsetTop + 'px' : '0px';
         win.style.height = h + 'px';
       }
-      pcSyncKeyboardBar();
-    } catch (e) {}
-  }
-
-  // La barra de herramientas del teclado (flechas ▲▼, autocompletar, "Listo") se
-  // dibuja ENCIMA del teclado y iOS no la reporta en visualViewport.height, así que
-  // es imposible medirla: siempre da 0. En su lugar detectamos si el teclado está
-  // abierto (el viewport visual se encoge bastante respecto al de la página) y en
-  // ese caso reservamos el alto típico de esa barra para que no tape el campo.
-  function pcSyncKeyboardBar() {
-    try {
-      const input = document.getElementById('pregunta-casa-input');
-      const win = document.getElementById('pregunta-casa-window');
-      if (!input || !win || !win.classList.contains('open')) return;
-
-      const vv = window.visualViewport;
-      const visibleH = vv ? vv.height : window.innerHeight;
-      const fullH = window.innerHeight;
-      // El teclado ocupa siempre bastante más de 120px; una barra de navegación
-      // apareciendo/desapareciendo nunca llega a tanto.
-      const keyboardOpen = (fullH - visibleH) > 120;
-
-      const extra = (keyboardOpen && document.activeElement === input) ? 48 : 0;
-      document.documentElement.style.setProperty('--pc-kb-extra', extra + 'px');
     } catch (e) {}
   }
   pcSyncViewportHeight();
@@ -3422,19 +3398,10 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     window.visualViewport.addEventListener('scroll', pcSyncViewportHeight);
   }
   document.addEventListener('focusin', function (e) {
-    if (e.target && e.target.id === 'pregunta-casa-input') {
-      // La barra del teclado aparece con retraso y en varias etapas, así que
-      // volvemos a medir unas cuantas veces hasta que se estabilice.
-      [50, 200, 400, 700].forEach(function (ms) {
-        setTimeout(pcSyncViewportHeight, ms);
-      });
-    }
+    if (e.target && e.target.id === 'pregunta-casa-input') setTimeout(pcSyncViewportHeight, 50);
   });
   document.addEventListener('focusout', function (e) {
-    if (e.target && e.target.id === 'pregunta-casa-input') {
-      document.documentElement.style.setProperty('--pc-kb-extra', '0px');
-      setTimeout(pcSyncViewportHeight, 50);
-    }
+    if (e.target && e.target.id === 'pregunta-casa-input') setTimeout(pcSyncViewportHeight, 50);
   });
 
   function pcToggleChat() {
