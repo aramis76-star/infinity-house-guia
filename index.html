@@ -3021,35 +3021,85 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
   #pregunta-casa-input-area {
     display: flex;
     align-items: center;
-    padding: 14px;
-    padding-bottom: calc(14px + var(--pc-safe-b, 0px));
-    gap: 10px;
+    padding: 10px 12px;
+    padding-bottom: calc(10px + var(--pc-safe-b, 0px));
+    gap: 8px;
     border-top: 1px solid rgba(15,45,37,0.08);
     background: var(--ih-white);
     flex-shrink: 0;
   }
+  .pc-icon-btn {
+    background: transparent;
+    border: none;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ih-green2);
+    opacity: 0.55;
+    cursor: pointer;
+    flex-shrink: 0;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s ease, opacity 0.15s ease;
+  }
+  .pc-icon-btn:hover { background: rgba(15,45,37,0.06); opacity: 0.8; }
+  .pc-icon-btn:active { transform: scale(0.92); }
+  .pc-icon-btn svg { width: 20px; height: 20px; }
+  #pc-input-pill {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    border: 1.5px solid rgba(15,45,37,0.09);
+    border-radius: 999px;
+    background: var(--ih-sand);
+    padding: 0 6px 0 16px;
+    transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  }
+  #pc-input-pill:focus-within { border-color: var(--ih-mint); background: var(--ih-white); box-shadow: 0 0 0 4px rgba(100,212,181,0.15); }
   #pregunta-casa-input {
     flex: 1;
     min-width: 0;
-    border: 1.5px solid rgba(15,45,37,0.09);
-    border-radius: 999px;
-    padding: 12px 18px;
+    border: none;
+    background: transparent;
+    padding: 11px 6px;
     font-size: 16px; /* 16px prevents iOS Safari from auto-zooming on focus */
     color: var(--ih-ink);
-    background: var(--ih-sand);
     outline: none;
-    transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
   }
-  #pregunta-casa-input:focus { border-color: var(--ih-mint); background: var(--ih-white); box-shadow: 0 0 0 4px rgba(100,212,181,0.15); }
+  #pc-camera-btn {
+    background: transparent;
+    border: none;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ih-green2);
+    opacity: 0.55;
+    cursor: pointer;
+    flex-shrink: 0;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s ease, opacity 0.15s ease;
+  }
+  #pc-camera-btn:hover { background: rgba(15,45,37,0.06); opacity: 0.8; }
+  #pc-camera-btn svg { width: 18px; height: 18px; }
   #pregunta-casa-send {
     background: linear-gradient(135deg, var(--ih-mint) 0%, var(--ih-green2) 100%);
     color: white;
     border: none;
     border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    font-size: 18px;
     line-height: 1;
     cursor: pointer;
     display: flex;
@@ -3135,7 +3185,15 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     <button class="pc-suggested-chip" data-es="¿Hay algún chef privado que pueda contratar?" data-en="Is there a private chef I can hire?" onclick="pcSendSuggested(this)">¿Hay algún chef privado que pueda contratar?</button>
   </div>
   <div id="pregunta-casa-input-area">
-    <input type="text" id="pregunta-casa-input" placeholder="Escribe tu pregunta..." onkeypress="if(event.key==='Enter') pcSendMessage()">
+    <button class="pc-icon-btn" type="button" aria-label="Adjuntar" onclick="return false;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </button>
+    <div id="pc-input-pill">
+      <input type="text" id="pregunta-casa-input" placeholder="Escribe tu pregunta..." onkeypress="if(event.key==='Enter') pcSendMessage()">
+      <button id="pc-camera-btn" type="button" aria-label="Cámara" onclick="return false;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8a2 2 0 012-2h1.5l1-1.5h7l1 1.5H18a2 2 0 012 2v9a2 2 0 01-2 2H6a2 2 0 01-2-2V8z"/><circle cx="12" cy="12.5" r="3.2"/></svg>
+      </button>
+    </div>
     <button id="pregunta-casa-send" onclick="pcSendMessage()">➤</button>
   </div>
 </div>
