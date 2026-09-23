@@ -994,12 +994,12 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
 
       <div class="place-card cat-supermercado infinity-pick" data-cat="supermercado">
         <div class="card-top"><div class="card-icon">📦</div><div>
-          <div class="card-name"><a class="supermax-link" data-href-es="https://www.supermaxonline.com/shopping-home.html" data-href-en="https://translate.google.com/translate?sl=es&amp;tl=en&amp;u=https://www.supermaxonline.com/shopping-home.html" href="https://www.supermaxonline.com/shopping-home.html" target="_blank">SuperMax Online · Delivery</a></div>
+          <div class="card-name"><a href="https://www.supermaxonline.com/shopping-home.html" target="_blank">SuperMax Online · Delivery</a></div>
           <div class="card-meta"><span class="card-tag tag-supermercado"><span class="lbl" data-es="Compra desde el celular" data-en="Shop from your phone">Compra desde el celular</span></span></div>
         </div></div>
-        <div class="card-note"><span class="es">Ordena tu compra online y recíbela en la puerta. Mínimo $50. Envío: $10 ($50–$100) · $8 ($100–$150) · $6 (+$150). Pago con tarjeta de crédito. Mismos precios y ofertas que la tienda física: frescos, carnes, licores y deli.</span><span class="en">Order groceries online and get them delivered. $50 minimum. Delivery: $10 ($50–$100) · $8 ($100–$150) · $6 (+$150). Credit card payment. Same prices and specials as in-store: fresh produce, meats, liquors and deli. <em>(Site is in Spanish; this link opens an auto-translated English version.)</em></span></div>
+        <div class="card-note"><span class="es">Ordena tu compra online y recíbela en la puerta. Mínimo $50. Envío: $10 ($50–$100) · $8 ($100–$150) · $6 (+$150). Pago con tarjeta de crédito. Mismos precios y ofertas que la tienda física: frescos, carnes, licores y deli.</span><span class="en">Order groceries online and get them delivered. $50 minimum. Delivery: $10 ($50–$100) · $8 ($100–$150) · $6 (+$150). Credit card payment. Same prices and specials as in-store: fresh produce, meats, liquors and deli. <em>(Site is in Spanish — tap your phone's browser "Translate" button (Safari or Chrome) to read it in English.)</em></span></div>
         <div class="card-actions">
-          <a class="action-btn go-btn supermax-link" data-href-es="https://www.supermaxonline.com/shopping-home.html" data-href-en="https://translate.google.com/translate?sl=es&amp;tl=en&amp;u=https://www.supermaxonline.com/shopping-home.html" href="https://www.supermaxonline.com/shopping-home.html" target="_blank">🌐 <span class="lbl" data-es="Sitio web" data-en="Website">Sitio web</span></a>
+          <a class="action-btn go-btn" href="https://www.supermaxonline.com/shopping-home.html" target="_blank">🌐 <span class="lbl" data-es="Sitio web" data-en="Website">Sitio web</span></a>
         </div>
       </div>
 
@@ -2442,11 +2442,6 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     // Notes: pt/fr fall back to English text since full translation isn't stored per-note
     document.querySelectorAll('.es').forEach(el => el.style.display = lang === 'es' ? 'inline' : 'none');
     document.querySelectorAll('.en').forEach(el => el.style.display = (lang === 'en' || lang === 'pt' || lang === 'fr') ? 'inline' : 'none');
-    // Links to Spanish-only external sites: swap to an auto-translated URL when not viewing in Spanish
-    document.querySelectorAll('.supermax-link').forEach(el => {
-      const url = lang === 'es' ? el.dataset.hrefEs : el.dataset.hrefEn;
-      if (url) el.href = url;
-    });
   }
 
   function searchPlaces(val) {
