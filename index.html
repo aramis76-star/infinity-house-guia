@@ -3164,9 +3164,10 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
 
       <div class="pc-lock-field">
         <svg class="pc-lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-        <input type="email" id="pc-lock-email" class="pc-lock-input" placeholder="Email" autocomplete="email" onkeypress="if(event.key==='Enter') { var b=document.querySelector('#pc-lock-screen .pc-pin-box'); if(b) b.focus(); }">
+        <input type="email" id="pc-lock-email" class="pc-lock-input" placeholder="Email" autocomplete="email" onkeypress="if(event.key==='Enter') pcTryUnlock()">
       </div>
 
+      <!-- PIN oculto por el momento (poner PC_REQUIRE_PIN = true y descomentar para reactivar)
       <div class="pc-lock-field pc-lock-pin-row">
         <svg class="pc-lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>
         <span class="pc-lock-pin-label" id="pc-lock-pin-label">PIN de puerta (4 dígitos)</span>
@@ -3177,6 +3178,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
           <input type="tel" inputmode="numeric" maxlength="1" class="pc-pin-box">
         </div>
       </div>
+      -->
 
       <div id="pin-error"></div>
 
@@ -3237,7 +3239,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
       pinLabel: 'PIN de puerta (4 dígitos)',
       continueBtn: 'CONTINUAR',
       noteText: 'Tu información se usa solo para mejorar tu estadía y mantener tu seguridad.',
-      errorFields: 'Completa todos los campos correctamente.',
+      errorFields: 'Completa tu nombre y un email válido.',
       pinWrong: 'PIN incorrecto',
       pinExpired: 'Este PIN ya expiró. Contacta a tus anfitriones.'
     },
@@ -3256,7 +3258,7 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
       pinLabel: 'Door PIN (4 digits)',
       continueBtn: 'CONTINUE',
       noteText: 'Your information is only used to improve your stay and keep you safe.',
-      errorFields: 'Please fill in all fields correctly.',
+      errorFields: 'Please enter your name and a valid email.',
       pinWrong: 'Incorrect PIN',
       pinExpired: 'This PIN has expired. Please contact your hosts.'
     }
@@ -3339,9 +3341,13 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     } catch (e) {}
   })();
 
+  // PIN desactivado por el momento: solo se piden nombre y email. Cambiar a true para volver a exigir el PIN.
+  const PC_REQUIRE_PIN = false;
+
   function pcIsUnlocked() {
     try {
       if (localStorage.getItem('ih_pc_unlocked') !== '1') return false;
+      if (!PC_REQUIRE_PIN) return true;
       const pinUsed = localStorage.getItem('ih_pc_unlocked_pin') || '';
       if (pinUsed === ADMIN_PIN) return true;
       if (pinUsed === GUEST_PIN && isGuestPinActive()) return true;
@@ -3371,13 +3377,13 @@ body{background:linear-gradient(180deg,#edf5f1 0,#f8faf9 340px,#f4f7f5 100%)!imp
     const pin = pcGetPinFromBoxes();
     const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    if (!name || !emailOk || pin.length < 4) {
+    if (!name || !emailOk || (PC_REQUIRE_PIN && pin.length < 4)) {
       if (errEl) errEl.textContent = t.errorFields;
       pcShakeLock();
       return;
     }
     const guestPinOk = (pin === GUEST_PIN) && isGuestPinActive();
-    if (!guestPinOk && pin !== ADMIN_PIN) {
+    if (PC_REQUIRE_PIN && !guestPinOk && pin !== ADMIN_PIN) {
       const expired = (pin === GUEST_PIN) && !isGuestPinActive();
       if (errEl) errEl.textContent = expired ? t.pinExpired : t.pinWrong;
       document.querySelectorAll('#pc-lock-screen .pc-pin-box').forEach(function (b) { b.value = ''; });
