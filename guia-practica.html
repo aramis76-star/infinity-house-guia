@@ -553,17 +553,17 @@ body.ih-locked #pregunta-casa-bubble,body.ih-locked #pregunta-casa-window{displa
   #pregunta-casa-window.pc-kb-fallback #pregunta-casa-input-area {
     padding-bottom: 130px;
   }
-  /* Modo teclado: mientras se escribe, la ventana deja de ser 'fixed' y vive en la
-     página (que sí puede desplazarse). Así el propio navegador sabe cuánto mide el
-     teclado y sube el campo de texto para que quede visible. */
-  #pregunta-casa-window.pc-abs {
-    position: absolute !important;
-    bottom: auto !important;
-    transform: none !important;
+  /* Mientras se escribe la ventana queda muy corta (solo cabe lo que está sobre el
+     teclado): ocultamos las preguntas sugeridas y compactamos el encabezado para que
+     el campo de texto nunca se corte por abajo. */
+  #pregunta-casa-window.pc-typing #pregunta-casa-suggested { display: none; }
+  #pregunta-casa-window.pc-typing #pregunta-casa-header {
+    padding-top: calc(8px + var(--pc-safe-t));
+    padding-bottom: 8px;
   }
-  #pregunta-casa-window.pc-abs #pregunta-casa-input-area {
-    padding-bottom: calc(12px + var(--pc-safe-b, 0px));
-  }
+  #pregunta-casa-window.pc-typing #pregunta-casa-avatar { width: 32px; height: 32px; font-size: 16px; }
+  #pregunta-casa-window.pc-typing #pregunta-casa-header p { display: none; }
+  #pregunta-casa-messages { min-height: 0; }
   .pc-icon-btn {
     background: transparent;
     border: none;
@@ -2381,7 +2381,7 @@ function initApp() {
     pcApplyLang();
     pcUpdateLockState();
     const isOpen = document.getElementById('pregunta-casa-window').classList.toggle('open');
-    if (isOpen) { pcLockBodyScroll(); pcSyncViewport(); } else { pcExitAbs(false); pcUnlockBodyScroll(); pcResetViewport(); }
+    if (isOpen) { pcLockBodyScroll(); pcSyncViewport(); } else { pcUnlockBodyScroll(); pcResetViewport(); }
   }
 
   /* --- Ajuste de teclado: mantiene el área de escritura visible ---
@@ -2397,7 +2397,7 @@ function initApp() {
   function pcResetViewport() {
     document.documentElement.style.removeProperty('--pc-vvh');
     const win = document.getElementById('pregunta-casa-window');
-    if (win) { win.style.transform = ''; win.classList.remove('pc-kb-open'); }
+    if (win) { win.style.transform = ''; win.classList.remove('pc-kb-open'); if (document.activeElement !== document.getElementById('pregunta-casa-input')) win.classList.remove('pc-typing'); }
     pcLastVvH = 0;
     pcLastVvTop = -1;
   }
@@ -2405,7 +2405,6 @@ function initApp() {
   function pcApplyViewport() {
     const win = document.getElementById('pregunta-casa-window');
     if (!win || !win.classList.contains('open')) return;
-    if (win.classList.contains('pc-abs')) return; /* modo teclado: lo maneja el navegador */
     if (window.innerWidth > 900) return; /* escritorio: ventana flotante, no aplica */
     const vv = window.visualViewport;
     if (!vv) return;
@@ -2420,6 +2419,7 @@ function initApp() {
       win.style.transform = top > 1 ? 'translateY(' + top + 'px)' : '';
       const kbOpen = (window.innerHeight - h) > 120;
       win.classList.toggle('pc-kb-open', kbOpen);
+      win.classList.toggle('pc-typing', kbOpen);
       if (kbOpen) win.classList.remove('pc-kb-fallback'); /* ya tenemos medida real */
       const messages = document.getElementById('pregunta-casa-messages');
       if (messages) messages.scrollTop = messages.scrollHeight;
@@ -2442,83 +2442,29 @@ function initApp() {
     pcVvLoopId = requestAnimationFrame(pcVvTick);
   }
 
-  /* --- Modo teclado ---
-     En iPhone (Safari y navegadores dentro de apps) el teclado tapa la parte de
-     abajo y muchos no avisan cuánto mide. Por eso, al tocar un campo de texto del
-     chat, la ventana pasa de 'fixed' a 'absolute' dentro de una página con espacio
-     de sobra: el propio iOS desplaza la página y deja el campo justo sobre el
-     teclado. Al cerrar el teclado todo vuelve a como estaba. */
-  let pcAbsMode = false;
-
-  function pcEnterAbs() {
-    const win = document.getElementById('pregunta-casa-window');
-    if (!win || pcAbsMode || !win.classList.contains('open')) return;
-    if (window.innerWidth > 900) return; /* escritorio: no aplica */
-    pcAbsMode = true;
-    /* 1) soltar el body (estaba fijo) sin perder la posición de la página */
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.left = '';
-    document.body.style.right = '';
-    document.body.style.width = '';
-    /* 2) página lo bastante alta para que iOS pueda subirla sobre el teclado */
-    document.body.style.minHeight = (window.innerHeight + 800) + 'px';
-    window.scrollTo({ top: pcScrollY, left: 0, behavior: 'instant' });
-    /* 3) la ventana cubre exactamente lo que se ve ahora */
-    win.classList.remove('pc-kb-open', 'pc-kb-fallback');
-    win.style.transform = '';
-    document.documentElement.style.removeProperty('--pc-vvh');
-    win.classList.add('pc-abs');
-    win.style.top = pcScrollY + 'px';
-    win.style.height = window.innerHeight + 'px';
-  }
-
-  function pcExitAbs(relock) {
-    if (!pcAbsMode) return;
-    pcAbsMode = false;
-    const win = document.getElementById('pregunta-casa-window');
-    if (win) { win.classList.remove('pc-abs'); win.style.top = ''; win.style.height = ''; }
-    document.body.style.minHeight = '';
-    if (relock) {
-      /* volver a fijar el body con la posición original (pcScrollY no se toca) */
-      document.body.style.position = 'fixed';
-      document.body.style.top = '-' + pcScrollY + 'px';
-      document.body.style.left = '0';
-      document.body.style.right = '0';
-      document.body.style.width = '100%';
-      pcLastVvH = 0; pcLastVvTop = -1;
-    }
-  }
-
-  /* Si tras abrirse el teclado el campo sigue tapado, lo subimos nosotros */
-  function pcRevealField(el) {
-    if (!pcAbsMode || !el || document.activeElement !== el) return;
-    const vv = window.visualViewport;
-    const visibleBottom = vv ? (vv.offsetTop + vv.height) : window.innerHeight;
-    const r = el.getBoundingClientRect();
-    const over = r.bottom + 12 - visibleBottom;
-    if (over > 0) window.scrollBy(0, over);
-    const messages = document.getElementById('pregunta-casa-messages');
-    if (messages) messages.scrollTop = messages.scrollHeight;
-  }
-
+  /* Respaldo para navegadores que no reportan el teclado (algunos in-app):
+     al enfocar el campo, esperamos medio segundo; si el bucle no detectó
+     el teclado, activamos el modo de espacio extra */
   (function () {
-    const win = document.getElementById('pregunta-casa-window');
-    if (!win) return;
-    const isField = function (el) { return el && el.tagName === 'INPUT' && win.contains(el); };
-    win.addEventListener('focusin', function (e) {
-      if (!isField(e.target)) return;
-      pcEnterAbs();
-      const el = e.target;
-      setTimeout(function () { pcRevealField(el); }, 450);
-      setTimeout(function () { pcRevealField(el); }, 900);
-    });
-    win.addEventListener('focusout', function (e) {
-      if (!isField(e.target)) return;
+    const input = document.getElementById('pregunta-casa-input');
+    if (!input) return;
+    input.addEventListener('focus', function () {
+      const w0 = document.getElementById('pregunta-casa-window');
+      if (w0) w0.classList.add('pc-typing');
       setTimeout(function () {
-        if (isField(document.activeElement)) return; /* pasó a otro campo */
-        pcExitAbs(win.classList.contains('open'));
-      }, 150);
+        const win = document.getElementById('pregunta-casa-window');
+        if (!win || !win.classList.contains('open')) return;
+        if (window.innerWidth > 900) return;
+        if (!win.classList.contains('pc-kb-open')) {
+          win.classList.add('pc-kb-fallback');
+        }
+        const messages = document.getElementById('pregunta-casa-messages');
+        if (messages) messages.scrollTop = messages.scrollHeight;
+      }, 500);
+    });
+    input.addEventListener('blur', function () {
+      const win = document.getElementById('pregunta-casa-window');
+      if (win) { win.classList.remove('pc-kb-fallback'); win.classList.remove('pc-typing'); }
     });
   })();
 
